@@ -11,7 +11,18 @@
   --tx:#e6edf3; --tx2:#9aa8b8; --tx3:#6b7a8c;
   --upper:#7c8cff; --core:#f5a524; --lower:#2dd4a7; --cardio:#ff6b81; --rest:#5a6875;
   --ok:#2dd4a7; --warn:#f5a524; --bad:#ff6b81;
+  --hdbg:rgba(13,17,23,.92);
   --r:14px;
+}
+/* Light theme. Same structure, re-pointed values — the accents are darkened
+   because the dark-mode versions lose contrast against white. */
+body.light{
+  --bg:#f5f7fa; --bg2:#ffffff; --card:#ffffff; --card2:#eef1f5;
+  --line:#dde3ea; --line2:#c2cbd6;
+  --tx:#141b23; --tx2:#54626f; --tx3:#8593a2;
+  --upper:#4f5fe0; --core:#9c6104; --lower:#0b8465; --cardio:#dc2f47; --rest:#6b7885;
+  --ok:#0b8465; --warn:#9c6104; --bad:#dc2f47;
+  --hdbg:rgba(245,247,250,.92);
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0}
@@ -26,14 +37,14 @@ button{font:inherit;color:inherit;cursor:pointer;border:none;background:none}
 
 /* ---------- header ---------- */
 header{
-  position:sticky;top:0;z-index:50;background:rgba(13,17,23,.92);
+  position:sticky;top:0;z-index:50;background:var(--hdbg);
   backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
 }
 .hd{display:flex;align-items:center;gap:12px;padding:14px 0 10px}
 .logo{
   width:34px;height:34px;border-radius:10px;flex:none;
   background:linear-gradient(135deg,var(--upper),var(--lower));
-  display:grid;place-items:center;font-weight:800;font-size:15px;color:#0d1117;
+  display:grid;place-items:center;font-weight:800;font-size:15px;color:var(--bg);
 }
 .hd h1{font-size:17px}
 .hd .sub{font-size:12px;color:var(--tx3);margin-top:1px}
@@ -100,7 +111,7 @@ nav button.on{background:var(--tx);color:var(--bg);}
 .t-core{background:rgba(245,165,36,.14);color:var(--core)}
 .t-lower{background:rgba(45,212,167,.14);color:var(--lower)}
 .t-cardio{background:rgba(255,107,129,.14);color:var(--cardio)}
-.t-rest{background:rgba(90,104,117,.18);color:#8b97a5}
+.t-rest{background:rgba(90,104,117,.18);color:var(--rest)}
 
 /* ---------- today ---------- */
 .hero{
@@ -123,7 +134,7 @@ nav button.on{background:var(--tx);color:var(--bg);}
 .repblock .lbl{color:var(--exc,var(--upper));opacity:.9;margin:10px 0 6px}
 .repblock .lbl:first-child{margin-top:2px}
 .chip.rep{border-color:color-mix(in srgb, var(--exc,var(--upper)) 45%, var(--line2))}
-.chip.rep.on{background:var(--exc,var(--upper));border-color:var(--exc,var(--upper));color:#0d1117}
+.chip.rep.on{background:var(--exc,var(--upper));border-color:var(--exc,var(--upper));color:var(--bg)}
 .chip.rep:hover{border-color:var(--exc,var(--upper))}
 .figbtn{margin-left:auto;font-size:12px;color:var(--tx3);border:1px solid var(--line);padding:4px 9px;border-radius:8px}
 .figbtn:hover{color:var(--tx);border-color:var(--line2)}
@@ -133,13 +144,28 @@ nav button.on{background:var(--tx);color:var(--bg);}
 .intens button b{display:block;font-size:14px}
 .intens button span{font-size:11px;color:var(--tx3)}
 .intens button.on{background:var(--tx);color:var(--bg);border-color:var(--tx)}
-.intens button.on span{color:rgba(13,17,23,.65)}
+.intens button.on span{color:var(--bg);opacity:.7}
+
+/* ---------- today's line-up chips ---------- */
+.partrow{display:flex;flex-wrap:wrap;gap:7px;margin-top:15px}
+.partchip{
+  display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:999px;
+  border:1px solid var(--line2);background:var(--card2);color:var(--tx);
+  font-size:13px;font-weight:600;line-height:1;transition:opacity .15s,border-color .15s;
+}
+.partchip .pd{width:7px;height:7px;border-radius:50%;background:var(--pc,var(--upper));flex:none}
+.partchip:hover{border-color:var(--pc,var(--line2))}
+.partchip.off{opacity:.4;background:transparent;text-decoration:line-through}
+.partchip.off .pd{background:var(--tx3)}
+.partchip.add{border-style:dashed;color:var(--tx2);font-size:15px;padding:7px 14px}
+.partchip.add:hover{color:var(--tx);border-color:var(--tx3)}
+.heroact{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 
 /* ---------- calendar ---------- */
 .cal{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
 .cal .dow{text-align:center;font-size:11px;font-weight:700;color:var(--tx3);padding:4px 0}
 .day{
-  border:1px solid var(--line);border-radius:9px;min-height:74px;padding:6px;
+  border:1px solid var(--line);border-radius:9px;min-height:74px;padding:6px 6px 6px 12px;
   background:var(--bg2);text-align:left;position:relative;overflow:hidden;
   display:flex;flex-direction:column;gap:3px;
 }
@@ -150,7 +176,7 @@ nav button.on{background:var(--tx);color:var(--bg);}
 .day .n{font-size:11.5px;font-weight:700;color:var(--tx2)}
 .day .g{font-size:11px;font-weight:700;line-height:1.25}
 .day .xs{font-size:9.5px;color:var(--tx3);line-height:1.3;overflow:hidden}
-.day .bar{position:absolute;left:0;top:0;bottom:0;width:3px}
+.day .bar{position:absolute;left:0;top:0;bottom:0;width:6px}
 .day .mk{position:absolute;right:5px;top:5px;font-size:10px}
 .day{cursor:pointer}
 .skipbtn{
@@ -212,7 +238,7 @@ body.locked #authgate{display:flex}
   border-radius:var(--r);padding:28px 24px}
 .authlogo{width:42px;height:42px;border-radius:12px;margin-bottom:16px;
   background:linear-gradient(135deg,var(--upper),var(--lower));
-  display:grid;place-items:center;font-weight:800;font-size:18px;color:#0d1117}
+  display:grid;place-items:center;font-weight:800;font-size:18px;color:var(--bg)}
 .authcard h2{font-size:20px;margin-bottom:6px}
 .authsub{margin:0 0 22px;font-size:13.5px;color:var(--tx2);line-height:1.5}
 .authcheck{font-size:13.5px;color:var(--tx3);padding:8px 0}
@@ -661,7 +687,8 @@ function defaultState(){
     logs:{},
     settings:{ rest:{mild:1,moderate:2,intensive:3}, runsPerWeek:2, cardioGap:3,
                minPerSession:2, maxPerSession:4, maxPerGroup:3, maxSets:4,
-               hold:{mild:0, moderate:1, intensive:2}, start:'2026-08-16' }
+               hold:{mild:0, moderate:1, intensive:2}, start:'2026-08-16',
+               theme:'dark' }
   };
 }
 function load(incoming){
@@ -689,6 +716,21 @@ function load(incoming){
   if(!S.settings.hold) S.settings.hold = {mild:0, moderate:1, intensive:2};
   if(!S.settings.maxSets) S.settings.maxSets = 4;
   if(S.v < 7){ S.v = 7; save(); }
+  if(!S.settings.theme) S.settings.theme = 'dark';
+  if(S.v < 8){ S.v = 8; save(); }
+}
+/* Theme is mirrored outside the account so the sign-in screen and the very
+   first paint after a reload match, before any state has loaded. */
+function applyTheme(t){
+  t = t || (S && S.settings && S.settings.theme) || 'dark';
+  document.body.classList.toggle('light', t==='light');
+  try{ localStorage.setItem('ts.theme', t); }catch(e){}
+}
+function setTheme(t){
+  S.settings.theme = t;
+  applyTheme(t);
+  save(); refresh();
+  toast('Saved \u2713  '+(t==='light'?'Light':'Dark')+' theme');
 }
 /* Does this browser actually keep what we write? Probed once, up front, so the
    app can say so plainly rather than losing a month of training in silence. */
@@ -766,6 +808,21 @@ function H(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repla
    ============================================================ */
 function routineOf(cat){
   return S.routine.filter(function(id){ return LIBMAP[id] && LIBMAP[id].cat===cat; });
+}
+/* Effort is now recorded per body part, since a day can be easy on legs and
+   brutal on core. Older records carry one value for the whole day, so both
+   readers fall back to it. */
+function intOf(rec,cat){
+  if(!rec) return 'moderate';
+  if(rec.gint && rec.gint[cat]) return rec.gint[cat];
+  return rec.intensity || 'moderate';
+}
+/* Same lookup, but tells the UI when nothing has actually been chosen yet
+   so no button is shown as selected. */
+function intSet(rec,cat){
+  if(!rec) return null;
+  if(rec.gint && rec.gint[cat]) return rec.gint[cat];
+  return rec.intensity || null;
 }
 function restDaysFor(intensity){
   var r = S.settings.rest;
@@ -1029,7 +1086,7 @@ function apply(rec,ctx,explicit){
       var same = prev && prev.sets===it.sets && JSON.stringify(prev.reps)===JSON.stringify(it.reps);
       ctx.repeats[id] = same ? (ctx.repeats[id]||0)+1 : 1;
       ctx.lastLogged[id] = {sets:it.sets, reps:copyReps(it.reps)};
-      var eff = rec.intensity||'moderate';
+      var eff = intOf(rec, ex.cat);
       ctx.lastEff[id] = eff;
       var did = {sets:it.sets, reps:copyReps(it.reps)};
       var need = holdFor(eff);
@@ -1050,7 +1107,7 @@ function apply(rec,ctx,explicit){
   });
   Object.keys(cats).forEach(function(c){
     ctx.last[c] = rec.date;
-    ctx.lastInt[c] = rec.intensity || 'moderate';
+    ctx.lastInt[c] = intOf(rec, c);
     if(c==='cardio') ctx.cardioDates.push(rec.date);
   });
 }
@@ -1114,8 +1171,16 @@ function setReps(date,id,idx,v){
   toast('Saved \u2713  '+ex.name+' \u00b7 '+(a.length>1?repWord(ex)+' '+(idx+1)+': ':'')+v+u);
 }
 function setLv(date,id,v){ var r=ensureRec(date); r.items[id]={lv:v}; r.type='workout'; save(); refresh(); toast('Saved \u2713  ran '+distOf(v).label); }
-function setIntensity(date,v){ var r=ensureRec(date); r.intensity=v; r.type='workout'; save(); refresh();
-  toast('Saved \u2713  '+v.charAt(0).toUpperCase()+v.slice(1)+' \u2014 rests at least '+restDaysFor(v)+' day'+(restDaysFor(v)===1?'':'s')+(v==='mild'?', and next time gets harder':'')); }
+function setIntensity(date,cat,v){
+  var r=ensureRec(date);
+  r.gint = r.gint||{};
+  r.gint[cat]=v;
+  r.intensity=v;              /* keeps older readers and the analysis page sane */
+  r.type='workout'; save(); refresh();
+  var d=restDaysFor(v);
+  toast('Saved \u2713  '+GROUPS[cat].short+' \u00b7 '+v.charAt(0).toUpperCase()+v.slice(1)
+    +' \u2014 rests at least '+d+' day'+(d===1?'':'s')+(v==='mild'?', and next time gets harder':''));
+}
 function skipEx(date,id){
   var r=ensureRec(date); r.items[id]={skipped:true}; r.type='workout'; save(); refresh();
   toast(LIBMAP[id].name+' marked as not done');
@@ -1181,6 +1246,74 @@ function removeFromDay(date,id){
   save(); refresh(); toast(LIBMAP[id].name+' removed from '+fmt(date));
 }
 function openAddPart(d){ openSheet(addPartHTML(d), {t:'add', d:d}); }
+/* One sheet behind the + button: everything the old "Add body part" and
+   "Change session" panels offered, in the order you would reach for them. */
+function openBuild(d){ openSheet(buildHTML(d), {t:'build', d:d}); }
+function buildHTML(d){
+  var have=partsIn(d), order=restedOrder(d), ctx=SIM.ctxT;
+  var count=dayCount(d), max=S.settings.maxPerSession||4, room=Math.max(0,max-count);
+  var LB='class="lbl" style="color:var(--tx3);font-size:11px;font-weight:700;letter-spacing:.06em';
+
+  var h='<div class="top"><div><h3 style="font-size:17px">Build this day</h3>'
+      + '<div class="tiny" style="margin-top:5px">'+fmtLong(d)+' &middot; '+count+' of '+max+' exercises used'
+      + (room?'':' &middot; <b style="color:var(--bad)">full</b>')+'</div></div>'
+      + '<button class="iconbtn" style="margin-left:auto" onclick="closeSheet()">&#10005;</button></div>';
+
+  /* --- add a whole body part on top of what is already there --- */
+  h += '<div '+LB+';margin-bottom:8px">ADD A BODY PART</div><div class="grid">';
+  order.forEach(function(g,i){
+    var inDay=!!have[g], since=ctx.last[g]?diffD(d,ctx.last[g]):null;
+    var best=(i===0 && !inDay);
+    var note = inDay ? 'Already in this day'
+      : (since===null ? 'Not trained yet' : 'Last trained '+since+' day'+(since===1?'':'s')+' ago');
+    h += '<button class="card" style="text-align:left;margin:0;'+(inDay||!room?'opacity:.45':'')+(best?';border-color:'+GROUPS[g].color:'')+'" '
+      +  (inDay||!room ? 'disabled' : 'onclick="addBodyPart(\''+d+'\',\''+g+'\')"')+'>'
+      +  '<div class="row">'+gtag(g)+'<b style="font-size:15px">'+GROUPS[g].name+'</b>'
+      +  (best?'<span class="tag t-lower" style="margin-left:auto">most rested</span>':'')+'</div>'
+      +  '<div class="tiny" style="margin-top:5px">'+note+' &middot; '+routineOf(g).map(function(id){return LIBMAP[id].name;}).join(', ')+'</div></button>';
+  });
+  h += '</div>';
+
+  /* --- or a single exercise --- */
+  var mine=S.routine.filter(function(id){ var r=S.logs[d]; return !(r&&r.items&&r.items[id]); });
+  if(mine.length){
+    h += '<div '+LB+';margin:20px 0 8px">OR JUST ONE EXERCISE</div><div class="chips">';
+    mine.forEach(function(id){
+      var ex=LIBMAP[id];
+      h += '<button class="chip" style="--exc:'+GROUPS[ex.cat].color+';border-color:'+GROUPS[ex.cat].color+'55" '
+        +  (room?'onclick="addExerciseToDay(\''+d+'\',\''+id+'\')"':'disabled')
+        +  '>+ '+H(ex.name)+'</button>';
+    });
+    h += '</div>';
+  }
+
+  /* --- what is in there now, tap to remove --- */
+  var here=itemList(S.logs[d]||SIM.plan[d]||{});
+  if(here.length){
+    h += '<div '+LB+';margin:20px 0 8px">IN THIS DAY \u2014 TAP TO REMOVE</div><div class="chips">';
+    here.forEach(function(o){
+      var ex=LIBMAP[o.id]; if(!ex) return;
+      h += '<button class="chip" onclick="removeFromDay(\''+d+'\',\''+o.id+'\')">'+H(ex.name)+' &nbsp;&#10005;</button>';
+    });
+    h += '</div>';
+  }
+
+  /* --- or throw the day out and rebuild it around one body part --- */
+  h += '<div '+LB+';margin:22px 0 8px">OR REPLACE THE WHOLE SESSION</div><div class="grid">';
+  GORDER.forEach(function(g){
+    var n=routineOf(g).length;
+    h += '<button class="card" style="text-align:left;margin:0;'+(n?'':'opacity:.45')+'" '+(n?'onclick="swapGroup(\''+d+'\',\''+g+'\')"':'disabled')+'>'
+      +  '<div class="row">'+gtag(g)+'<b style="font-size:15px">'+GROUPS[g].name+'</b></div>'
+      +  '<div class="tiny" style="margin-top:5px">'+(n? n+' exercise'+(n===1?'':'s')+' in your routine &middot; '+GROUPS[g].desc : 'Nothing in your routine for this group yet')+'</div></button>';
+  });
+  h += '<button class="card" style="text-align:left;margin:0" onclick="swapGroup(\''+d+'\',\'rest\');closeSheet()"><div class="row">'+gtag('rest')+'<b style="font-size:15px">Rest day</b></div>'
+     + '<div class="tiny" style="margin-top:5px">Deliberate day off. Nothing counts as trained.</div></button>';
+  h += '</div>';
+
+  h += '<div class="tiny" style="margin-top:16px">Adding keeps what is already here; replacing rebuilds the day around the body part you pick. '
+     + 'Either way, every day after this one is recalculated. Your limit is '+max+' exercises a day \u2014 change it under Settings.</div>';
+  return h;
+}
 function addPartHTML(d){
   var have=partsIn(d), order=restedOrder(d), ctx=SIM.ctxT;
   var count=dayCount(d), max=S.settings.maxPerSession||4, room=Math.max(0,max-count);
@@ -1249,7 +1382,7 @@ function repairShort(){
   });
   if(changed){ save(); refresh(); }
 }
-function markSkip(date){ S.logs[date]={date:date,type:'skip',group:'rest',items:{},logged:true}; save(); refresh(); toast('Saved \u2713  '+fmt(date)+' marked as no exercise'); }
+function markSkip(date){ S.logs[date]={date:date,type:'skip',group:'rest',items:{},logged:true}; save(); refresh(); toast('Saved \u2713  '+fmt(date)+' marked as a rest day'); }
 function clearRec(date){ delete S.logs[date]; save(); refresh(); toast('Record cleared \u2014 back to the plan'); }
 function swapGroup(date,g){
   var entry, ctx = SIM.ctxT;
@@ -1338,15 +1471,16 @@ function exCard(date,it,editable){
   }
   return h+'</div>';
 }
-function intensityBlock(date,cur){
+function intensityBlock(date,cat,cur){
   var opt=[['mild','Mild','felt easy'],['moderate','Moderate','solid work'],['intensive','Intensive','all out']];
   var eff={mild:'next target goes up',moderate:'target holds',intensive:'target holds'};
-  return '<div class="lbl" style="margin-bottom:8px">How hard was it?</div><div class="intens">'+opt.map(function(o){
+  return '<div class="lbl" style="margin-bottom:8px">How hard was '+H(GROUPS[cat].short)+'?</div><div class="intens">'+opt.map(function(o){
     var r=restDaysFor(o[0]);
-    return '<button class="'+(cur===o[0]?'on':'')+'" onclick="setIntensity(\''+date+'\',\''+o[0]+'\')"><b>'+o[1]+'</b><span>'+o[2]+'<br>'+r+' day'+(r===1?'':'s')+' rest &middot; '+eff[o[0]]+'</span></button>';
+    return '<button class="'+(cur===o[0]?'on':'')+'" onclick="setIntensity(\''+date+'\',\''+cat+'\',\''+o[0]+'\')"><b>'+o[1]+'</b><span>'+o[2]+'<br>'+r+' day'+(r===1?'':'s')+' rest &middot; '+eff[o[0]]+'</span></button>';
   }).join('')+'</div>';
 }
-function sessionEditor(date){
+function sessionEditor(date,opts){
+  opts = opts||{};
   var T=today(), entry=SIM.plan[date]||{group:'rest',items:[],why:''};
   var rec=recOf(date), future=date>T;
   var h='';
@@ -1361,7 +1495,7 @@ function sessionEditor(date){
   var isRest = rec ? (rec.type!=='skip' && recItems.length===0) : (entry.group==='rest');
 
   if(rec && rec.type==='skip'){
-    h += '<div class="card" style="border-color:rgba(255,107,129,.35)"><div class="row"><div><b>No exercise recorded</b><div class="tiny" style="margin-top:3px">Your body parts keep resting, so the plan has been recalculated from here.</div></div></div>'
+    h += '<div class="card" style="border-color:rgba(255,107,129,.35)"><div class="row"><div><b>Rest day recorded</b><div class="tiny" style="margin-top:3px">Nothing counts as trained, so your body parts keep resting and the plan has been recalculated from here.</div></div></div>'
       +  '<div style="margin-top:12px"><button class="btn sm" onclick="clearRec(\''+date+'\')">Undo</button></div></div>';
     return h;
   }
@@ -1369,23 +1503,73 @@ function sessionEditor(date){
     h += '<div class="card"><b>Rest day</b><div class="tiny" style="margin-top:4px">'+H(entry.why||'')+'</div>'
       +  '<div class="tiny" style="margin-top:8px">Sessions now hold at least '+S.settings.minPerSession+' exercises, so body parts come round in bigger blocks with a gap between them. '
       +  'Want to train every day instead? Lower <b>Minimum exercises per session</b> or <b>Rest days after a Moderate session</b> in Settings.</div>'
-      +  '<div style="margin-top:12px"><button class="btn sm" onclick="openSwap(\''+date+'\')">Train anyway</button></div></div>';
+      +  '<div style="margin-top:12px"><button class="btn sm" onclick="openBuild(\''+date+'\')">Train anyway</button></div></div>';
     return h;
   }
-  shown.forEach(function(it){ h += exCard(date,it,!future); });
+  if(!opts.noChips) h += '<div class="card">'+partChips(date)+'</div>';
+
+  /* Split the day by body part. Each block ends with its own effort rating,
+     because one session can be easy on legs and all-out on core. */
+  var byCat={}, cats=[];
+  shown.forEach(function(it){
+    var ex=LIBMAP[it.id]; if(!ex) return;
+    if(it.skipped) return;              /* skipped ones live in the chip row above */
+    if(!byCat[ex.cat]){ byCat[ex.cat]=[]; cats.push(ex.cat); }
+    byCat[ex.cat].push(it);
+  });
+  cats.sort(function(a,b){ return GORDER.indexOf(a)-GORDER.indexOf(b); });
+
+  if(!cats.length){
+    h += '<div class="card"><b>Everything skipped</b><div class="tiny" style="margin-top:4px">'
+      +  'Tap any greyed-out name above to bring it back, or use + to add something else.</div></div>';
+  }
+
+  cats.forEach(function(cat){
+    h += '<div class="sechd">'+gtag(cat)+'<h2>'+H(GROUPS[cat].name)+'</h2><div class="line"></div></div>';
+    byCat[cat].forEach(function(it){ h += exCard(date,it,!future); });
+    if(!future) h += '<div class="card">'+intensityBlock(date, cat, intSet(rec,cat))+'</div>';
+  });
+
   if(!future){
-    h += '<div class="card">'+intensityBlock(date, rec?rec.intensity:null)+'</div>';
-    h += '<div class="row" style="flex-wrap:wrap;gap:8px">';
-    h += '<button class="btn" onclick="openAddPart(\''+date+'\')">+ Add body part</button>';
-    h += '<button class="btn" onclick="openSwap(\''+date+'\')">Change session</button>';
-    h += '<button class="btn danger" onclick="markSkip(\''+date+'\')">Did not exercise</button>';
-    if(rec) h += '<button class="btn ghost sm" onclick="clearRec(\''+date+'\')">Reset to plan</button>';
-    h += '</div>';
+    if(!opts.noRest || rec){
+      h += '<div class="row" style="flex-wrap:wrap;gap:8px">';
+      if(!opts.noRest) h += '<button class="btn danger" onclick="markSkip(\''+date+'\')">Rest Day</button>';
+      if(rec) h += '<button class="btn ghost sm" onclick="clearRec(\''+date+'\')">Reset to plan</button>';
+      h += '</div>';
+    }
     h += '<div class="tiny" style="margin-top:9px">'+(rec
       ? 'This day is saved. Everything after it has been recalculated.'
       : 'Nothing recorded yet, so this day counts as done exactly as planned. Tap anything above to record what you actually did.')+'</div>';
   }
   return h;
+}
+
+/* The line-up for a day, as tappable names. Tapping greys one out (skipped)
+   and drops its sets-and-reps card below; tapping again brings it back. */
+function partChips(date){
+  var rec=recOf(date), entry=SIM.plan[date]||{items:[]};
+  var recItems = rec ? Object.keys(rec.items||{}) : [];
+  var list = (rec && rec.type!=='skip' && recItems.length)
+    ? recItems.map(function(id){ return {id:id, skipped:!!(rec.items[id]||{}).skipped}; })
+    : (entry.items||[]).map(function(o){ return {id:o.id, skipped:!!o.skipped}; });
+
+  var h='<div class="lbl">Today\u2019s line-up \u2014 tap to drop or bring back</div><div class="partrow">';
+  var any=false;
+  list.forEach(function(it){
+    var ex=LIBMAP[it.id]; if(!ex) return;
+    any=true;
+    h += '<button class="partchip'+(it.skipped?' off':'')+'" style="--pc:'+GROUPS[ex.cat].color+'"'
+      +  ' onclick="togglePart(\''+date+'\',\''+it.id+'\')">'
+      +  '<span class="pd"></span>'+H(ex.name)+'</button>';
+  });
+  if(!any) h += '<span class="tiny" style="align-self:center">Nothing planned yet.</span>';
+  h += '<button class="partchip add" onclick="openBuild(\''+date+'\')" title="Add or change">+</button>';
+  return h+'</div>';
+}
+function togglePart(date,id){
+  var r=ensureRec(date);
+  if(r.items[id] && r.items[id].skipped) unskipEx(date,id);
+  else skipEx(date,id);
 }
 
 /* ============================================================
@@ -1400,13 +1584,23 @@ function renderToday(){
   h += '<div class="hero" style="--accent:'+barStyle(rec&&rec.type!=='skip'?rec:entry)+'">';
   h += '<div class="date">'+fmtLong(T).toUpperCase()+'</div>';
   var src = (rec && rec.type!=='skip') ? rec : entry;
-  var ttl = (rec && rec.type==='skip') ? 'No exercise today' : sessionTitle(src);
+  var ttl = (rec && rec.type==='skip') ? 'Rest Day' : sessionTitle(src);
   h += '<div class="title">'+H(ttl)+(parallelCardio(src)?' <span style="color:var(--cardio)">+ Cardio</span>':'')+'</div>';
   h += '<div class="row" style="margin-top:8px;gap:8px;flex-wrap:wrap">'+stateTag(T)+'<span class="why">'+H(entry.why||'')+'</span></div>';
   h += '<div class="statebar">'+st.map(function(x){return '<div class="state">'+x+'</div>';}).join('')+'</div>';
+
+  /* the briefing carries the line-up itself, so the day can be shaped
+     without scrolling down into the sets and reps */
+  var skipped = !!(rec && rec.type==='skip');
+  if(!skipped){
+    h += partChips(T);
+    h += '<div class="heroact"><button class="btn danger sm" onclick="markSkip(\''+T+'\')">Rest Day</button>'
+      +  (rec ? '<button class="btn ghost sm" onclick="clearRec(\''+T+'\')">Reset to plan</button>' : '')
+      +  '</div>';
+  }
   h += '</div>';
 
-  h += sessionEditor(T);
+  h += sessionEditor(T, {noChips:true, noRest:true});
 
   /* next 6 days preview */
   h += '<div class="sechd"><h2>Coming up</h2><div class="line"></div></div>';
@@ -1499,7 +1693,7 @@ function renderCal(){
     if(d<=T){
       h += g==='skip'
         ? '<button class="skipbtn undo" title="Undo — put the planned session back" onclick="event.stopPropagation();toggleSkip(\''+d+'\')">&#8635;</button>'
-        : '<button class="skipbtn" title="I did not exercise on this day" onclick="event.stopPropagation();toggleSkip(\''+d+'\')">&#10005;</button>';
+        : '<button class="skipbtn" title="Mark as a rest day" onclick="event.stopPropagation();toggleSkip(\''+d+'\')">&#10005;</button>';
     }
     h += '</div>';
   }
@@ -1514,7 +1708,7 @@ function renderCal(){
      + 'Change or skip any day and everything after it is recalculated instantly.<br><br>'
      + 'A body part comes back after <b>'+S.settings.rest.mild+' day</b> if you logged it Mild, <b>'+S.settings.rest.moderate+' days</b> if Moderate and <b>'+S.settings.rest.intensive+' days</b> if Intensive. '
      + 'Cardio is not a body part, so it is added on top of a session rather than replacing it, capped at <b>'+S.settings.runsPerWeek+' per week</b>. '
-     + 'Use the small &#10005; on any past day to record that you did not exercise.</div></div>';
+     + 'Use the small &#10005; on any past day to mark it as a rest day.</div></div>';
 
   document.getElementById('p-cal').innerHTML=h;
 }
@@ -1540,7 +1734,7 @@ function moveMonth(n){
 function stateTag(d){
   var T=today(), rec=recOf(d);
   if(d>T) return '<span class="tag t-rest">Planned</span>';
-  if(rec && rec.type==='skip') return '<span class="tag t-cardio">&#10007; No exercise</span>';
+  if(rec && rec.type==='skip') return '<span class="tag t-cardio">&#10007; Rest Day</span>';
   if(rec) return '<span class="tag t-lower">&#10003; Recorded by you</span>';
   return '<span class="tag t-rest">Assumed done as planned</span>';
 }
@@ -1745,6 +1939,14 @@ function settingsHTML(){
   h += row('Minimum exercises per session','If one body part is shorter than this, the next most rested body part joins it. Core is always paired with another body part.',[1,2,3,4,5],S.settings.minPerSession,'setMin');
   h += row('Maximum exercises per session','Hard ceiling on how long one day gets, cardio and pinned extras included.',[2,3,4,5,6],S.settings.maxPerSession,'setMax');
   var nDays = Object.keys(S.logs||{}).length;
+  var th = (S.settings.theme==='light') ? 'light' : 'dark';
+  h += '<div class="sechd" style="margin:16px 0 10px"><h2 style="font-size:13px;color:var(--tx3);letter-spacing:.06em">APPEARANCE</h2><div class="line"></div></div>';
+  h += '<div class="card"><b style="font-size:14px">Theme</b>'
+    +  '<div class="tiny" style="margin:4px 0 10px">Dark is easier on the eyes at night; light is easier to read in daylight or on a bright screen.</div>'
+    +  '<div class="chips">'
+    +  '<button class="chip'+(th==='dark'?' on':'')+'" onclick="setTheme(\'dark\')">Dark</button>'
+    +  '<button class="chip'+(th==='light'?' on':'')+'" onclick="setTheme(\'light\')">Light</button>'
+    +  '</div></div>';
   h += '<div class="sechd" style="margin:16px 0 10px"><h2 style="font-size:13px;color:var(--tx3);letter-spacing:.06em">YOUR DATA</h2><div class="line"></div></div>';
   h += '<div class="card"><b style="font-size:14px">' + (STORAGE_OK ? 'Saving normally' : 'Not saving on this browser') + '</b>'
     +  '<div class="tiny" style="margin:4px 0 10px;line-height:1.6">'
@@ -1777,6 +1979,7 @@ function rerenderSheet(){
   else if(SHEET.t==='fig') h=figSheetHTML(SHEET.id);
   else if(SHEET.t==='set') h=settingsHTML();
   else if(SHEET.t==='add') h=addPartHTML(SHEET.d);
+  else if(SHEET.t==='build') h=buildHTML(SHEET.d);
   else return;
   el.innerHTML=h; el.scrollTop=top;
 }
@@ -1831,7 +2034,12 @@ function analytics(){
     A.sessions++;
     Object.keys(cats).forEach(function(c){ A.byGroup[c]=(A.byGroup[c]||0)+1; A.groupTotal=(A.groupTotal||0)+1; });
     if(e.assumed) A.assumed++; else A.logged++;
-    A.intensity[r.intensity||'moderate'] = (A.intensity[r.intensity||'moderate']||0)+1;
+    /* one tally per body part trained, since each carries its own effort now */
+    Object.keys(cats).forEach(function(c){
+      var v = intOf(r,c);
+      A.intensity[v] = (A.intensity[v]||0)+1;
+      A.intensityTotal = (A.intensityTotal||0)+1;
+    });
     var wk=weekKey(e.date);
     A.weeks[wk]=A.weeks[wk]||{upper:0,core:0,lower:0,cardio:0};
     Object.keys(cats).forEach(function(c){ A.weeks[wk][c]++; });
@@ -2130,7 +2338,7 @@ function renderStats(){
          return '<span><span class="dot bg-'+g+'" style="display:inline-block;margin-right:5px"></span>'+GROUPS[g].short+' '+p+'%</span>';}).join('')
      + '</div></div></div>';
   h += '<div><div class="sechd"><h2>Effort mix</h2><div class="line"></div></div><div class="card chartbox" style="text-align:center">'
-     + donut([{k:'Mild',v:A.intensity.mild,c:'#5a6875'},{k:'Moderate',v:A.intensity.moderate,c:'var(--upper)'},{k:'Intensive',v:A.intensity.intensive,c:'var(--cardio)'}], A.logged, 'you logged')
+     + donut([{k:'Mild',v:A.intensity.mild,c:'var(--rest)'},{k:'Moderate',v:A.intensity.moderate,c:'var(--upper)'},{k:'Intensive',v:A.intensity.intensive,c:'var(--cardio)'}], A.intensityTotal||0, 'body parts rated')
      + '<div class="legend" style="justify-content:center"><span><span class="dot" style="background:#5a6875;display:inline-block;margin-right:5px"></span>Mild '+A.intensity.mild+'</span>'
      + '<span><span class="dot bg-upper" style="display:inline-block;margin-right:5px"></span>Moderate '+A.intensity.moderate+'</span>'
      + '<span><span class="dot bg-cardio" style="display:inline-block;margin-right:5px"></span>Intensive '+A.intensity.intensive+'</span></div></div></div>';
@@ -2158,7 +2366,7 @@ function renderStats(){
 
   h += '<div class="card"><b style="font-size:13.5px">Reading these numbers</b><div class="tiny" style="margin-top:6px;line-height:1.6">'
      + 'Totals include days you did not explicitly record, because the app assumes you followed the plan. '
-     + 'Anything you mark as <b>Did not exercise</b> is excluded and pulls down the "days not skipped" figure. '
+     + 'Anything you mark as a <b>Rest Day</b> is excluded and pulls down the "days not skipped" figure. '
      + 'Since '+(A.firstDate?fmtLong(A.firstDate):'today')+' you have covered '+A.days+' days: '
      + A.sessions+' training, '+A.rest+' rest, '+A.skipped+' skipped'+(totalMin?', plus '+totalMin+' minutes of timed holds and cardio':'')+'.</div></div>';
 
@@ -2170,6 +2378,7 @@ function renderStats(){
    ============================================================ */
 function bootApp(){
 load();
+applyTheme();
 refresh();
 repairShort();
 stampSaved();
@@ -2186,6 +2395,11 @@ if(!STORAGE_OK){
 window.bootApp = bootApp;
 </script>
 
+<script>
+/* Before anything else paints: the sign-in screen should already be in the
+   theme this browser last used, not flash dark and then switch. */
+try{ if(localStorage.getItem('ts.theme')==='light') document.body.classList.add('light'); }catch(e){}
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 "use strict";
