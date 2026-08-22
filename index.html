@@ -203,19 +203,96 @@ nav button.on{background:var(--tx);color:var(--bg);}
 }
 #toast.on{opacity:1;transform:translate(-50%,0)}
 .empty{text-align:center;padding:34px 16px;color:var(--tx3);font-size:13.5px}
+
+/* ---------- auth gate ---------- */
+body.locked header,body.locked .wrap,body.locked .ov{display:none!important}
+#authgate{display:none;min-height:100vh;align-items:center;justify-content:center;padding:24px}
+body.locked #authgate{display:flex}
+.authcard{width:100%;max-width:370px;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r);padding:28px 24px}
+.authlogo{width:42px;height:42px;border-radius:12px;margin-bottom:16px;
+  background:linear-gradient(135deg,var(--upper),var(--lower));
+  display:grid;place-items:center;font-weight:800;font-size:18px;color:#0d1117}
+.authcard h2{font-size:20px;margin-bottom:6px}
+.authsub{margin:0 0 22px;font-size:13.5px;color:var(--tx2);line-height:1.5}
+.authcheck{font-size:13.5px;color:var(--tx3);padding:8px 0}
+body.auth-checking #authform{display:none}
+body:not(.auth-checking) #authcheck{display:none}
+.authlabel{display:block;font-size:12px;font-weight:600;color:var(--tx2);
+  margin:0 0 6px;letter-spacing:.01em}
+.authinput{width:100%;padding:11px 13px;margin-bottom:14px;border-radius:11px;
+  background:var(--bg2);border:1px solid var(--line);color:var(--tx);
+  font:inherit;font-size:14px}
+.authinput:focus{outline:none;border-color:var(--upper)}
+.authinput::placeholder{color:var(--tx3)}
+.authbtn{width:100%;padding:12px;border-radius:11px;font-weight:650;font-size:14px;
+  background:var(--tx);color:var(--bg);margin-top:4px}
+.authbtn:hover{opacity:.9}
+.authbtn[disabled]{opacity:.5;cursor:default}
+.authmsg{font-size:13px;line-height:1.5;margin-bottom:12px;display:none}
+.authmsg.on{display:block}
+.authmsg.bad{color:var(--bad)}
+.authmsg.ok{color:var(--ok)}
+.authalt{display:flex;justify-content:space-between;gap:12px;margin-top:16px}
+.authlink{font-size:13px;color:var(--tx2);font-weight:600;padding:2px 0}
+.authlink:hover{color:var(--tx);text-decoration:underline}
+.authgoogle{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:11px;border-radius:11px;background:#fff;color:#1f1f1f;
+  font-weight:600;font-size:14px;margin-bottom:18px}
+.authgoogle:hover{background:#f1f3f4}
+.authdiv{display:flex;align-items:center;gap:12px;margin:0 0 18px;
+  color:var(--tx3);font-size:12px}
+.authdiv:before,.authdiv:after{content:"";flex:1;height:1px;background:var(--line)}
 </style>
 </head>
-<body>
+<body class="locked auth-checking">
+
+<div id="authgate">
+  <div class="authcard">
+    <div class="authlogo">T</div>
+    <h2 id="authTitle">Sign in</h2>
+    <p class="authsub" id="authSub">Your training log, kept under your account.</p>
+
+    <div id="authcheck" class="authcheck">Checking your session&hellip;</div>
+
+    <div id="authform">
+      <button id="authGoogle" class="authgoogle">
+        <svg viewBox="0 0 18 18" width="17" height="17" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.92c1.7-1.57 2.68-3.88 2.68-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.92-2.26c-.8.54-1.84.86-3.04.86-2.34 0-4.32-1.58-5.03-3.7H.96v2.33A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.72a5.4 5.4 0 0 1 0-3.44V4.95H.96a9 9 0 0 0 0 8.1l3.01-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58C13.46.9 11.43 0 9 0A9 9 0 0 0 .96 4.95l3.01 2.33C4.68 5.16 6.66 3.58 9 3.58z"/></svg>
+        <span>Continue with Google</span>
+      </button>
+
+      <div class="authdiv"><span>or use email</span></div>
+
+      <label class="authlabel" for="authEmail">Email</label>
+      <input id="authEmail" class="authinput" type="email" autocomplete="email" placeholder="you@example.com">
+
+      <div id="authPassWrap">
+        <label class="authlabel" for="authPass">Password</label>
+        <input id="authPass" class="authinput" type="password" autocomplete="current-password" placeholder="At least 6 characters">
+      </div>
+
+      <div id="authMsg" class="authmsg"></div>
+      <button id="authSubmit" class="authbtn">Sign in</button>
+
+      <div class="authalt">
+        <button id="authToggle" class="authlink">Create an account</button>
+        <button id="authForgot" class="authlink">Forgot password</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <header>
   <div class="wrap">
     <div class="hd">
       <div class="logo">T</div>
       <div>
         <h1>Training Scheduler</h1>
-        <div class="sub"><span id="hdsub"></span><span id="savedhint" style="margin-left:8px;opacity:.7"></span></div>
+        <div class="sub"><span id="hdsub"></span><span id="savedhint" style="margin-left:8px;opacity:.7"></span><span id="hduser" style="margin-left:8px;opacity:.7"></span><span id="synchint" style="margin-left:8px;opacity:.7"></span></div>
       </div>
       <div class="spacer"></div>
       <button class="iconbtn" id="btnSettings" title="Settings">&#9881;</button>
+      <button class="iconbtn" id="btnLogout" title="Sign out">&#8677;</button>
     </div>
     <nav id="nav">
       <button data-p="today" class="on">Today</button>
@@ -239,17 +316,7 @@ nav button.on{background:var(--tx);color:var(--bg);}
 
 <div class="ov" id="ov"><div class="sheet" id="sheet"></div></div>
 <div id="toast"></div>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-const SUPABASE_URL = "https://crylmqobejsmfnclbzty.supabase.co";
-const SUPABASE_KEY = "sb_publishable_6WGjwYEk9svO95hOrq4Vcw_CbsIokXu";
-
-const sb = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
-  
 "use strict";
 /* ============================================================
    1. FIGURE DRAWING  —  stick-figure poses, no images needed
@@ -580,6 +647,9 @@ function distOf(lv){ return DIST[Math.max(0,Math.min(3,lv-1))]; }
    3. STATE + DATES
    ============================================================ */
 var KEY = 'trainingScheduler.v1';
+/* Auth swaps this to a per-account key so two people on one browser
+   never read each other's logs. */
+window.setStorageKey = function(k){ KEY = k; };
 var HORIZON = 62;          /* days planned ahead */
 var S;                     /* app state */
 
@@ -632,13 +702,22 @@ var STORAGE_OK = (function(){
   }catch(e){ return false; }
 })();
 var LAST_SAVE = null;
+var SUPPRESS_PUSH = false;
 function save(){
   try{
     localStorage.setItem(KEY, JSON.stringify(S));
     LAST_SAVE = new Date();
     stampSaved();
+    if(window.queueCloudPush && !SUPPRESS_PUSH) window.queueCloudPush();
   }catch(e){ toast('Could not save (storage blocked)'); }
 }
+/* Bridges for the sync layer below. */
+window.getState = function(){ return S; };
+window.applyRemoteState = function(d){
+  SUPPRESS_PUSH = true;
+  try{ load(d); save(); refresh(); }
+  finally{ SUPPRESS_PUSH = false; }
+};
 function stampSaved(){
   var el = document.getElementById('savedhint');
   if(!el) return;
@@ -2089,6 +2168,7 @@ function renderStats(){
 /* ============================================================
    13. BOOT
    ============================================================ */
+function bootApp(){
 load();
 refresh();
 repairShort();
@@ -2102,6 +2182,377 @@ if(!STORAGE_OK){
   + 'the app is running inside a preview frame or a private window. Save this file to your computer and open '
   + 'it directly, and it will remember everything from then on.</div>';
 }
+}
+window.bootApp = bootApp;
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+"use strict";
+/* ============================================================
+   AUTH  —  Supabase email + password
+   ------------------------------------------------------------
+   PASTE YOUR TWO VALUES BELOW.
+   Both come from Supabase: Project Settings -> API.
+   The anon/publishable key is meant to be public — it is safe
+   in this file and safe on GitHub. Never put the service_role
+   (secret) key here.
+   ============================================================ */
+var SUPABASE_URL      = "https://crylmqobejsmfnclbzty.supabase.co";
+var SUPABASE_ANON_KEY = "sb_publishable_6WGjwYEk9svO95hOrq4Vcw_CbsIokXu";
+
+(function(){
+
+var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+  auth: { persistSession:true, autoRefreshToken:true, detectSessionInUrl:true }
+});
+
+var body     = document.body;
+var elEmail  = document.getElementById('authEmail');
+var elPass   = document.getElementById('authPass');
+var elPassWrap = document.getElementById('authPassWrap');
+var elMsg    = document.getElementById('authMsg');
+var elSubmit = document.getElementById('authSubmit');
+var elToggle = document.getElementById('authToggle');
+var elForgot = document.getElementById('authForgot');
+var elTitle  = document.getElementById('authTitle');
+var elSub    = document.getElementById('authSub');
+
+var mode = 'signin';          /* signin | signup | reset | recover */
+var started = false;
+
+function msg(text, kind){
+  elMsg.textContent = text || '';
+  elMsg.className = 'authmsg' + (text ? ' on ' + (kind||'bad') : '');
+}
+function busy(on, label){
+  elSubmit.disabled = on;
+  elSubmit.textContent = on ? (label || 'Working\u2026') : submitLabel();
+}
+function submitLabel(){
+  return mode==='signup'  ? 'Create account'
+       : mode==='reset'   ? 'Send reset link'
+       : mode==='recover' ? 'Set new password'
+       : 'Sign in';
+}
+function render(){
+  var titles = { signin:'Sign in', signup:'Create your account',
+                 reset:'Reset your password', recover:'Choose a new password' };
+  var subs = {
+    signin:'Your training log, kept under your account.',
+    signup:'Pick an email and password. You will be signed in straight away.',
+    reset:'Enter your email and we will send you a reset link.',
+    recover:'Enter a new password to finish resetting.'
+  };
+  elTitle.textContent = titles[mode];
+  elSub.textContent   = subs[mode];
+  elSubmit.textContent = submitLabel();
+
+  var hideEmail = (mode==='recover') ? 'none' : '';
+  elPassWrap.style.display = (mode==='reset') ? 'none' : '';
+  elEmail.style.display = hideEmail;
+  document.querySelector('label[for="authEmail"]').style.display = hideEmail;
+
+  elPass.setAttribute('autocomplete',
+    (mode==='signup'||mode==='recover') ? 'new-password' : 'current-password');
+
+  elToggle.textContent = (mode==='signup') ? 'I already have an account' : 'Create an account';
+  elToggle.style.display = (mode==='recover') ? 'none' : '';
+  elForgot.style.display = (mode==='signin') ? '' : 'none';
+  if(mode!=='signin' && mode!=='signup') elToggle.textContent = 'Back to sign in';
+
+  var showGoogle = (mode==='signin' || mode==='signup') ? '' : 'none';
+  var g = document.getElementById('authGoogle');
+  var d = document.querySelector('.authdiv');
+  if(g) g.style.display = showGoogle ? '' : 'none';
+  if(d) d.style.display = showGoogle ? '' : 'none';
+
+  msg('');
+}
+
+/* ---- starting the app once we know who this is ---- */
+var CURRENT_USER = null;
+var KEYNAME = null;      /* localStorage key for this account */
+var STAMPKEY = null;     /* localStorage key holding last-synced timestamp */
+
+function setSync(state){
+  var el = document.getElementById('synchint');
+  if(!el) return;
+  var t = { saving:'syncing\u2026', synced:'synced', offline:'offline \u2014 saved on this device' };
+  el.textContent = t[state] || '';
+  el.style.color = (state==='offline') ? 'var(--bad)' : '';
+}
+
+function startApp(user){
+  if(started) return;
+  started = true;
+
+  CURRENT_USER = user;
+  KEYNAME  = 'trainingScheduler.v1.' + user.id;
+  STAMPKEY = KEYNAME + '.synced';
+
+  /* One-time lift: if this browser has pre-login data and this account
+     has none yet, carry it over rather than starting them from empty. */
+  try{
+    if(!localStorage.getItem(KEYNAME)){
+      var legacy = localStorage.getItem('trainingScheduler.v1');
+      if(legacy) localStorage.setItem(KEYNAME, legacy);
+    }
+  }catch(e){}
+
+  window.setStorageKey(KEYNAME);
+
+  var hu = document.getElementById('hduser');
+  if(hu) hu.textContent = user.email || '';
+
+  var chk = document.getElementById('authcheck');
+  if(chk) chk.textContent = 'Loading your training log\u2026';
+
+  syncPull().then(function(){
+    body.classList.remove('locked','auth-checking');
+    window.bootApp();
+    wireSync();
+    if(pendingPush) pushNow();
+  });
+}
+
+/* ============================================================
+   SYNC  —  localStorage stays the fast path; the cloud row is
+   the record of truth across devices. Newer timestamp wins.
+   ============================================================ */
+var pendingPush = false;
+var pushTimer = null;
+
+function localStamp(){
+  try{ return Date.parse(localStorage.getItem(STAMPKEY) || '') || 0; }catch(e){ return 0; }
+}
+
+function syncPull(){
+  return sb.from('training_data')
+    .select('data,updated_at')
+    .eq('user_id', CURRENT_USER.id)
+    .maybeSingle()
+    .then(function(r){
+      if(r.error){ setSync('offline'); return; }
+
+      var remote = r.data;
+      var localRaw = null;
+      try{ localRaw = localStorage.getItem(KEYNAME); }catch(e){}
+
+      /* Nothing in the cloud yet — this device seeds it. */
+      if(!remote || !remote.data){
+        if(localRaw) pendingPush = true;
+        return;
+      }
+
+      var rStamp = Date.parse(remote.updated_at) || 0;
+
+      if(!localRaw || rStamp > localStamp()){
+        try{
+          localStorage.setItem(KEYNAME, JSON.stringify(remote.data));
+          localStorage.setItem(STAMPKEY, remote.updated_at);
+        }catch(e){}
+        setSync('synced');
+      }else if(localStamp() > rStamp){
+        pendingPush = true;
+      }else{
+        setSync('synced');
+      }
+    })
+    .catch(function(){ setSync('offline'); });
+}
+
+function pushNow(){
+  if(!CURRENT_USER) return;
+  var state = window.getState && window.getState();
+  if(!state) return;
+
+  setSync('saving');
+  var now = new Date().toISOString();
+
+  sb.from('training_data')
+    .upsert({ user_id: CURRENT_USER.id, data: state, updated_at: now })
+    .then(function(r){
+      if(r.error){ pendingPush = true; setSync('offline'); return; }
+      try{ localStorage.setItem(STAMPKEY, now); }catch(e){}
+      pendingPush = false;
+      setSync('synced');
+    })
+    .catch(function(){ pendingPush = true; setSync('offline'); });
+}
+
+/* Every save() in the app lands here. Batched so a burst of edits
+   becomes one write, not thirty. */
+window.queueCloudPush = function(){
+  pendingPush = true;
+  setSync('saving');
+  clearTimeout(pushTimer);
+  pushTimer = setTimeout(pushNow, 1200);
+};
+
+function flush(){
+  if(!pendingPush) return;
+  clearTimeout(pushTimer);
+  pushNow();
+}
+
+function wireSync(){
+  /* Leaving the tab, backgrounding on mobile, or coming back online
+     are all moments where an unsent change would otherwise be stranded. */
+  document.addEventListener('visibilitychange', function(){
+    if(document.visibilityState === 'hidden') flush();
+    else if(pendingPush) flush();
+  });
+  window.addEventListener('online', flush);
+  window.addEventListener('pagehide', flush);
+
+  /* Coming back to a tab left open for hours: check whether another
+     device moved ahead of this one. */
+  window.addEventListener('focus', function(){
+    if(pendingPush || !CURRENT_USER) return;
+    sb.from('training_data').select('data,updated_at')
+      .eq('user_id', CURRENT_USER.id).maybeSingle()
+      .then(function(r){
+        if(r.error || !r.data || !r.data.data) return;
+        var rStamp = Date.parse(r.data.updated_at) || 0;
+        if(rStamp > localStamp()){
+          try{ localStorage.setItem(STAMPKEY, r.data.updated_at); }catch(e){}
+          window.applyRemoteState(r.data.data);
+          setSync('synced');
+        }
+      });
+  });
+}
+
+/* ---- submit ---- */
+function submit(){
+  var email = (elEmail.value||'').trim();
+  var pass  = elPass.value||'';
+
+  if(mode!=='recover' && !email){ msg('Enter your email.'); return; }
+  if((mode==='signin'||mode==='signup'||mode==='recover') && !pass){ msg('Enter your password.'); return; }
+  if((mode==='signup'||mode==='recover') && pass.length < 6){
+    msg('Passwords need at least 6 characters.'); return;
+  }
+
+  busy(true);
+
+  if(mode==='signin'){
+    sb.auth.signInWithPassword({ email:email, password:pass }).then(function(r){
+      busy(false);
+      if(r.error){ msg(friendly(r.error)); return; }
+      /* onAuthStateChange takes it from here */
+    });
+
+  }else if(mode==='signup'){
+    sb.auth.signUp({
+      email:email, password:pass,
+      options:{ emailRedirectTo: window.location.origin + window.location.pathname }
+    }).then(function(r){
+      busy(false);
+      if(r.error){ msg(friendly(r.error)); return; }
+      if(!r.data.session){
+        mode='signin'; render();
+        msg('Account created. Check ' + email + ' for a confirmation link, then sign in.', 'ok');
+      }
+    });
+
+  }else if(mode==='reset'){
+    sb.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin + window.location.pathname
+    }).then(function(r){
+      busy(false);
+      if(r.error){ msg(friendly(r.error)); return; }
+      msg('Reset link sent to ' + email + '. Open it on this device.', 'ok');
+    });
+
+  }else if(mode==='recover'){
+    sb.auth.updateUser({ password: pass }).then(function(r){
+      busy(false);
+      if(r.error){ msg(friendly(r.error)); return; }
+      msg('Password updated. Signing you in\u2026', 'ok');
+      sb.auth.getUser().then(function(u){ if(u.data && u.data.user) startApp(u.data.user); });
+    });
+  }
+}
+
+function friendly(err){
+  var m = (err && err.message) || 'Something went wrong.';
+  if(/invalid login credentials/i.test(m)) return 'That email and password do not match an account.';
+  if(/already registered|already been registered/i.test(m)) return 'That email already has an account. Sign in instead.';
+  if(/email not confirmed/i.test(m)) return 'Confirm your email first — check your inbox for the link.';
+  if(/rate limit|too many/i.test(m)) return 'Too many attempts. Wait a minute and try again.';
+  if(/failed to fetch|network/i.test(m)) return 'Could not reach the server. Check your connection.';
+  return m;
+}
+
+/* ---- wiring ---- */
+elSubmit.addEventListener('click', submit);
+[elEmail, elPass].forEach(function(el){
+  el.addEventListener('keydown', function(e){ if(e.key==='Enter') submit(); });
+});
+elToggle.addEventListener('click', function(){
+  mode = (mode==='signin') ? 'signup' : 'signin';
+  render();
+});
+elForgot.addEventListener('click', function(){ mode='reset'; render(); });
+
+var elGoogle = document.getElementById('authGoogle');
+if(elGoogle){
+  elGoogle.addEventListener('click', function(){
+    msg('');
+    elGoogle.disabled = true;
+    sb.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: window.location.origin + window.location.pathname }
+    }).then(function(r){
+      if(r.error){ elGoogle.disabled = false; msg(friendly(r.error)); }
+      /* On success the browser leaves for Google and returns here signed in. */
+    });
+  });
+}
+
+var elLogout = document.getElementById('btnLogout');
+if(elLogout){
+  elLogout.addEventListener('click', function(){
+    /* Push anything unsent before dropping the session, or the last
+       few edits would only ever exist on this device. */
+    var done = function(){ sb.auth.signOut().then(function(){ window.location.reload(); }); };
+    if(pendingPush){
+      clearTimeout(pushTimer);
+      setSync('saving');
+      var state = window.getState && window.getState();
+      var now = new Date().toISOString();
+      sb.from('training_data')
+        .upsert({ user_id: CURRENT_USER.id, data: state, updated_at: now })
+        .then(done).catch(done);
+    }else{ done(); }
+  });
+}
+
+/* ---- session check on load ---- */
+sb.auth.onAuthStateChange(function(event, session){
+  if(event === 'PASSWORD_RECOVERY'){
+    mode='recover';
+    body.classList.remove('auth-checking');
+    render();
+    return;
+  }
+  if(session && session.user) startApp(session.user);
+  if(event === 'SIGNED_OUT') window.location.reload();
+});
+
+sb.auth.getSession().then(function(r){
+  var session = r.data && r.data.session;
+  if(session && session.user){ startApp(session.user); }
+  else{ body.classList.remove('auth-checking'); render(); }
+}).catch(function(){
+  body.classList.remove('auth-checking');
+  render();
+  msg('Could not reach Supabase. Check your project URL and key.');
+});
+
+})();
 </script>
 </body>
 </html>
