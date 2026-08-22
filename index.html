@@ -2261,11 +2261,11 @@ function render(){
   elForgot.style.display = (mode==='signin') ? '' : 'none';
   if(mode!=='signin' && mode!=='signup') elToggle.textContent = 'Back to sign in';
 
-  var showGoogle = (mode==='signin' || mode==='signup') ? '' : 'none';
+  var showGoogle = (mode==='signin' || mode==='signup');
   var g = document.getElementById('authGoogle');
   var d = document.querySelector('.authdiv');
-  if(g) g.style.display = showGoogle ? '' : 'none';
-  if(d) d.style.display = showGoogle ? '' : 'none';
+  if(g) g.style.display = showGoogle ? 'flex' : 'none';
+  if(d) d.style.display = showGoogle ? 'flex' : 'none';
 
   msg('');
 }
