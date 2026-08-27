@@ -1070,6 +1070,8 @@ function prescribe(id,ctx){
 /* choose which body parts share a day: keep adding recovered groups until the
    session is long enough. Core is never allowed to stand on its own. */
 function pickGroups(d,ctx,elig){
+  /* Running loads the legs, so lower body is not offered the very next day. */
+  if(ctx.last.cardio && diffD(d,ctx.last.cardio)===1) elig=elig.filter(function(g){ return g!=='lower'; });
   var min=S.settings.minPerSession||3, chosen=[], n=0;
   elig.forEach(function(e){
     if(chosen.length>=3) return;
@@ -1812,10 +1814,16 @@ function renderCal(){
     h += '<div class="bar" style="background:'+(skipped?'var(--bad)':barStyle(src))+'"></div>';
     h += '<div class="mk" style="color:'+col+'">'+mark+'</div>';
     h += '<div class="n">'+day+'</div>';
+    var seen={}, gcats=[];
+    itemList(src).forEach(function(o){
+      if(o.skipped) return;
+      var c=LIBMAP[o.id]&&LIBMAP[o.id].cat;
+      if(c&&!seen[c]){ seen[c]=1; gcats.push(c); }
+    });
+    if(par&&!seen.cardio){ seen.cardio=1; gcats.push('cardio'); }
     var gl = skipped ? '<span class="gb off">&#10005;</span>'
-      : (catsOf(src).map(function(c){return '<span class="gb" style="--gc:'+GROUPS[c].color+'">'+GLET[c]+'</span>';}).join('')
+      : (gcats.map(function(c){return '<span class="gb" style="--gc:'+GROUPS[c].color+'">'+GLET[c]+'</span>';}).join('')
          || '<span class="gb">'+GLET.rest+'</span>');
-    if(par) gl += '<span class="gb" style="--gc:var(--cardio)">'+GLET.cardio+'</span>';
     h += '<div class="gl">'+gl+'</div>';
     h += '<div class="xs">'+H(shortItems(rec,e))+'</div>';
     if(d<=T){
