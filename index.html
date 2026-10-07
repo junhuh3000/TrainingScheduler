@@ -234,6 +234,14 @@ nav button.on{background:var(--tx);color:var(--bg);}
 .empty{text-align:center;padding:34px 16px;color:var(--tx3);font-size:13.5px}
 
 /* ---------- home / gym ---------- */
+.bigpick{display:flex;gap:10px;margin-top:15px}
+.bigpick button{flex:1;padding:15px 8px 13px;border-radius:15px;display:flex;flex-direction:column;
+  align-items:center;gap:7px;font-size:15.5px;font-weight:800;letter-spacing:.01em}
+.bigpick .bp-home{border:2px solid var(--line2);background:var(--bg2);color:var(--tx)}
+.bigpick .bp-home:hover{border-color:var(--upper);color:var(--upper)}
+.bigpick .bp-gym{border:2px solid var(--tx);background:var(--tx);color:var(--bg)}
+.bigpick .bp-gym:hover{opacity:.9}
+.bigpick svg{display:block}
 .modeseg{display:inline-flex;border:1px solid var(--line2);border-radius:999px;background:var(--bg2);padding:3px;gap:2px}
 .modeseg button{padding:5px 15px;border-radius:999px;font-size:12.5px;font-weight:700;color:var(--tx3)}
 .modeseg button.on{background:var(--tx);color:var(--bg)}
@@ -243,6 +251,9 @@ nav button.on{background:var(--tx);color:var(--bg);}
   border:1px solid var(--line2);background:var(--card);color:var(--tx3);
   font-size:10px;font-weight:800;display:grid;place-items:center;line-height:1;opacity:.75}
 .modebtn.gym{color:var(--bg);background:var(--tx);border-color:var(--tx);opacity:1}
+.modebtn.home{color:var(--tx);border-color:var(--tx3);opacity:1}
+.modebtn.off{opacity:.38}
+.modebtn.auto{opacity:.55;border-style:dashed;color:var(--tx2)}
 .modebtn:hover{opacity:1}
 .day{padding-top:10px}
 .day .n{padding-right:20px}
@@ -544,8 +555,8 @@ var GORDER = ['upper','core','lower','cardio'];
 var GLET = {upper:'U', core:'C', lower:'L', cardio:'R', rest:'\u2013'};
 var LOCALES = {en:'en-GB', ko:'ko-KR', vi:'vi-VN'};
 var TR = {
-ko:{'Today':'\uc624\ub298','Calendar':'\ub2ec\ub825','My Routine':'\ub0b4 \ub8e8\ud2f4','Library':'\uc6b4\ub3d9 \ubaa9\ub85d','Analysis':'\ubd84\uc11d','Rest Day':'\ud734\uc2dd\uc77c','Rest':'\ud734\uc2dd','Reset':'\ucd08\uae30\ud654','Coming up':'\ub2e4\uac00\uc624\ub294 \uc77c\uc815','Yesterday':'\uc5b4\uc81c','last':'\ucd5c\uadfc','first time':'\ucc98\uc74c','Today\'s Line Up':'\uc624\ub298\uc758 \uad6c\uc131','Nothing planned yet.':'\uacc4\ud68d \uc5c6\uc74c','How to':'\ubc29\ubc95','Skip':'\uac74\ub108\ub6f0\uae30','Undo':'\ub418\ub3cc\ub9ac\uae30','Sets':'\uc138\ud2b8','Target':'\ubaa9\ud45c','Mild':'\uac00\ubcbc\uc6c0','Moderate':'\ubcf4\ud1b5','Intensive':'\uac15\ud568','Effort':'\uac15\ub3c4','Train anyway':'\uadf8\ub798\ub3c4 \uc6b4\ub3d9\ud558\uae30','Everything skipped':'\ubaa8\ub450 \uac74\ub108\ub700','Not done today.':'\uc624\ub298\uc740 \uc548 \ud568','Edit':'\ud3b8\uc9d1','Theme':'\ud14c\ub9c8','Dark':'\ub2e4\ud06c','Light':'\ub77c\uc774\ud2b8','Add more':'\ub354 \ucd94\uac00','Browse library':'\uc6b4\ub3d9 \ubaa9\ub85d \ubcf4\uae30','Nothing here yet.':'\uc544\uc9c1 \uc5c6\uc74c','Remove':'\uc0ad\uc81c','Recovery':'\ud68c\ubcf5','recover':'\ud68c\ubcf5','Planned':'\uc608\uc815','Recorded':'\uae30\ub85d\ub428','Assumed':'\uacc4\ud68d\ub300\ub85c \ucc98\ub9ac','Exercises':'\uc6b4\ub3d9','Language':'\uc5b8\uc5b4','Rest day recorded':'\ud734\uc2dd\uc77c\ub85c \uae30\ub85d\ub428','ready':'\uc900\ube44\ub428','d':'\uc77c','Upper Body':'\uc0c1\uccb4','Middle (Core)':'\ucf54\uc5b4(\ubcf5\ubd80)','Lower Body':'\ud558\uccb4','Cardio':'\uc720\uc0b0\uc18c','Upper':'\uc0c1\uccb4','Core':'\ucf54\uc5b4','Lower':'\ud558\uccb4','Cardio this week':'\uc774\ubc88 \uc8fc \uc720\uc0b0\uc18c','Running target':'\ub7ec\ub2dd \ubaa9\ud45c','Active streak':'\uc5f0\uc18d \uc6b4\ub3d9','Build this day':'\uc774 \ub0a0 \uad6c\uc131\ud558\uae30','Add a body part':'\ubd80\uc704 \ucd94\uac00','Or just one exercise':'\uc6b4\ub3d9 \ud558\ub098\ub9cc \ucd94\uac00','In this day - tap to remove':'\ud604\uc7ac \uad6c\uc131 - \ub20c\ub7ec\uc11c \uc81c\uac70','Or replace the whole session':'\uc138\uc158 \uc804\uccb4 \uad50\uccb4','Deliberate day off.':'\uc758\ub3c4\uc801\uc778 \ud734\uc2dd.','Add to routine':'\ub8e8\ud2f4\uc5d0 \ucd94\uac00','Rest day':'\ud734\uc2dd\uc77c','Before you started':'\uc2dc\uc791 \uc774\uc804','reps':'\ud68c','Streak':'\uc5f0\uc18d','ago':'\uc804','Keep it up!':'\uacc4\uc18d \uc774\uc5b4\uac00\uc694!','Great start!':'\uc88b\uc740 \uc2dc\uc791!','Start':'\uc2dc\uc791\uc77c','This month':'\uc774\ubc88 \ub2ec','Home':'\ud648','Gym':'\uc9d0','Home Training':'\ud648 \ud2b8\ub808\uc774\ub2dd','Gym Training':'\uc9d0 \ud2b8\ub808\uc774\ub2dd'},
-vi:{'Today':'H\u00f4m nay','Calendar':'L\u1ecbch','My Routine':'L\u1ecbch tr\u00ecnh','Library':'Th\u01b0 vi\u1ec7n','Analysis':'Ph\u00e2n t\u00edch','Rest Day':'Ng\u00e0y ngh\u1ec9','Rest':'Ngh\u1ec9','Reset':'\u0110\u1eb7t l\u1ea1i','Coming up':'S\u1eafp t\u1edbi','Yesterday':'H\u00f4m qua','last':'l\u1ea7n tr\u01b0\u1edbc','first time':'l\u1ea7n \u0111\u1ea7u','Today\'s Line Up':'B\u00e0i h\u00f4m nay','Nothing planned yet.':'Ch\u01b0a c\u00f3 k\u1ebf ho\u1ea1ch','How to':'C\u00e1ch t\u1eadp','Skip':'B\u1ecf qua','Undo':'Ho\u00e0n t\u00e1c','Sets':'Hi\u1ec7p','Target':'M\u1ee5c ti\u00eau','Mild':'Nh\u1eb9','Moderate':'V\u1eeba','Intensive':'N\u1eb7ng','Effort':'C\u01b0\u1eddng \u0111\u1ed9','Train anyway':'V\u1eabn t\u1eadp','Everything skipped':'\u0110\u00e3 b\u1ecf qua t\u1ea5t c\u1ea3','Not done today.':'H\u00f4m nay kh\u00f4ng t\u1eadp','Edit':'Ch\u1ec9nh s\u1eeda','Theme':'Giao di\u1ec7n','Dark':'T\u1ed1i','Light':'S\u00e1ng','Add more':'Th\u00eam','Browse library':'Xem th\u01b0 vi\u1ec7n','Nothing here yet.':'Ch\u01b0a c\u00f3 g\u00ec','Remove':'X\u00f3a','Recovery':'Ph\u1ee5c h\u1ed3i','recover':'ph\u1ee5c h\u1ed3i','Planned':'D\u1ef1 ki\u1ebfn','Recorded':'\u0110\u00e3 ghi','Assumed':'Theo k\u1ebf ho\u1ea1ch','Exercises':'B\u00e0i t\u1eadp','Language':'Ng\u00f4n ng\u1eef','Rest day recorded':'\u0110\u00e3 ghi ng\u00e0y ngh\u1ec9','ready':'s\u1eb5n s\u00e0ng','d':' ng\u00e0y','Upper Body':'Th\u00e2n tr\u00ean','Middle (Core)':'C\u01a1 b\u1ee5ng','Lower Body':'Th\u00e2n d\u01b0\u1edbi','Cardio':'Cardio','Upper':'Tr\u00ean','Core':'B\u1ee5ng','Lower':'D\u01b0\u1edbi','Cardio this week':'Cardio tu\u1ea7n n\u00e0y','Running target':'M\u1ee5c ti\u00eau ch\u1ea1y','Active streak':'Chu\u1ed7i ng\u00e0y t\u1eadp','Build this day':'S\u1eafp x\u1ebfp ng\u00e0y n\u00e0y','Add a body part':'Th\u00eam nh\u00f3m c\u01a1','Or just one exercise':'Ho\u1eb7c m\u1ed9t b\u00e0i','In this day - tap to remove':'Trong ng\u00e0y - ch\u1ea1m \u0111\u1ec3 x\u00f3a','Or replace the whole session':'Ho\u1eb7c thay c\u1ea3 bu\u1ed5i','Deliberate day off.':'Ngh\u1ec9 c\u00f3 ch\u1ee7 \u0111\u00edch.','Add to routine':'Th\u00eam v\u00e0o l\u1ecbch','Rest day':'Ng\u00e0y ngh\u1ec9','Before you started':'Tr\u01b0\u1edbc khi b\u1eaft \u0111\u1ea7u','reps':'l\u1ea7n','Streak':'Chu\u1ed7i','ago':'tr\u01b0\u1edbc','Keep it up!':'Ti\u1ebfp t\u1ee5c nh\u00e9!','Great start!':'Kh\u1edfi \u0111\u1ea7u t\u1ed1t!','Start':'B\u1eaft \u0111\u1ea7u','This month':'Th\u00e1ng n\u00e0y','Home':'Nh\u00e0','Gym':'Gym','Home Training':'T\u1eadp t\u1ea1i nh\u00e0','Gym Training':'T\u1eadp gym'}
+ko:{'Today':'\uc624\ub298','Calendar':'\ub2ec\ub825','My Routine':'\ub0b4 \ub8e8\ud2f4','Library':'\uc6b4\ub3d9 \ubaa9\ub85d','Analysis':'\ubd84\uc11d','Rest Day':'\ud734\uc2dd\uc77c','Rest':'\ud734\uc2dd','Reset':'\ucd08\uae30\ud654','Coming up':'\ub2e4\uac00\uc624\ub294 \uc77c\uc815','Yesterday':'\uc5b4\uc81c','last':'\ucd5c\uadfc','first time':'\ucc98\uc74c','Today\'s Line Up':'\uc624\ub298\uc758 \uad6c\uc131','Nothing planned yet.':'\uacc4\ud68d \uc5c6\uc74c','How to':'\ubc29\ubc95','Skip':'\uac74\ub108\ub6f0\uae30','Undo':'\ub418\ub3cc\ub9ac\uae30','Sets':'\uc138\ud2b8','Target':'\ubaa9\ud45c','Mild':'\uac00\ubcbc\uc6c0','Moderate':'\ubcf4\ud1b5','Intensive':'\uac15\ud568','Effort':'\uac15\ub3c4','Train anyway':'\uadf8\ub798\ub3c4 \uc6b4\ub3d9\ud558\uae30','Everything skipped':'\ubaa8\ub450 \uac74\ub108\ub700','Not done today.':'\uc624\ub298\uc740 \uc548 \ud568','Edit':'\ud3b8\uc9d1','Theme':'\ud14c\ub9c8','Dark':'\ub2e4\ud06c','Light':'\ub77c\uc774\ud2b8','Add more':'\ub354 \ucd94\uac00','Browse library':'\uc6b4\ub3d9 \ubaa9\ub85d \ubcf4\uae30','Nothing here yet.':'\uc544\uc9c1 \uc5c6\uc74c','Remove':'\uc0ad\uc81c','Recovery':'\ud68c\ubcf5','recover':'\ud68c\ubcf5','Planned':'\uc608\uc815','Recorded':'\uae30\ub85d\ub428','Assumed':'\uacc4\ud68d\ub300\ub85c \ucc98\ub9ac','Exercises':'\uc6b4\ub3d9','Language':'\uc5b8\uc5b4','Rest day recorded':'\ud734\uc2dd\uc77c\ub85c \uae30\ub85d\ub428','ready':'\uc900\ube44\ub428','d':'\uc77c','Upper Body':'\uc0c1\uccb4','Middle (Core)':'\ucf54\uc5b4(\ubcf5\ubd80)','Lower Body':'\ud558\uccb4','Cardio':'\uc720\uc0b0\uc18c','Upper':'\uc0c1\uccb4','Core':'\ucf54\uc5b4','Lower':'\ud558\uccb4','Cardio this week':'\uc774\ubc88 \uc8fc \uc720\uc0b0\uc18c','Running target':'\ub7ec\ub2dd \ubaa9\ud45c','Active streak':'\uc5f0\uc18d \uc6b4\ub3d9','Build this day':'\uc774 \ub0a0 \uad6c\uc131\ud558\uae30','Add a body part':'\ubd80\uc704 \ucd94\uac00','Or just one exercise':'\uc6b4\ub3d9 \ud558\ub098\ub9cc \ucd94\uac00','In this day - tap to remove':'\ud604\uc7ac \uad6c\uc131 - \ub20c\ub7ec\uc11c \uc81c\uac70','Or replace the whole session':'\uc138\uc158 \uc804\uccb4 \uad50\uccb4','Deliberate day off.':'\uc758\ub3c4\uc801\uc778 \ud734\uc2dd.','Add to routine':'\ub8e8\ud2f4\uc5d0 \ucd94\uac00','Rest day':'\ud734\uc2dd\uc77c','Before you started':'\uc2dc\uc791 \uc774\uc804','reps':'\ud68c','Streak':'\uc5f0\uc18d','ago':'\uc804','Keep it up!':'\uacc4\uc18d \uc774\uc5b4\uac00\uc694!','Great start!':'\uc88b\uc740 \uc2dc\uc791!','Start':'\uc2dc\uc791\uc77c','This month':'\uc774\ubc88 \ub2ec','Home':'\ud648','Gym':'\uc9d0','Home Training':'\ud648 \ud2b8\ub808\uc774\ub2dd','Gym Training':'\uc9d0 \ud2b8\ub808\uc774\ub2dd','Enter a workout':'\uc6b4\ub3d9 \uc2dc\uc791\ud558\uae30'},
+vi:{'Today':'H\u00f4m nay','Calendar':'L\u1ecbch','My Routine':'L\u1ecbch tr\u00ecnh','Library':'Th\u01b0 vi\u1ec7n','Analysis':'Ph\u00e2n t\u00edch','Rest Day':'Ng\u00e0y ngh\u1ec9','Rest':'Ngh\u1ec9','Reset':'\u0110\u1eb7t l\u1ea1i','Coming up':'S\u1eafp t\u1edbi','Yesterday':'H\u00f4m qua','last':'l\u1ea7n tr\u01b0\u1edbc','first time':'l\u1ea7n \u0111\u1ea7u','Today\'s Line Up':'B\u00e0i h\u00f4m nay','Nothing planned yet.':'Ch\u01b0a c\u00f3 k\u1ebf ho\u1ea1ch','How to':'C\u00e1ch t\u1eadp','Skip':'B\u1ecf qua','Undo':'Ho\u00e0n t\u00e1c','Sets':'Hi\u1ec7p','Target':'M\u1ee5c ti\u00eau','Mild':'Nh\u1eb9','Moderate':'V\u1eeba','Intensive':'N\u1eb7ng','Effort':'C\u01b0\u1eddng \u0111\u1ed9','Train anyway':'V\u1eabn t\u1eadp','Everything skipped':'\u0110\u00e3 b\u1ecf qua t\u1ea5t c\u1ea3','Not done today.':'H\u00f4m nay kh\u00f4ng t\u1eadp','Edit':'Ch\u1ec9nh s\u1eeda','Theme':'Giao di\u1ec7n','Dark':'T\u1ed1i','Light':'S\u00e1ng','Add more':'Th\u00eam','Browse library':'Xem th\u01b0 vi\u1ec7n','Nothing here yet.':'Ch\u01b0a c\u00f3 g\u00ec','Remove':'X\u00f3a','Recovery':'Ph\u1ee5c h\u1ed3i','recover':'ph\u1ee5c h\u1ed3i','Planned':'D\u1ef1 ki\u1ebfn','Recorded':'\u0110\u00e3 ghi','Assumed':'Theo k\u1ebf ho\u1ea1ch','Exercises':'B\u00e0i t\u1eadp','Language':'Ng\u00f4n ng\u1eef','Rest day recorded':'\u0110\u00e3 ghi ng\u00e0y ngh\u1ec9','ready':'s\u1eb5n s\u00e0ng','d':' ng\u00e0y','Upper Body':'Th\u00e2n tr\u00ean','Middle (Core)':'C\u01a1 b\u1ee5ng','Lower Body':'Th\u00e2n d\u01b0\u1edbi','Cardio':'Cardio','Upper':'Tr\u00ean','Core':'B\u1ee5ng','Lower':'D\u01b0\u1edbi','Cardio this week':'Cardio tu\u1ea7n n\u00e0y','Running target':'M\u1ee5c ti\u00eau ch\u1ea1y','Active streak':'Chu\u1ed7i ng\u00e0y t\u1eadp','Build this day':'S\u1eafp x\u1ebfp ng\u00e0y n\u00e0y','Add a body part':'Th\u00eam nh\u00f3m c\u01a1','Or just one exercise':'Ho\u1eb7c m\u1ed9t b\u00e0i','In this day - tap to remove':'Trong ng\u00e0y - ch\u1ea1m \u0111\u1ec3 x\u00f3a','Or replace the whole session':'Ho\u1eb7c thay c\u1ea3 bu\u1ed5i','Deliberate day off.':'Ngh\u1ec9 c\u00f3 ch\u1ee7 \u0111\u00edch.','Add to routine':'Th\u00eam v\u00e0o l\u1ecbch','Rest day':'Ng\u00e0y ngh\u1ec9','Before you started':'Tr\u01b0\u1edbc khi b\u1eaft \u0111\u1ea7u','reps':'l\u1ea7n','Streak':'Chu\u1ed7i','ago':'tr\u01b0\u1edbc','Keep it up!':'Ti\u1ebfp t\u1ee5c nh\u00e9!','Great start!':'Kh\u1edfi \u0111\u1ea7u t\u1ed1t!','Start':'B\u1eaft \u0111\u1ea7u','This month':'Th\u00e1ng n\u00e0y','Home':'Nh\u00e0','Gym':'Gym','Home Training':'T\u1eadp t\u1ea1i nh\u00e0','Gym Training':'T\u1eadp gym','Enter a workout':'B\u1eaft \u0111\u1ea7u bu\u1ed5i t\u1eadp'}
 };
 var FLAGS={
 ko:'<svg width="30" height="20" viewBox="0 0 30 20" style="border-radius:4px;display:block"><rect width="30" height="20" fill="#fff"/><g transform="translate(15,10) rotate(-14)"><path d="M-5 0A5 5 0 0 1 5 0A2.5 2.5 0 0 1 0 0A2.5 2.5 0 0 0 -5 0Z" fill="#c8102e"/><path d="M5 0A5 5 0 0 1 -5 0A2.5 2.5 0 0 1 0 0A2.5 2.5 0 0 0 5 0Z" fill="#003478"/></g><g fill="#000"><g transform="translate(5.2,5) rotate(-62)"><rect x="-2.4" y="-2" width="4.8" height="1"/><rect x="-2.4" y="-0.5" width="4.8" height="1"/><rect x="-2.4" y="1" width="4.8" height="1"/></g><g transform="translate(24.8,5) rotate(62)"><rect x="-2.4" y="-2" width="4.8" height="1"/><rect x="-2.4" y="-0.5" width="4.8" height="1"/><rect x="-2.4" y="1" width="4.8" height="1"/></g><g transform="translate(5.2,15) rotate(62)"><rect x="-2.4" y="-2" width="4.8" height="1"/><rect x="-2.4" y="-0.5" width="4.8" height="1"/><rect x="-2.4" y="1" width="4.8" height="1"/></g><g transform="translate(24.8,15) rotate(-62)"><rect x="-2.4" y="-2" width="4.8" height="1"/><rect x="-2.4" y="-0.5" width="4.8" height="1"/><rect x="-2.4" y="1" width="4.8" height="1"/></g></g></svg>',
@@ -1008,6 +1019,14 @@ function load(incoming){
   if(!S.routineG) S.routineG = [];
   if(!S.modes) S.modes = {};
   if(S.v < 10){ S.v = 10; save(); }
+  if(S.v < 11){
+    /* opt-in model: only days with a real workout log stay marked as trained */
+    Object.keys(S.logs||{}).forEach(function(d){
+      var r=S.logs[d];
+      if(r && r.type!=='skip' && r.type!=='rest' && r.items && Object.keys(r.items).length && !(S.modes&&S.modes[d])) S.modes[d]='home';
+    });
+    S.v = 11; save();
+  }
 }
 /* Theme is mirrored outside the account so the sign-in screen and the very
    first paint after a reload match, before any state has loaded. */
@@ -1101,8 +1120,18 @@ function H(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repla
 /* A day trains either at home or at the gym. Each place has its own routine,
    and everything downstream (the planner, the build sheet, the line-up) reads
    through RT_DATE so it draws from the right one for the day in question. */
-function modeOf(d){ return (S.modes && S.modes[d])==='gym' ? 'gym' : 'home'; }
-function routineListFor(d){ return modeOf(d)==='gym' ? (S.routineG||[]) : (S.routine||[]); }
+function modeOf(d){
+  var v = S.modes && S.modes[d];
+  return v==='gym' ? 'gym' : (v==='home' ? 'home' : 'rest');
+}
+/* What a day effectively trains as. Untouched days in the PAST stay rest,
+   but untouched days in the FUTURE are penciled in as gym sessions, because
+   gym training is the predominant plan going forward. */
+function effModeOf(d){
+  var m = modeOf(d);
+  return (m==='rest' && d>today()) ? 'gym' : m;
+}
+function routineListFor(d){ return effModeOf(d)==='gym' ? (S.routineG||[]) : (S.routine||[]); }
 var RT_DATE = null;
 function activeList(){ return RT_DATE ? routineListFor(RT_DATE) : (S.routine||[]); }
 function routineOf(cat){
@@ -1111,11 +1140,11 @@ function routineOf(cat){
 function setMode(d,m){
   S.modes = S.modes||{};
   if(modeOf(d)===m) return;
-  if(m==='gym') S.modes[d]='gym'; else delete S.modes[d];
+  if(m==='rest') delete S.modes[d]; else S.modes[d]=m;
   save(); refresh();
-  toast((m==='gym'?t('Gym'):t('Home'))+' \u00b7 '+fmt(d));
+  toast((m==='rest'?t('Rest'):(m==='gym'?t('Gym'):t('Home')))+' \u00b7 '+fmt(d));
 }
-function cycleMode(d){ setMode(d, modeOf(d)==='gym' ? 'home' : 'gym'); }
+function cycleMode(d){ var m=modeOf(d); setMode(d, m==='rest'?'home':(m==='home'?'gym':'rest')); }
 /* Effort is now recorded per body part, since a day can be easy on legs and
    brutal on core. Older records carry one value for the whole day, so both
    readers fall back to it. */
@@ -1222,10 +1251,25 @@ function simulate(){
   return {plan:plan, hist:hist, notes:notes, ctx:ctx, ctxT:ctxT||ctx, start:start};
 }
 
+/* Nothing is scheduled until a workout is entered: an untouched day is a
+   rest day, full stop. Entering Home or Gym is the trigger that lets the
+   planner build that one day. */
 function choose(d,ctx){
-  if(modeOf(d)==='gym' && routineListFor(d).length===0)
+  var m = effModeOf(d), explicit = modeOf(d)!=='rest';
+  if(m==='rest')
     return {date:d, group:'rest', groups:[], items:[],
-            why:'Gym day, but your gym routine is empty \u2014 add gym exercises under My Routine'};
+            why:'Rest by default \u2014 no workout entered for this day'};
+  var entry = chooseEntered(d,ctx);
+  if(m==='gym'){
+    if(explicit) entry = gymLead(d,ctx,entry);                 /* a chosen gym day always opens on the treadmill */
+    else if(entry.group==='rest' && !(S.routineG||[]).length)
+      entry = gymLead(d,ctx,entry);                            /* penciled-in day with no gym routine yet: at least a treadmill block */
+    else if(entry.group!=='rest' && !explicit)
+      entry.why = 'Penciled-in gym session \u2014 ' + entry.why;
+  }
+  return entry;
+}
+function chooseEntered(d,ctx){
   /* --- which muscle groups have recovered? --- */
   var elig=[];
   ['upper','core','lower'].forEach(function(g){
@@ -1321,7 +1365,7 @@ function prescribe(id,ctx){
    session is long enough. Core is never allowed to stand on its own. */
 function pickGroups(d,ctx,elig){
   /* Running loads the legs, so lower body is not offered the very next day. */
-  if(ctx.last.cardio && diffD(d,ctx.last.cardio)===1) elig=elig.filter(function(g){ return g!=='lower'; });
+  if(ctx.last.cardio && diffD(d,ctx.last.cardio)===1) elig=elig.filter(function(e){ return e.g!=='lower'; });
   var min=S.settings.minPerSession||3, chosen=[], n=0;
   elig.forEach(function(e){
     if(chosen.length>=3) return;
@@ -1373,10 +1417,25 @@ function cardioEntry(d,ctx,why){
   addPinned(e,ctx);
   return trimSession(e);
 }
+/* A gym day always opens with the treadmill, so entering Gym never lands on
+   an empty rest screen. Drop it from the line-up if you are skipping cardio. */
+function gymLead(d,ctx,entry){
+  var hasCardio = (entry.items||[]).some(function(it){ var ex=LIBMAP[it.id]; return ex && ex.cat==='cardio'; });
+  if(hasCardio) return entry;
+  var it = prescribe('treadmill', ctx);
+  if(entry.group==='rest' || !(entry.items||[]).length){
+    return trimSession({date:d, group:'cardio', groups:[], items:[it], cardio:true,
+      why:'Gym day \u2014 treadmill to start'
+        + ((S.routineG||[]).length ? '' : '. Add gym exercises under My Routine to build fuller sessions')});
+  }
+  entry.items.unshift(it);
+  entry.why += ' \u00b7 treadmill to open the session';
+  return trimSession(entry);
+}
 /* exercises you can reach while you are out running get added to every cardio
    day, on top of the plan, without resetting that body part's recovery */
 function addPinned(entry,ctx){
-  if(modeOf(entry.date)==='gym') return;   /* pinned extras belong to home cardio days */
+  if(effModeOf(entry.date)==='gym') return;   /* pinned extras belong to home cardio days */
   (S.pinned||[]).forEach(function(id){
     if(!LIBMAP[id] || S.routine.indexOf(id)<0) return;
     if(entry.items.some(function(it){ return it.id===id; })) return;
@@ -1778,7 +1837,7 @@ function exCard(date,it,editable){
   h += '<div class="exhd"><div><h4>'+H(ex.name)+(it.bonus?' <span class="tag t-cardio" style="vertical-align:2px">extra</span>':'')+'</h4>'
     +  '<div class="presc">'+H(ex.part)+(ex.gear!=='None'?' &middot; '+H(ex.gear):'')+'</div></div>';
   h += '<div style="margin-left:auto;display:flex;gap:6px;flex:none">';
-  h += '<button class="figbtn" style="margin:0" onclick="openFig(\''+ex.id+'\',\''+modeOf(date)+'\')">'+t('How to')+'</button>';
+  h += '<button class="figbtn" style="margin:0" onclick="openFig(\''+ex.id+'\',\''+(effModeOf(date)==='gym'?'gym':'home')+'\')">'+t('How to')+'</button>';
   if(editable){
     h += it.skipped
       ? '<button class="figbtn" style="margin:0;color:var(--ok);border-color:rgba(45,212,167,.4)" onclick="unskipEx(\''+date+'\',\''+ex.id+'\')">'+t('Undo')+'</button>'
@@ -1923,19 +1982,34 @@ function renderToday(){
     +'<div class="date" style="flex:1;text-align:center">'+fmtLong(D).toUpperCase()
     +(D!==T?' &nbsp;<button class="btn sm ghost" style="padding:2px 9px" onclick="goToday()">'+t('Today')+'</button>':'')+'</div>'
     +'<button class="navarr" onclick="moveDay(1)">&#8250;</button></div>';
-  h+='<div class="row" style="margin-top:12px;justify-content:center">'
-    +'<div class="modeseg">'
-    +'<button class="'+(modeOf(D)==='home'?'on':'')+'" onclick="setMode(\''+D+'\',\'home\')">'+t('Home')+'</button>'
-    +'<button class="'+(modeOf(D)==='gym'?'on':'')+'" onclick="setMode(\''+D+'\',\'gym\')">'+t('Gym')+'</button>'
-    +'</div></div>';
+  if(!skipped){
+    var md=modeOf(D), em=effModeOf(D);
+    if(md==='rest' && em==='rest'){
+      /* nothing chosen yet: the choice itself is the call to action */
+      h+='<div class="bigpick">'
+        +'<button class="bp-home" onclick="setMode(\''+D+'\',\'home\')">'
+        +'<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11.3 12 4.4l8.5 6.9"/><path d="M6 10v9.2h12V10"/><path d="M10 19.2v-5h4v5"/></svg>'
+        +t('Home')+'</button>'
+        +'<button class="bp-gym" onclick="setMode(\''+D+'\',\'gym\')">'
+        +'<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M8.2 12h7.6"/><path d="M6 8.6v6.8M8.4 7v10M15.6 7v10M18 8.6v6.8"/><path d="M3.5 10.6v2.8M20.5 10.6v2.8"/></svg>'
+        +t('Gym')+'</button>'
+        +'</div>';
+    } else {
+      var segs='<div class="modeseg">'
+        +'<button class="'+(md==='home'?'on':'')+'" onclick="setMode(\''+D+'\',\''+(md==='home'?'rest':'home')+'\')">'+t('Home')+'</button>'
+        +'<button class="'+((md==='gym'||(md==='rest'&&em==='gym'))?'on':'')+'" onclick="setMode(\''+D+'\',\''+(md==='gym'?'rest':'gym')+'\')">'+t('Gym')+'</button>'
+        +'</div>';
+      h+='<div class="row" style="margin-top:12px;justify-content:center">'+segs+'</div>';
+    }
+  }
   h+='<div class="row" style="margin-top:12px;align-items:flex-start;gap:8px">'
     +'<div style="flex:1;min-width:0"><div class="title">'+H(ttl)
     +((parallelCardio(src)&&!skipped)?' <span style="color:var(--cardio)">+ '+GS('cardio')+'</span>':'')+'</div>'
     +'<div style="margin-top:6px">'+stateTag(D)+'</div></div>';
-  if(D<=T && !skipped) h+='<button class="btn danger sm" style="flex:none" onclick="markSkip(\''+D+'\')">'+t('Rest Day')+'</button>';
+  if(D<=T && !skipped && (modeOf(D)!=='rest' || rec)) h+='<button class="btn danger sm" style="flex:none" onclick="markSkip(\''+D+'\')">'+t('Rest Day')+'</button>';
   if(rec) h+='<button class="btn ghost sm" style="flex:none" onclick="clearRec(\''+D+'\')">'+t('Reset')+'</button>';
   h+='</div>';
-  if(!skipped) h+='<div class="lineup" style="--accent:'+barStyle(src)+'">'+partChips(D)+'</div>';
+  if(!skipped && (modeOf(D)!=='rest' || itemList(src).length)) h+='<div class="lineup" style="--accent:'+barStyle(src)+'">'+partChips(D)+'</div>';
   h+=briefText(D);
   if(D===T) h+='<div class="statebar">'+statusOf(T).map(function(x){return '<div class="state">'+x+'</div>';}).join('')+'</div>';
   h+='</div></div>';
@@ -2001,7 +2075,7 @@ function lastDone(id,D){
   return null;
 }
 function itemsLine(e){
-  if(!e.items||!e.items.length) return t('Recovery');
+  if(!e.items||!e.items.length) return t('Rest');
   return e.items.filter(function(it){return !it.skipped;}).map(function(it){
     var ex=LIBMAP[it.id]; if(!ex) return '';
     if(it.lv!=null) return ex.name+' '+distOf(it.lv).short;
@@ -2075,7 +2149,9 @@ function renderCal(){
     h += '<div class="'+cls+'" onclick="openDay(\''+d+'\')">';
     h += '<div class="bar" style="background:'+(skipped?'var(--bad)':barStyle(src))+'"></div>';
     h += '<div class="mk" style="color:'+col+'">'+mark+'</div>';
-    h += '<button class="modebtn'+(modeOf(d)==='gym'?' gym':'')+'" title="'+t('Home')+' / '+t('Gym')+'" onclick="event.stopPropagation();cycleMode(\''+d+'\')">'+(modeOf(d)==='gym'?'G':'H')+'</button>';
+    var md=modeOf(d), em=effModeOf(d);
+    var mcls = md==='gym' ? ' gym' : md==='home' ? ' home' : (em==='gym' ? ' auto' : ' off');
+    h += '<button class="modebtn'+mcls+'" title="'+t('Rest')+' / '+t('Home')+' / '+t('Gym')+'" onclick="event.stopPropagation();cycleMode(\''+d+'\')">'+(em==='gym'?'G':(em==='home'?'H':'\u2013'))+'</button>';
     h += '<div class="n">'+day+'</div>';
     var seen={}, gcats=[];
     itemList(src).forEach(function(o){
@@ -2101,7 +2177,7 @@ function renderCal(){
   h += '<div class="legend">'+GORDER.map(function(g){return '<span><span class="gb" style="--gc:'+GROUPS[g].color+';display:inline-grid;vertical-align:-5px;margin-right:5px">'+GLET[g]+'</span>'+GN(g)+'</span>';}).join('')
      + '<span><span class="gb off" style="display:inline-grid;vertical-align:-5px;margin-right:5px">&#10005;</span>'+t('Rest Day')+'</span>'
      + '<span style="color:var(--tx3)">&#9679; '+t('Recorded')+'</span>'
-     + '<span style="color:var(--tx3)">H = '+t('Home')+' &middot; G = '+t('Gym')+'</span></div>';
+     + '<span style="color:var(--tx3)">\u2013 / H / G = '+t('Rest')+' / '+t('Home')+' / '+t('Gym')+'</span></div>';
 
   
 
@@ -2110,7 +2186,7 @@ function renderCal(){
 function shortItems(rec,e){
   if(rec && rec.type==='skip') return '';
   var items = rec && rec.items ? Object.keys(rec.items).filter(function(id){return !rec.items[id].skipped;}).map(function(id){var o=rec.items[id];return {id:id,sets:o.sets,reps:o.reps,lv:o.lv};}) : (e?e.items:[]);
-  if(!items||!items.length) return t('recover');
+  if(!items||!items.length) return t('Rest');
   return items.map(function(it){
     var ex=LIBMAP[it.id]; if(!ex) return '';
     if(it.lv!=null) return distOf(it.lv).short;
@@ -2133,16 +2209,23 @@ function moveMonth(n){
 }
 function stateTag(d){
   var T=today(), rec=recOf(d);
-  if(d>T) return '<span class="tag t-rest">'+t('Planned')+'</span>';
   if(rec && rec.type==='skip') return '<span class="tag t-cardio">&#10007; '+t('Rest Day')+'</span>';
   if(rec) return '<span class="tag t-lower">&#10003; '+t('Recorded')+'</span>';
-  return '<span class="tag t-rest">'+t('Assumed')+'</span>';
+  var e=SIM.plan[d];
+  if(!e || !(e.items||[]).length) return '<span class="tag t-rest">'+t('Rest')+'</span>';
+  return d>T ? '<span class="tag t-rest">'+t('Planned')+'</span>'
+             : '<span class="tag t-rest">'+t('Assumed')+'</span>';
 }
 function daySheetHTML(d){
   var e=SIM.plan[d]||{group:'rest',items:[],why:''};
   var h='<div class="top"><div><h3 style="font-size:17px">'+fmtLong(d)+'</h3>';
   h += '<div class="row" style="margin-top:7px;gap:8px;flex-wrap:wrap">'+stateTag(d)+'<span class="tiny">'+H(e.why||'')+'</span></div></div>';
   h += '<button class="iconbtn" style="margin-left:auto" onclick="closeSheet()">&#10005;</button></div>';
+  var md=modeOf(d);
+  h += '<div class="row" style="margin:2px 0 12px"><div class="modeseg">'
+    +'<button class="'+(md==='home'?'on':'')+'" onclick="setMode(\''+d+'\',\''+(md==='home'?'rest':'home')+'\')">'+t('Home')+'</button>'
+    +'<button class="'+(md==='gym'?'on':'')+'" onclick="setMode(\''+d+'\',\''+(md==='gym'?'rest':'gym')+'\')">'+t('Gym')+'</button>'
+    +'</div></div>';
   return h + sessionEditor(d);
 }
 function openDay(d){ openSheet(daySheetHTML(d), {t:'day', d:d}); }
