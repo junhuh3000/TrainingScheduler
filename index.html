@@ -233,6 +233,20 @@ nav button.on{background:var(--tx);color:var(--bg);}
 #toast.on{opacity:1;transform:translate(-50%,0)}
 .empty{text-align:center;padding:34px 16px;color:var(--tx3);font-size:13.5px}
 
+/* ---------- home / gym ---------- */
+.modeseg{display:inline-flex;border:1px solid var(--line2);border-radius:999px;background:var(--bg2);padding:3px;gap:2px}
+.modeseg button{padding:5px 15px;border-radius:999px;font-size:12.5px;font-weight:700;color:var(--tx3)}
+.modeseg button.on{background:var(--tx);color:var(--bg)}
+.modeseg.wide{display:flex;margin-bottom:14px}
+.modeseg.wide button{flex:1;padding:8px 10px;font-size:13px}
+.modebtn{position:absolute;right:4px;top:4px;width:20px;height:20px;border-radius:6px;
+  border:1px solid var(--line2);background:var(--card);color:var(--tx3);
+  font-size:10px;font-weight:800;display:grid;place-items:center;line-height:1;opacity:.75}
+.modebtn.gym{color:var(--bg);background:var(--tx);border-color:var(--tx);opacity:1}
+.modebtn:hover{opacity:1}
+.day{padding-top:10px}
+.day .n{padding-right:20px}
+
 /* ---------- v9 redesign ---------- */
 .sechd.big{margin:30px 0 12px}
 .sechd.big h2{font-size:18px;font-weight:750}
@@ -437,12 +451,35 @@ var POSES = {
   JACK_IN:    {h:[60,17],n:[60,28],p:[60,54],e1:[54,42],w1:[54,56],e2:[66,42],w2:[66,56],k1:[57,72],f1:[56,90],k2:[63,72],f2:[64,90]},
   JACK_OUT:   {h:[60,17],n:[60,28],p:[60,54],e1:[46,28],w1:[38,15],e2:[74,28],w2:[82,15],k1:[46,70],f1:[36,88],k2:[74,70],f2:[84,88]},
   SKIP_A:     {h:[60,17],n:[60,28],p:[60,55],e1:[50,40],w1:[46,50],e2:[70,40],w2:[74,50],k1:[58,74],f1:[57,93],k2:[62,74],f2:[63,93]},
-  SKIP_B:     {h:[60,13],n:[60,24],p:[60,51],e1:[50,36],w1:[46,46],e2:[70,36],w2:[74,46],k1:[57,68],f1:[59,84],k2:[63,68],f2:[65,84]}
+  SKIP_B:     {h:[60,13],n:[60,24],p:[60,51],e1:[50,36],w1:[46,46],e2:[70,36],w2:[74,46],k1:[57,68],f1:[59,84],k2:[63,68],f2:[65,84]},
+  /* ---- gym poses ---- */
+  BPRESS_DN:  {h:[97,76],n:[88,78],p:[56,80],e1:[82,88],w1:[78,68],e2:[80,89],w2:[74,69],k1:[40,88],f1:[34,93],k2:[42,89],f2:[36,93]},
+  BPRESS_UP:  {h:[97,76],n:[88,78],p:[56,80],e1:[82,66],w1:[80,52],e2:[80,67],w2:[77,53],k1:[40,88],f1:[34,93],k2:[42,89],f2:[36,93]},
+  FLY_DN:     {h:[97,76],n:[88,78],p:[56,80],e1:[76,90],w1:[66,93],e2:[74,91],w2:[64,93],k1:[40,88],f1:[34,93],k2:[42,89],f2:[36,93]},
+  FLY_UP:     {h:[97,76],n:[88,78],p:[56,80],e1:[80,64],w1:[78,54],e2:[78,65],w2:[76,55],k1:[40,88],f1:[34,93],k2:[42,89],f2:[36,93]},
+  LPULL_UP:   {h:[90,36],n:[88,46],p:[88,70],e1:[82,32],w1:[80,16],e2:[94,33],w2:[96,18],k1:[72,74],f1:[74,93],k2:[75,75],f2:[77,93]},
+  LPULL_DN:   {h:[90,36],n:[88,46],p:[88,70],e1:[90,52],w1:[82,44],e2:[96,55],w2:[96,46],k1:[72,74],f1:[74,93],k2:[75,75],f2:[77,93]},
+  SROW_A:     {h:[72,50],n:[70,60],p:[60,84],e1:[82,64],w1:[94,66],e2:[80,66],w2:[92,68],k1:[80,78],f1:[98,84],k2:[82,80],f2:[100,86]},
+  SROW_B:     {h:[58,46],n:[58,56],p:[60,84],e1:[48,62],w1:[62,64],e2:[46,64],w2:[60,66],k1:[80,78],f1:[98,84],k2:[82,80],f2:[100,86]},
+  TPUSH_A:    {h:[60,17],n:[60,28],p:[60,55],e1:[56,42],w1:[60,31],e2:[64,42],w2:[68,31],k1:[59,74],f1:[58,93],k2:[62,74],f2:[62,93]},
+  TPUSH_B:    {h:[60,17],n:[60,28],p:[60,55],e1:[56,42],w1:[57,56],e2:[64,42],w2:[65,56],k1:[59,74],f1:[58,93],k2:[62,74],f2:[62,93]},
+  LEGPRESS_A: {h:[96,51],n:[90,60],p:[70,76],e1:[84,70],w1:[78,76],e2:[82,72],w2:[76,78],k1:[56,62],f1:[46,70],k2:[58,64],f2:[48,72]},
+  LEGPRESS_B: {h:[96,51],n:[90,60],p:[70,76],e1:[84,70],w1:[78,76],e2:[82,72],w2:[76,78],k1:[52,58],f1:[36,56],k2:[54,60],f2:[38,58]},
+  LEGEXT_A:   {h:[88,35],n:[86,45],p:[86,68],e1:[92,56],w1:[94,68],e2:[90,58],w2:[92,69],k1:[70,72],f1:[72,92],k2:[73,73],f2:[75,92]},
+  LEGEXT_B:   {h:[88,35],n:[86,45],p:[86,68],e1:[92,56],w1:[94,68],e2:[90,58],w2:[92,69],k1:[70,70],f1:[50,66],k2:[73,71],f2:[53,68]},
+  LEGCURL_A:  {h:[22,80],n:[30,81],p:[62,82],e1:[36,88],w1:[28,92],e2:[34,89],w2:[26,93],k1:[80,83],f1:[98,85],k2:[82,84],f2:[100,86]},
+  LEGCURL_B:  {h:[22,80],n:[30,81],p:[62,82],e1:[36,88],w1:[28,92],e2:[34,89],w2:[26,93],k1:[80,82],f1:[86,62],k2:[82,83],f2:[88,64]},
+  HLR_UP:     {h:[64,33],n:[60,42],p:[60,66],e1:[55,28],w1:[54,15],e2:[65,28],w2:[66,15],k1:[58,62],f1:[52,72],k2:[61,63],f2:[55,73]},
+  KCR_A:      {h:[64,34],n:[62,44],p:[58,66],e1:[66,36],w1:[70,28],e2:[70,38],w2:[74,30],k1:[58,80],f1:[44,91],k2:[61,81],f2:[47,92]},
+  KCR_B:      {h:[72,46],n:[68,54],p:[58,66],e1:[72,44],w1:[76,36],e2:[75,46],w2:[79,38],k1:[58,80],f1:[44,91],k2:[61,81],f2:[47,92]},
+  BIKE_A:     {h:[48,40],n:[54,46],p:[70,64],e1:[52,54],w1:[43,52],e2:[54,56],w2:[45,54],k1:[58,68],f1:[58,77],k2:[70,76],f2:[70,87]},
+  BIKE_B:     {h:[48,40],n:[54,46],p:[70,64],e1:[52,54],w1:[43,52],e2:[54,56],w2:[45,54],k1:[70,76],f1:[70,87],k2:[58,68],f2:[58,77]}
 };
 
 var C_NEAR = '#e6edf3', C_FAR = '#4a5867', C_PROP = '#54627a';
 function _l(a,b,c,w){return '<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="'+c+'" stroke-width="'+w+'" stroke-linecap="round" stroke-linejoin="round"/>';}
 function _db(w,c){return '<rect x="'+(w[0]-5)+'" y="'+(w[1]-2.6)+'" width="10" height="5.2" rx="1.6" fill="'+c+'"/>';}
+function _pl(w,c){return '<rect x="'+(w[0]-2.3)+'" y="'+(w[1]-6.5)+'" width="4.6" height="13" rx="2" fill="'+c+'"/>';}
 
 function drawPose(P,accent,props){
   var s = '';
@@ -454,6 +491,12 @@ function drawPose(P,accent,props){
   if(props.indexOf('bench2')>=0) s += '<rect x="76" y="72" width="36" height="5" rx="2" fill="'+C_PROP+'"/><rect x="80" y="77" width="3" height="17" fill="'+C_PROP+'"/>';
   if(props.indexOf('box')>=0) s += '<rect x="72" y="74" width="38" height="20" rx="2" fill="none" stroke="'+C_PROP+'" stroke-width="2"/>';
   if(props.indexOf('rope')>=0) s += '<ellipse cx="60" cy="60" rx="34" ry="36" fill="none" stroke="'+C_PROP+'" stroke-width="1.6" stroke-dasharray="4 4"/>';
+  if(props.indexOf('fbench')>=0) s += _l([28,84],[106,84],C_PROP,4)+_l([36,84],[36,94],C_PROP,2)+_l([98,84],[98,94],C_PROP,2);
+  if(props.indexOf('seatB')>=0) s += _l([64,80],[94,80],C_PROP,4)+_l([94,80],[106,54],C_PROP,4)+_l([78,80],[78,94],C_PROP,2);
+  if(props.indexOf('sled')>=0) s += _l([30,44],[44,74],C_PROP,5);
+  if(props.indexOf('bike')>=0) s += _l([70,67],[70,82],C_PROP,3)+_l([46,56],[46,63],C_PROP,3)+_l([40,50],[46,56],C_PROP,3)+'<circle cx="64" cy="82" r="2.6" fill="'+C_PROP+'"/>'+_l([58,92],[84,92],C_PROP,2);
+  if(props.indexOf('cblU')>=0) s += _l([P.w1[0]+2,P.w1[1]-2],[P.w1[0]+8,7],C_PROP,1.6)+'<circle cx="'+(P.w1[0]+8)+'" cy="6" r="2.4" fill="'+C_PROP+'"/>';
+  if(props.indexOf('cblF')>=0) s += _l(P.w1,[110,P.w1[1]+2],C_PROP,1.6)+_l([110,58],[110,88],C_PROP,4);
   /* far limbs first */
   s += _l(P.n,P.e2,C_FAR,3)+_l(P.e2,P.w2,C_FAR,3);
   s += _l(P.p,P.k2,C_FAR,3.2)+_l(P.k2,P.f2,C_FAR,3.2);
@@ -464,6 +507,9 @@ function drawPose(P,accent,props){
   s += _l(P.p,P.k1,C_NEAR,3.6)+_l(P.k1,P.f1,C_NEAR,3.6);
   s += _l(P.n,P.e1,C_NEAR,3.4)+_l(P.e1,P.w1,C_NEAR,3.4);
   if(props.indexOf('db')>=0){ s += _db(P.w2,C_FAR)+_db(P.w1,C_NEAR); }
+  if(props.indexOf('bbw')>=0){ s += _pl(P.w2,C_FAR)+_pl(P.w1,C_NEAR); }
+  if(props.indexOf('bbsh')>=0){ var bs=[P.n[0],P.n[1]+4]; s += _l([bs[0]-14,bs[1]],[bs[0]+14,bs[1]],C_PROP,2.6)+_pl([bs[0]-14,bs[1]],C_FAR)+_pl([bs[0]+14,bs[1]],C_NEAR); }
+  if(props.indexOf('bbp')>=0){ var bp=[P.p[0],P.p[1]-7]; s += _l([bp[0]-13,bp[1]],[bp[0]+13,bp[1]],C_PROP,2.6)+_pl([bp[0]-13,bp[1]],C_FAR)+_pl([bp[0]+13,bp[1]],C_NEAR); }
   return s;
 }
 
@@ -498,8 +544,8 @@ var GORDER = ['upper','core','lower','cardio'];
 var GLET = {upper:'U', core:'C', lower:'L', cardio:'R', rest:'\u2013'};
 var LOCALES = {en:'en-GB', ko:'ko-KR', vi:'vi-VN'};
 var TR = {
-ko:{'Today':'\uc624\ub298','Calendar':'\ub2ec\ub825','My Routine':'\ub0b4 \ub8e8\ud2f4','Library':'\uc6b4\ub3d9 \ubaa9\ub85d','Analysis':'\ubd84\uc11d','Rest Day':'\ud734\uc2dd\uc77c','Rest':'\ud734\uc2dd','Reset':'\ucd08\uae30\ud654','Coming up':'\ub2e4\uac00\uc624\ub294 \uc77c\uc815','Yesterday':'\uc5b4\uc81c','last':'\ucd5c\uadfc','first time':'\ucc98\uc74c','Today\'s Line Up':'\uc624\ub298\uc758 \uad6c\uc131','Nothing planned yet.':'\uacc4\ud68d \uc5c6\uc74c','How to':'\ubc29\ubc95','Skip':'\uac74\ub108\ub6f0\uae30','Undo':'\ub418\ub3cc\ub9ac\uae30','Sets':'\uc138\ud2b8','Target':'\ubaa9\ud45c','Mild':'\uac00\ubcbc\uc6c0','Moderate':'\ubcf4\ud1b5','Intensive':'\uac15\ud568','Effort':'\uac15\ub3c4','Train anyway':'\uadf8\ub798\ub3c4 \uc6b4\ub3d9\ud558\uae30','Everything skipped':'\ubaa8\ub450 \uac74\ub108\ub700','Not done today.':'\uc624\ub298\uc740 \uc548 \ud568','Edit':'\ud3b8\uc9d1','Theme':'\ud14c\ub9c8','Dark':'\ub2e4\ud06c','Light':'\ub77c\uc774\ud2b8','Add more':'\ub354 \ucd94\uac00','Browse library':'\uc6b4\ub3d9 \ubaa9\ub85d \ubcf4\uae30','Nothing here yet.':'\uc544\uc9c1 \uc5c6\uc74c','Remove':'\uc0ad\uc81c','Recovery':'\ud68c\ubcf5','recover':'\ud68c\ubcf5','Planned':'\uc608\uc815','Recorded':'\uae30\ub85d\ub428','Assumed':'\uacc4\ud68d\ub300\ub85c \ucc98\ub9ac','Exercises':'\uc6b4\ub3d9','Language':'\uc5b8\uc5b4','Rest day recorded':'\ud734\uc2dd\uc77c\ub85c \uae30\ub85d\ub428','ready':'\uc900\ube44\ub428','d':'\uc77c','Upper Body':'\uc0c1\uccb4','Middle (Core)':'\ucf54\uc5b4(\ubcf5\ubd80)','Lower Body':'\ud558\uccb4','Cardio':'\uc720\uc0b0\uc18c','Upper':'\uc0c1\uccb4','Core':'\ucf54\uc5b4','Lower':'\ud558\uccb4','Cardio this week':'\uc774\ubc88 \uc8fc \uc720\uc0b0\uc18c','Running target':'\ub7ec\ub2dd \ubaa9\ud45c','Active streak':'\uc5f0\uc18d \uc6b4\ub3d9','Build this day':'\uc774 \ub0a0 \uad6c\uc131\ud558\uae30','Add a body part':'\ubd80\uc704 \ucd94\uac00','Or just one exercise':'\uc6b4\ub3d9 \ud558\ub098\ub9cc \ucd94\uac00','In this day - tap to remove':'\ud604\uc7ac \uad6c\uc131 - \ub20c\ub7ec\uc11c \uc81c\uac70','Or replace the whole session':'\uc138\uc158 \uc804\uccb4 \uad50\uccb4','Deliberate day off.':'\uc758\ub3c4\uc801\uc778 \ud734\uc2dd.','Add to routine':'\ub8e8\ud2f4\uc5d0 \ucd94\uac00','Rest day':'\ud734\uc2dd\uc77c','Before you started':'\uc2dc\uc791 \uc774\uc804','reps':'\ud68c','Streak':'\uc5f0\uc18d','ago':'\uc804','Keep it up!':'\uacc4\uc18d \uc774\uc5b4\uac00\uc694!','Great start!':'\uc88b\uc740 \uc2dc\uc791!','Start':'\uc2dc\uc791\uc77c','This month':'\uc774\ubc88 \ub2ec'},
-vi:{'Today':'H\u00f4m nay','Calendar':'L\u1ecbch','My Routine':'L\u1ecbch tr\u00ecnh','Library':'Th\u01b0 vi\u1ec7n','Analysis':'Ph\u00e2n t\u00edch','Rest Day':'Ng\u00e0y ngh\u1ec9','Rest':'Ngh\u1ec9','Reset':'\u0110\u1eb7t l\u1ea1i','Coming up':'S\u1eafp t\u1edbi','Yesterday':'H\u00f4m qua','last':'l\u1ea7n tr\u01b0\u1edbc','first time':'l\u1ea7n \u0111\u1ea7u','Today\'s Line Up':'B\u00e0i h\u00f4m nay','Nothing planned yet.':'Ch\u01b0a c\u00f3 k\u1ebf ho\u1ea1ch','How to':'C\u00e1ch t\u1eadp','Skip':'B\u1ecf qua','Undo':'Ho\u00e0n t\u00e1c','Sets':'Hi\u1ec7p','Target':'M\u1ee5c ti\u00eau','Mild':'Nh\u1eb9','Moderate':'V\u1eeba','Intensive':'N\u1eb7ng','Effort':'C\u01b0\u1eddng \u0111\u1ed9','Train anyway':'V\u1eabn t\u1eadp','Everything skipped':'\u0110\u00e3 b\u1ecf qua t\u1ea5t c\u1ea3','Not done today.':'H\u00f4m nay kh\u00f4ng t\u1eadp','Edit':'Ch\u1ec9nh s\u1eeda','Theme':'Giao di\u1ec7n','Dark':'T\u1ed1i','Light':'S\u00e1ng','Add more':'Th\u00eam','Browse library':'Xem th\u01b0 vi\u1ec7n','Nothing here yet.':'Ch\u01b0a c\u00f3 g\u00ec','Remove':'X\u00f3a','Recovery':'Ph\u1ee5c h\u1ed3i','recover':'ph\u1ee5c h\u1ed3i','Planned':'D\u1ef1 ki\u1ebfn','Recorded':'\u0110\u00e3 ghi','Assumed':'Theo k\u1ebf ho\u1ea1ch','Exercises':'B\u00e0i t\u1eadp','Language':'Ng\u00f4n ng\u1eef','Rest day recorded':'\u0110\u00e3 ghi ng\u00e0y ngh\u1ec9','ready':'s\u1eb5n s\u00e0ng','d':' ng\u00e0y','Upper Body':'Th\u00e2n tr\u00ean','Middle (Core)':'C\u01a1 b\u1ee5ng','Lower Body':'Th\u00e2n d\u01b0\u1edbi','Cardio':'Cardio','Upper':'Tr\u00ean','Core':'B\u1ee5ng','Lower':'D\u01b0\u1edbi','Cardio this week':'Cardio tu\u1ea7n n\u00e0y','Running target':'M\u1ee5c ti\u00eau ch\u1ea1y','Active streak':'Chu\u1ed7i ng\u00e0y t\u1eadp','Build this day':'S\u1eafp x\u1ebfp ng\u00e0y n\u00e0y','Add a body part':'Th\u00eam nh\u00f3m c\u01a1','Or just one exercise':'Ho\u1eb7c m\u1ed9t b\u00e0i','In this day - tap to remove':'Trong ng\u00e0y - ch\u1ea1m \u0111\u1ec3 x\u00f3a','Or replace the whole session':'Ho\u1eb7c thay c\u1ea3 bu\u1ed5i','Deliberate day off.':'Ngh\u1ec9 c\u00f3 ch\u1ee7 \u0111\u00edch.','Add to routine':'Th\u00eam v\u00e0o l\u1ecbch','Rest day':'Ng\u00e0y ngh\u1ec9','Before you started':'Tr\u01b0\u1edbc khi b\u1eaft \u0111\u1ea7u','reps':'l\u1ea7n','Streak':'Chu\u1ed7i','ago':'tr\u01b0\u1edbc','Keep it up!':'Ti\u1ebfp t\u1ee5c nh\u00e9!','Great start!':'Kh\u1edfi \u0111\u1ea7u t\u1ed1t!','Start':'B\u1eaft \u0111\u1ea7u','This month':'Th\u00e1ng n\u00e0y'}
+ko:{'Today':'\uc624\ub298','Calendar':'\ub2ec\ub825','My Routine':'\ub0b4 \ub8e8\ud2f4','Library':'\uc6b4\ub3d9 \ubaa9\ub85d','Analysis':'\ubd84\uc11d','Rest Day':'\ud734\uc2dd\uc77c','Rest':'\ud734\uc2dd','Reset':'\ucd08\uae30\ud654','Coming up':'\ub2e4\uac00\uc624\ub294 \uc77c\uc815','Yesterday':'\uc5b4\uc81c','last':'\ucd5c\uadfc','first time':'\ucc98\uc74c','Today\'s Line Up':'\uc624\ub298\uc758 \uad6c\uc131','Nothing planned yet.':'\uacc4\ud68d \uc5c6\uc74c','How to':'\ubc29\ubc95','Skip':'\uac74\ub108\ub6f0\uae30','Undo':'\ub418\ub3cc\ub9ac\uae30','Sets':'\uc138\ud2b8','Target':'\ubaa9\ud45c','Mild':'\uac00\ubcbc\uc6c0','Moderate':'\ubcf4\ud1b5','Intensive':'\uac15\ud568','Effort':'\uac15\ub3c4','Train anyway':'\uadf8\ub798\ub3c4 \uc6b4\ub3d9\ud558\uae30','Everything skipped':'\ubaa8\ub450 \uac74\ub108\ub700','Not done today.':'\uc624\ub298\uc740 \uc548 \ud568','Edit':'\ud3b8\uc9d1','Theme':'\ud14c\ub9c8','Dark':'\ub2e4\ud06c','Light':'\ub77c\uc774\ud2b8','Add more':'\ub354 \ucd94\uac00','Browse library':'\uc6b4\ub3d9 \ubaa9\ub85d \ubcf4\uae30','Nothing here yet.':'\uc544\uc9c1 \uc5c6\uc74c','Remove':'\uc0ad\uc81c','Recovery':'\ud68c\ubcf5','recover':'\ud68c\ubcf5','Planned':'\uc608\uc815','Recorded':'\uae30\ub85d\ub428','Assumed':'\uacc4\ud68d\ub300\ub85c \ucc98\ub9ac','Exercises':'\uc6b4\ub3d9','Language':'\uc5b8\uc5b4','Rest day recorded':'\ud734\uc2dd\uc77c\ub85c \uae30\ub85d\ub428','ready':'\uc900\ube44\ub428','d':'\uc77c','Upper Body':'\uc0c1\uccb4','Middle (Core)':'\ucf54\uc5b4(\ubcf5\ubd80)','Lower Body':'\ud558\uccb4','Cardio':'\uc720\uc0b0\uc18c','Upper':'\uc0c1\uccb4','Core':'\ucf54\uc5b4','Lower':'\ud558\uccb4','Cardio this week':'\uc774\ubc88 \uc8fc \uc720\uc0b0\uc18c','Running target':'\ub7ec\ub2dd \ubaa9\ud45c','Active streak':'\uc5f0\uc18d \uc6b4\ub3d9','Build this day':'\uc774 \ub0a0 \uad6c\uc131\ud558\uae30','Add a body part':'\ubd80\uc704 \ucd94\uac00','Or just one exercise':'\uc6b4\ub3d9 \ud558\ub098\ub9cc \ucd94\uac00','In this day - tap to remove':'\ud604\uc7ac \uad6c\uc131 - \ub20c\ub7ec\uc11c \uc81c\uac70','Or replace the whole session':'\uc138\uc158 \uc804\uccb4 \uad50\uccb4','Deliberate day off.':'\uc758\ub3c4\uc801\uc778 \ud734\uc2dd.','Add to routine':'\ub8e8\ud2f4\uc5d0 \ucd94\uac00','Rest day':'\ud734\uc2dd\uc77c','Before you started':'\uc2dc\uc791 \uc774\uc804','reps':'\ud68c','Streak':'\uc5f0\uc18d','ago':'\uc804','Keep it up!':'\uacc4\uc18d \uc774\uc5b4\uac00\uc694!','Great start!':'\uc88b\uc740 \uc2dc\uc791!','Start':'\uc2dc\uc791\uc77c','This month':'\uc774\ubc88 \ub2ec','Home':'\ud648','Gym':'\uc9d0','Home Training':'\ud648 \ud2b8\ub808\uc774\ub2dd','Gym Training':'\uc9d0 \ud2b8\ub808\uc774\ub2dd'},
+vi:{'Today':'H\u00f4m nay','Calendar':'L\u1ecbch','My Routine':'L\u1ecbch tr\u00ecnh','Library':'Th\u01b0 vi\u1ec7n','Analysis':'Ph\u00e2n t\u00edch','Rest Day':'Ng\u00e0y ngh\u1ec9','Rest':'Ngh\u1ec9','Reset':'\u0110\u1eb7t l\u1ea1i','Coming up':'S\u1eafp t\u1edbi','Yesterday':'H\u00f4m qua','last':'l\u1ea7n tr\u01b0\u1edbc','first time':'l\u1ea7n \u0111\u1ea7u','Today\'s Line Up':'B\u00e0i h\u00f4m nay','Nothing planned yet.':'Ch\u01b0a c\u00f3 k\u1ebf ho\u1ea1ch','How to':'C\u00e1ch t\u1eadp','Skip':'B\u1ecf qua','Undo':'Ho\u00e0n t\u00e1c','Sets':'Hi\u1ec7p','Target':'M\u1ee5c ti\u00eau','Mild':'Nh\u1eb9','Moderate':'V\u1eeba','Intensive':'N\u1eb7ng','Effort':'C\u01b0\u1eddng \u0111\u1ed9','Train anyway':'V\u1eabn t\u1eadp','Everything skipped':'\u0110\u00e3 b\u1ecf qua t\u1ea5t c\u1ea3','Not done today.':'H\u00f4m nay kh\u00f4ng t\u1eadp','Edit':'Ch\u1ec9nh s\u1eeda','Theme':'Giao di\u1ec7n','Dark':'T\u1ed1i','Light':'S\u00e1ng','Add more':'Th\u00eam','Browse library':'Xem th\u01b0 vi\u1ec7n','Nothing here yet.':'Ch\u01b0a c\u00f3 g\u00ec','Remove':'X\u00f3a','Recovery':'Ph\u1ee5c h\u1ed3i','recover':'ph\u1ee5c h\u1ed3i','Planned':'D\u1ef1 ki\u1ebfn','Recorded':'\u0110\u00e3 ghi','Assumed':'Theo k\u1ebf ho\u1ea1ch','Exercises':'B\u00e0i t\u1eadp','Language':'Ng\u00f4n ng\u1eef','Rest day recorded':'\u0110\u00e3 ghi ng\u00e0y ngh\u1ec9','ready':'s\u1eb5n s\u00e0ng','d':' ng\u00e0y','Upper Body':'Th\u00e2n tr\u00ean','Middle (Core)':'C\u01a1 b\u1ee5ng','Lower Body':'Th\u00e2n d\u01b0\u1edbi','Cardio':'Cardio','Upper':'Tr\u00ean','Core':'B\u1ee5ng','Lower':'D\u01b0\u1edbi','Cardio this week':'Cardio tu\u1ea7n n\u00e0y','Running target':'M\u1ee5c ti\u00eau ch\u1ea1y','Active streak':'Chu\u1ed7i ng\u00e0y t\u1eadp','Build this day':'S\u1eafp x\u1ebfp ng\u00e0y n\u00e0y','Add a body part':'Th\u00eam nh\u00f3m c\u01a1','Or just one exercise':'Ho\u1eb7c m\u1ed9t b\u00e0i','In this day - tap to remove':'Trong ng\u00e0y - ch\u1ea1m \u0111\u1ec3 x\u00f3a','Or replace the whole session':'Ho\u1eb7c thay c\u1ea3 bu\u1ed5i','Deliberate day off.':'Ngh\u1ec9 c\u00f3 ch\u1ee7 \u0111\u00edch.','Add to routine':'Th\u00eam v\u00e0o l\u1ecbch','Rest day':'Ng\u00e0y ngh\u1ec9','Before you started':'Tr\u01b0\u1edbc khi b\u1eaft \u0111\u1ea7u','reps':'l\u1ea7n','Streak':'Chu\u1ed7i','ago':'tr\u01b0\u1edbc','Keep it up!':'Ti\u1ebfp t\u1ee5c nh\u00e9!','Great start!':'Kh\u1edfi \u0111\u1ea7u t\u1ed1t!','Start':'B\u1eaft \u0111\u1ea7u','This month':'Th\u00e1ng n\u00e0y','Home':'Nh\u00e0','Gym':'Gym','Home Training':'T\u1eadp t\u1ea1i nh\u00e0','Gym Training':'T\u1eadp gym'}
 };
 var FLAGS={
 ko:'<svg width="30" height="20" viewBox="0 0 30 20" style="border-radius:4px;display:block"><rect width="30" height="20" fill="#fff"/><g transform="translate(15,10) rotate(-14)"><path d="M-5 0A5 5 0 0 1 5 0A2.5 2.5 0 0 1 0 0A2.5 2.5 0 0 0 -5 0Z" fill="#c8102e"/><path d="M5 0A5 5 0 0 1 -5 0A2.5 2.5 0 0 1 0 0A2.5 2.5 0 0 0 5 0Z" fill="#003478"/></g><g fill="#000"><g transform="translate(5.2,5) rotate(-62)"><rect x="-2.4" y="-2" width="4.8" height="1"/><rect x="-2.4" y="-0.5" width="4.8" height="1"/><rect x="-2.4" y="1" width="4.8" height="1"/></g><g transform="translate(24.8,5) rotate(62)"><rect x="-2.4" y="-2" width="4.8" height="1"/><rect x="-2.4" y="-0.5" width="4.8" height="1"/><rect x="-2.4" y="1" width="4.8" height="1"/></g><g transform="translate(5.2,15) rotate(62)"><rect x="-2.4" y="-2" width="4.8" height="1"/><rect x="-2.4" y="-0.5" width="4.8" height="1"/><rect x="-2.4" y="1" width="4.8" height="1"/></g><g transform="translate(24.8,15) rotate(-62)"><rect x="-2.4" y="-2" width="4.8" height="1"/><rect x="-2.4" y="-0.5" width="4.8" height="1"/><rect x="-2.4" y="1" width="4.8" height="1"/></g></g></svg>',
@@ -526,13 +572,13 @@ var T_STD  = [15,20,30,45,60,90];
 
 var LIB = [
 /* ---------------- UPPER ---------------- */
-{id:'chinup', name:'Chin Ups', cat:'upper', part:'Front of arms (biceps) + back', gear:'Pull-up bar', level:'Hard',
+{id:'chinup', name:'Chin Ups', cat:'upper', env:'both', part:'Front of arms (biceps) + back', gear:'Pull-up bar', level:'Hard',
  poses:['HANG','CHINUP_TOP'], props:['bar'], mid:'pull up',
  how:['Hold the bar with your palms facing you, hands about shoulder-width apart.','Hang with arms straight and cross your ankles behind you.','Pull your chest up until your chin passes the bar. Keep elbows close to your body.','Lower yourself down slowly (2 seconds) until arms are straight again.'],
  tip:'If you cannot do one yet, jump up to the top and lower as slowly as you can.',
  reps:[5,8,10,12,15,20], sets:S_STD, def:{sets:3,reps:5}},
 
-{id:'pullup', name:'Pull Ups', cat:'upper', part:'Back (lats) + shoulders', gear:'Pull-up bar', level:'Hard',
+{id:'pullup', name:'Pull Ups', cat:'upper', env:'both', part:'Back (lats) + shoulders', gear:'Pull-up bar', level:'Hard',
  poses:['HANG','CHINUP_TOP'], props:['bar'], mid:'pull up',
  how:['Same as a chin up but your palms face away from you and hands are wider than your shoulders.','Hang with arms straight.','Pull your chest toward the bar, leading with your elbows down and back.','Lower slowly until arms are straight.'],
  tip:'Harder than chin ups because your arms help less. Expect fewer reps.',
@@ -713,7 +759,186 @@ var LIB = [
  poses:['STEP_A','STEP_B'], props:['box'], mid:'climb',
  how:['Walk or jog up a flight of stairs at a steady effort.','Walk back down slowly to recover, then repeat.','Place your whole foot on each step and drive through the heel.'],
  tip:'Always walk down. Running down stairs is where people get hurt.',
- reps:[5,10,15,20,30], sets:[1], def:{sets:1,reps:15}}
+ reps:[5,10,15,20,30], sets:[1], def:{sets:1,reps:15}},
+
+/* ================= GYM ================= */
+/* ------ gym upper ------ */
+{id:'benchpress', name:'Barbell Bench Press', cat:'upper', env:'gym', part:'Chest + triceps + shoulders', gear:'Barbell + bench', level:'Medium',
+ poses:['BPRESS_DN','BPRESS_UP'], props:['fbench','bbw'], mid:'press',
+ how:['Lie on the bench with your eyes under the bar, feet flat on the floor.','Grip a little wider than your shoulders and unrack the bar over your chest.','Lower it under control until it touches your mid chest.','Press it back up until your arms are straight. Use a spotter or safety pins when going heavy.'],
+ tip:'Keep your shoulder blades pinched together on the bench the whole set.',
+ reps:[5,8,10,12,15], sets:S_STD, def:{sets:3,reps:8}},
+
+{id:'inclinepress', name:'Incline Bench Press', cat:'upper', env:'gym', part:'Upper chest + shoulders', gear:'Barbell + incline bench', level:'Medium',
+ poses:['BPRESS_DN','BPRESS_UP'], props:['fbench','bbw'], mid:'press',
+ how:['Set the bench to roughly 30 degrees and lie back.','Grip slightly wider than your shoulders and unrack over your upper chest.','Lower the bar to just below your collarbones.','Press straight back up. Expect a little less weight than flat bench.'],
+ tip:'The steeper the bench, the more it becomes a shoulder press.',
+ reps:[5,8,10,12,15], sets:S_STD, def:{sets:3,reps:8}},
+
+{id:'dbbench', name:'Dumbbell Bench Press', cat:'upper', env:'gym', part:'Chest + triceps', gear:'Dumbbells + bench', level:'Medium',
+ poses:['BPRESS_DN','BPRESS_UP'], props:['fbench','db'], mid:'press',
+ how:['Sit with the dumbbells on your thighs, then lie back and bring them to your shoulders.','Press both up over your chest until your arms are straight.','Lower them slowly, elbows at about 45 degrees, until you feel a chest stretch.','Press back up. Each arm works on its own, so stay even.'],
+ tip:'A deeper, safer stretch than the barbell, and no spotter needed.',
+ reps:R_LOW, sets:S_STD, def:{sets:3,reps:10}},
+
+{id:'ohp', name:'Barbell Overhead Press', cat:'upper', env:'gym', part:'Shoulders + triceps', gear:'Barbell', level:'Hard',
+ poses:['PRESS_DOWN','PRESS_UP'], props:['bbw'], mid:'press up',
+ how:['Stand with the bar resting on your front shoulders, hands just outside them.','Squeeze your stomach and buttocks so your back stays tall.','Press the bar straight up past your face until your arms lock out overhead.','Lower it back to your shoulders under control.'],
+ tip:'Move your head back slightly so the bar travels in a straight line.',
+ reps:[5,8,10,12,15], sets:S_STD, def:{sets:3,reps:8}},
+
+{id:'latpulldown', name:'Lat Pulldown', cat:'upper', env:'gym', part:'Back (lats) + biceps', gear:'Cable machine', level:'Easy',
+ poses:['LPULL_UP','LPULL_DN'], props:['bench2','cblU'], mid:'pull down',
+ how:['Sit with your thighs under the pads and grip the bar wider than your shoulders.','Lean back a few degrees with your chest up.','Pull the bar down to the top of your chest, elbows driving down and back.','Let it rise slowly until your arms are straight again.'],
+ tip:'The machine version of a pull up \u2014 perfect for building up to the real thing.',
+ reps:R_MID, sets:S_STD, def:{sets:3,reps:10}},
+
+{id:'cablerow', name:'Seated Cable Row', cat:'upper', env:'gym', part:'Mid back + biceps', gear:'Cable machine', level:'Easy',
+ poses:['SROW_A','SROW_B'], props:['cblF'], mid:'row',
+ how:['Sit with your feet on the plates, knees slightly bent, and grab the handle.','Sit tall with a flat back and arms stretched forward.','Pull the handle to your stomach, squeezing your shoulder blades together.','Let it return slowly without letting your back round.'],
+ tip:'Row with your back, not your arms \u2014 think elbows to hips.',
+ reps:R_MID, sets:S_STD, def:{sets:3,reps:12}},
+
+{id:'bbrow', name:'Barbell Row', cat:'upper', env:'gym', part:'Upper + mid back', gear:'Barbell', level:'Medium',
+ poses:['ROW_DOWN','ROW_UP'], props:['bbw'], mid:'row',
+ how:['Hold the bar with hands shoulder-width, then hinge forward until your back is about 45 degrees and flat.','Let the bar hang below your shoulders.','Pull it to your lower ribs, elbows staying close to your body.','Lower under control without standing up between reps.'],
+ tip:'If your torso bounces up each rep, the bar is too heavy.',
+ reps:R_LOW, sets:S_STD, def:{sets:3,reps:10}},
+
+{id:'bbcurl', name:'Barbell Curl', cat:'upper', env:'gym', part:'Front of arms (biceps)', gear:'Barbell', level:'Easy',
+ poses:['CURL_DOWN','CURL_UP'], props:['bbw'], mid:'curl',
+ how:['Stand tall holding the bar at your thighs, palms facing forward.','Pin your elbows to your sides.','Curl the bar up to your shoulders without swinging your hips.','Lower it slowly all the way down.'],
+ tip:'An empty 20 kg bar is already a solid start for strict curls.',
+ reps:R_MID, sets:S_STD, def:{sets:3,reps:10}},
+
+{id:'tripushdown', name:'Tricep Pushdown', cat:'upper', env:'gym', part:'Back of arms (triceps)', gear:'Cable machine', level:'Easy',
+ poses:['TPUSH_A','TPUSH_B'], props:['cblU'], mid:'push down',
+ how:['Face the cable with the bar or rope at chest height.','Pin your elbows to your sides, forearms up.','Push the handle down until your arms are fully straight.','Let it rise back to chest height with your elbows staying still.'],
+ tip:'Only your forearms move. If your elbows drift, lower the weight.',
+ reps:R_MID, sets:S_STD, def:{sets:3,reps:12}},
+
+{id:'chestfly', name:'Dumbbell Chest Fly', cat:'upper', env:'gym', part:'Chest', gear:'Dumbbells + bench', level:'Medium',
+ poses:['FLY_UP','FLY_DN'], props:['fbench','db'], mid:'open',
+ how:['Lie on the bench with the dumbbells pressed together above your chest, palms facing each other.','With a slight, fixed bend in your elbows, open your arms out wide.','Stop when you feel a strong chest stretch.','Squeeze the weights back together along the same curve, like hugging a tree.'],
+ tip:'Go lighter than you think. This is a stretch exercise, not a press.',
+ reps:R_MID, sets:S_STD, def:{sets:3,reps:12}},
+
+{id:'bardip', name:'Parallel Bar Dips', cat:'upper', env:'gym', part:'Chest + triceps', gear:'Dip bars', level:'Hard',
+ poses:['DIP_UP','DIP_DOWN'], props:[], mid:'lower',
+ how:['Jump up on the parallel bars with your arms straight, feet crossed behind you.','Lean slightly forward and bend your elbows to lower your body.','Go down until your shoulders are level with your elbows.','Press back up to straight arms.'],
+ tip:'Use the assisted dip machine if full dips are not there yet.',
+ reps:[3,5,8,10,12,15], sets:S_STD, def:{sets:3,reps:5}},
+
+/* ------ gym core ------ */
+{id:'hangraise', name:'Hanging Leg Raise', cat:'core', env:'gym', part:'Lower stomach + grip', gear:'Pull-up bar', level:'Hard',
+ poses:['HANG','HLR_UP'], props:['bar'], mid:'lift knees',
+ how:['Hang from the bar with straight arms and a tight grip.','Without swinging, lift your knees up toward your chest.','Pause for a moment at the top.','Lower your legs slowly back to a dead hang.'],
+ tip:'Straighten your legs on the way up to make it much harder.',
+ reps:R_LOW, sets:S_STD, def:{sets:3,reps:8}},
+
+{id:'cablecrunch', name:'Cable Crunch', cat:'core', env:'gym', part:'Stomach (abs), loaded', gear:'Cable machine', level:'Medium',
+ poses:['KCR_A','KCR_B'], props:['cblU'], mid:'crunch',
+ how:['Kneel below the cable holding the rope beside your head.','Keep your hips still \u2014 they do not sit back.','Crunch your ribs down toward your hips, pulling with your stomach, not your arms.','Return slowly until your stomach is fully stretched.'],
+ tip:'The only ab exercise here you can keep loading heavier for years.',
+ reps:R_MID, sets:S_STD, def:{sets:3,reps:12}},
+
+{id:'abmachine', name:'Ab Crunch Machine', cat:'core', env:'gym', part:'Stomach (abs)', gear:'Crunch machine', level:'Easy',
+ poses:['SITUP_DOWN','CRUNCH_UP'], props:[], mid:'crunch',
+ how:['Set the seat so the pads sit on your chest or in your hands at chest height.','Pick a light weight to start.','Crunch forward and down, folding at the ribs, breathing out.','Return slowly without letting the stack slam.'],
+ tip:'Smooth and slow beats heavy and jerky here.',
+ reps:R_MID, sets:S_STD, def:{sets:3,reps:12}},
+
+{id:'backext', name:'Back Extension', cat:'core', env:'gym', part:'Lower back + buttocks', gear:'Extension bench', level:'Easy',
+ poses:['SUPER_DOWN','SUPER_UP'], props:['fbench'], mid:'lift',
+ how:['Set the pad at your hips and hook your heels under the rollers.','Cross your arms over your chest and lower your upper body down.','Lift back up until your body makes one straight line \u2014 not higher.','Lower under control. Hold a plate to make it harder.'],
+ tip:'Rounding up past straight pinches the lower back. Stop at neutral.',
+ reps:R_MID, sets:S_STD, def:{sets:3,reps:12}},
+
+/* ------ gym lower ------ */
+{id:'bbsquat', name:'Barbell Squat', cat:'lower', env:'gym', part:'Thighs + buttocks + core', gear:'Barbell + rack', level:'Hard',
+ poses:['STAND','SQUAT_DOWN'], props:['bbsh'], mid:'squat',
+ how:['Rest the bar on your upper back (not your neck) and step out of the rack.','Feet shoulder-width, toes slightly out.','Sit down and back until your thighs are at least level with the floor, chest up.','Drive through your whole foot to stand back up.'],
+ tip:'Set the safety pins just below your bottom position every time.',
+ reps:[5,8,10,12,15], sets:S_STD, def:{sets:3,reps:8}},
+
+{id:'legpress', name:'Leg Press', cat:'lower', env:'gym', part:'Thighs + buttocks', gear:'Leg press machine', level:'Easy',
+ poses:['LEGPRESS_A','LEGPRESS_B'], props:['seatB','sled'], mid:'press',
+ how:['Sit back in the machine with your feet shoulder-width on the plate.','Release the handles and lower the plate until your knees reach about 90 degrees.','Press back up through your whole foot.','Never lock your knees out hard at the top.'],
+ tip:'All the squat-like work with none of the balance demands.',
+ reps:R_MID, sets:S_STD, def:{sets:3,reps:10}},
+
+{id:'deadlift', name:'Barbell Deadlift', cat:'lower', env:'gym', part:'Whole back of body', gear:'Barbell', level:'Hard',
+ poses:['RDL_BOT','RDL_TOP'], props:['bbw'], mid:'lift',
+ how:['Stand with the bar over the middle of your feet, shins close to it.','Hinge down and grip just outside your legs, back flat, chest up.','Push the floor away and stand up tall, bar dragging up your legs.','Hinge back down under control. Reset your back flat before every rep.'],
+ tip:'Learn it light. A flat back matters more than any number on the bar.',
+ reps:[3,5,8,10,12], sets:S_STD, def:{sets:3,reps:5}},
+
+{id:'legext', name:'Leg Extension', cat:'lower', env:'gym', part:'Front of thighs (quads)', gear:'Extension machine', level:'Easy',
+ poses:['LEGEXT_A','LEGEXT_B'], props:['bench2'], mid:'extend',
+ how:['Sit with the pad on your shins, knees lined up with the machine pivot.','Grip the handles and sit tall.','Straighten your legs all the way, squeezing the front of your thighs.','Lower slowly \u2014 the way down is half the exercise.'],
+ tip:'Pause for one second at the top of every rep.',
+ reps:R_MID, sets:S_STD, def:{sets:3,reps:12}},
+
+{id:'legcurl', name:'Lying Leg Curl', cat:'lower', env:'gym', part:'Back of thighs (hamstrings)', gear:'Curl machine', level:'Easy',
+ poses:['LEGCURL_A','LEGCURL_B'], props:['fbench'], mid:'curl',
+ how:['Lie face down with the pad just above your heels.','Hold the handles and keep your hips pressed into the bench.','Curl your heels toward your bottom.','Lower slowly until your legs are almost straight.'],
+ tip:'If your hips lift off the bench, the weight is too heavy.',
+ reps:R_MID, sets:S_STD, def:{sets:3,reps:12}},
+
+{id:'hipthrust', name:'Barbell Hip Thrust', cat:'lower', env:'gym', part:'Buttocks (glutes)', gear:'Barbell + bench', level:'Medium',
+ poses:['BRIDGE_DOWN','BRIDGE_UP'], props:['bbp'], mid:'drive up',
+ how:['Sit on the floor with your upper back against a bench, bar over your hips (use a pad).','Feet flat, knees bent, chin tucked.','Drive through your heels and lift your hips until your body is level like a table.','Squeeze hard at the top, then lower with control.'],
+ tip:'The strongest glute exercise in the gym. Loads up fast \u2014 enjoy it.',
+ reps:R_MID, sets:S_STD, def:{sets:3,reps:10}},
+
+{id:'calfpress', name:'Machine Calf Raise', cat:'lower', env:'gym', part:'Calves', gear:'Calf machine', level:'Easy',
+ poses:['CALF_DOWN','CALF_UP'], props:['bbsh'], mid:'rise',
+ how:['Stand with the balls of your feet on the platform, shoulders under the pads.','Let your heels drop as low as they go for a full stretch.','Rise up onto your toes as high as possible.','Pause at the top, then lower slowly.'],
+ tip:'Full stretch at the bottom, full squeeze at the top \u2014 no bouncing.',
+ reps:R_HIGH, sets:S_STD, def:{sets:3,reps:15}},
+
+{id:'bulgdb', name:'Weighted Split Squat', cat:'lower', env:'gym', part:'Thighs + buttocks (one leg)', gear:'Dumbbells + bench', level:'Hard',
+ poses:['SPLIT_TOP','SPLIT_BOT'], props:['bench2','db'], mid:'lower',
+ how:['Hold a dumbbell in each hand and rest one foot on a bench behind you.','Stand one big step in front of it, chest tall.','Lower straight down until your front thigh is level with the floor.','Drive up through the front heel. All reps, then swap legs.'],
+ tip:'The dumbbells also fix your balance by pulling you down evenly.',
+ reps:R_LOW, sets:[1,2,3,4], def:{sets:3,reps:8}},
+
+{id:'walklunge', name:'DB Walking Lunge', cat:'lower', env:'gym', part:'Thighs + buttocks', gear:'Dumbbells', level:'Medium',
+ poses:['STAND','LUNGE'], props:['db'], mid:'step',
+ how:['Hold a dumbbell in each hand at your sides.','Take a big step forward and lower until both knees are at 90 degrees.','Drive through the front heel and step the back leg through into the next lunge.','Keep walking forward. One step per leg = 2 reps.'],
+ tip:'Shorter steps hit the thighs, longer steps hit the buttocks.',
+ reps:R_MID, sets:S_STD, def:{sets:3,reps:10}},
+
+/* ------ gym cardio (minutes) ------ */
+{id:'treadmill', name:'Treadmill Run', cat:'cardio', env:'gym', part:'Heart + lungs + legs', gear:'Treadmill', level:'Medium', unit:'min', cardio:true,
+ poses:['RUN_A','RUN_B'], props:[], mid:'run',
+ how:['Start walking, then bring the speed up to an easy jog over 2-3 minutes.','Run at a pace where you could still speak a short sentence.','Set a 1% incline to mimic outdoor running.','Slow to a walk for the last few minutes to cool down.'],
+ tip:'Hands off the rails \u2014 holding on cancels half the work.',
+ reps:[10,15,20,30,45,60], sets:[1], def:{sets:1,reps:20}},
+
+{id:'bike', name:'Stationary Bike', cat:'cardio', env:'gym', part:'Heart + lungs + thighs', gear:'Exercise bike', level:'Easy', unit:'min', cardio:true,
+ poses:['BIKE_A','BIKE_B'], props:['bike'], mid:'pedal',
+ how:['Set the saddle so your knee is slightly bent at the bottom of the pedal stroke.','Pedal at a steady effort where talking is still possible.','Add resistance rather than speed to work harder.','Spin easy for the last 3 minutes.'],
+ tip:'The joint-friendliest cardio in the gym \u2014 perfect for heavy-leg days.',
+ reps:[10,15,20,30,45,60], sets:[1], def:{sets:1,reps:20}},
+
+{id:'rower', name:'Rowing Machine', cat:'cardio', env:'gym', part:'Whole body + heart', gear:'Rowing machine', level:'Medium', unit:'min', cardio:true,
+ poses:['SROW_A','SROW_B'], props:['cblF'], mid:'drive',
+ how:['Strap your feet in and grip the handle with straight arms.','Drive with your legs first, then lean back slightly, then pull the handle to your ribs.','Reverse it: arms out, lean forward, knees bend.','Keep the stroke long and smooth, about 20-24 strokes per minute.'],
+ tip:'Legs do 60% of the work. If your arms die first, the order is wrong.',
+ reps:[5,10,15,20,30], sets:[1], def:{sets:1,reps:15}},
+
+{id:'stairmill', name:'Stair Climber', cat:'cardio', env:'gym', part:'Legs + heart', gear:'Stair machine', level:'Hard', unit:'min', cardio:true,
+ poses:['STEP_A','STEP_B'], props:['box'], mid:'climb',
+ how:['Step on and start at a slow pace.','Stand tall \u2014 fingertips on the rails only for balance.','Place your whole foot on each step and push through the heel.','It is harder than it looks: start with short blocks.'],
+ tip:'Leaning on the rails can cut the workout nearly in half.',
+ reps:[5,10,15,20,30], sets:[1], def:{sets:1,reps:10}},
+
+{id:'elliptical', name:'Elliptical', cat:'cardio', env:'gym', part:'Heart + lungs, low impact', gear:'Elliptical machine', level:'Easy', unit:'min', cardio:true,
+ poses:['WALK_A','WALK_B'], props:[], mid:'glide',
+ how:['Step on and start pedalling forward, hands on the moving handles.','Push and pull with your arms as your legs drive.','Raise the resistance until the motion feels like work, not coasting.','Keep an upright posture, eyes forward.'],
+ tip:'Zero impact on the knees \u2014 a good choice the day after a long run.',
+ reps:[10,15,20,30,45,60], sets:[1], def:{sets:1,reps:20}}
 ];
 
 var LIBMAP = {}; LIB.forEach(function(e){ LIBMAP[e.id]=e; });
@@ -742,6 +967,8 @@ function defaultState(){
   return {
     v:2,
     routine:['chinup','pushup','dbcurl','situp','squat','lunge','run'],
+    routineG:[],                /* gym routine - starts empty */
+    modes:{},                   /* date -> 'gym' (home is the default) */
     pinned:['chinup'],          /* always available on a cardio day */
     logs:{},
     settings:{ rest:{mild:1,moderate:2,intensive:3}, runsPerWeek:2, cardioGap:3,
@@ -778,6 +1005,9 @@ function load(incoming){
   if(!S.settings.theme) S.settings.theme = 'light';
   if(S.v < 8){ S.v = 8; save(); }
   if(S.v < 9){ S.settings.theme='light'; S.v = 9; save(); }
+  if(!S.routineG) S.routineG = [];
+  if(!S.modes) S.modes = {};
+  if(S.v < 10){ S.v = 10; save(); }
 }
 /* Theme is mirrored outside the account so the sign-in screen and the very
    first paint after a reload match, before any state has loaded. */
@@ -868,9 +1098,24 @@ function H(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repla
    using real records where they exist and assuming the plan
    was completed where they do not.
    ============================================================ */
+/* A day trains either at home or at the gym. Each place has its own routine,
+   and everything downstream (the planner, the build sheet, the line-up) reads
+   through RT_DATE so it draws from the right one for the day in question. */
+function modeOf(d){ return (S.modes && S.modes[d])==='gym' ? 'gym' : 'home'; }
+function routineListFor(d){ return modeOf(d)==='gym' ? (S.routineG||[]) : (S.routine||[]); }
+var RT_DATE = null;
+function activeList(){ return RT_DATE ? routineListFor(RT_DATE) : (S.routine||[]); }
 function routineOf(cat){
-  return S.routine.filter(function(id){ return LIBMAP[id] && LIBMAP[id].cat===cat; });
+  return activeList().filter(function(id){ return LIBMAP[id] && LIBMAP[id].cat===cat; });
 }
+function setMode(d,m){
+  S.modes = S.modes||{};
+  if(modeOf(d)===m) return;
+  if(m==='gym') S.modes[d]='gym'; else delete S.modes[d];
+  save(); refresh();
+  toast((m==='gym'?t('Gym'):t('Home'))+' \u00b7 '+fmt(d));
+}
+function cycleMode(d){ setMode(d, modeOf(d)==='gym' ? 'home' : 'gym'); }
 /* Effort is now recorded per body part, since a day can be easy on legs and
    brutal on core. Older records carry one value for the whole day, so both
    readers fall back to it. */
@@ -962,6 +1207,7 @@ function simulate(){
   var plan={}, hist=[], notes={}, d=start, guard=0, ctxT=null;
 
   while(d<=end && guard++<4000){
+    RT_DATE = d;
     var entry = choose(d,ctx);
     plan[d] = entry;
     var rec = S.logs[d];
@@ -972,10 +1218,14 @@ function simulate(){
     if(d===T) ctxT = JSON.parse(JSON.stringify(ctx));   /* freeze the state as of today */
     d = addD(d,1);
   }
+  RT_DATE = null;
   return {plan:plan, hist:hist, notes:notes, ctx:ctx, ctxT:ctxT||ctx, start:start};
 }
 
 function choose(d,ctx){
+  if(modeOf(d)==='gym' && routineListFor(d).length===0)
+    return {date:d, group:'rest', groups:[], items:[],
+            why:'Gym day, but your gym routine is empty \u2014 add gym exercises under My Routine'};
   /* --- which muscle groups have recovered? --- */
   var elig=[];
   ['upper','core','lower'].forEach(function(g){
@@ -1059,7 +1309,7 @@ function pickExercises(g,ctx,d){
     var la = ctx.lastDone[a] ? diffD(d,ctx.lastDone[a]) : 999;
     var lb = ctx.lastDone[b] ? diffD(d,ctx.lastDone[b]) : 999;
     if(lb!==la) return lb-la;
-    return S.routine.indexOf(a)-S.routine.indexOf(b);
+    var L=activeList(); return L.indexOf(a)-L.indexOf(b);
   });
   return ids.slice(0, S.settings.maxPerGroup||3);
 }
@@ -1126,6 +1376,7 @@ function cardioEntry(d,ctx,why){
 /* exercises you can reach while you are out running get added to every cardio
    day, on top of the plan, without resetting that body part's recovery */
 function addPinned(entry,ctx){
+  if(modeOf(entry.date)==='gym') return;   /* pinned extras belong to home cardio days */
   (S.pinned||[]).forEach(function(id){
     if(!LIBMAP[id] || S.routine.indexOf(id)<0) return;
     if(entry.items.some(function(it){ return it.id===id; })) return;
@@ -1288,6 +1539,7 @@ function dayCount(date){
 }
 function dayFull(date){ return dayCount(date) >= (S.settings.maxPerSession||4); }
 function restedOrder(date){
+  RT_DATE = date;
   var ctx=SIM.ctxT;
   return ['upper','core','lower'].filter(function(g){ return routineOf(g).length; })
     .sort(function(a,b){
@@ -1303,6 +1555,7 @@ function partsIn(date){
 }
 /* add a whole body part. With no group given it takes the most rested one. */
 function addBodyPart(date,g,silent){
+  RT_DATE = date;
   var r=ensureRec(date), ctx=SIM.ctxT, have=partsIn(date);
   if(!g){
     var cand=restedOrder(date).filter(function(x){ return !have[x]; });
@@ -1340,6 +1593,7 @@ function openAddPart(d){ openSheet(addPartHTML(d), {t:'add', d:d}); }
    "Change session" panels offered, in the order you would reach for them. */
 function openBuild(d){ openSheet(buildHTML(d), {t:'build', d:d}); }
 function buildHTML(d){
+  RT_DATE = d;
   var have=partsIn(d), order=restedOrder(d), ctx=SIM.ctxT;
   var count=dayCount(d), max=S.settings.maxPerSession||4, room=Math.max(0,max-count);
   var LB='class="lbl" style="color:var(--tx3);font-size:11px;font-weight:700;letter-spacing:.06em';
@@ -1365,7 +1619,7 @@ function buildHTML(d){
   h += '</div>';
 
   /* --- or a single exercise --- */
-  var mine=S.routine.filter(function(id){ var r=S.logs[d]; return !(r&&r.items&&r.items[id]); });
+  var mine=routineListFor(d).filter(function(id){ var r=S.logs[d]; return !(r&&r.items&&r.items[id]); });
   if(mine.length){
     h += '<div '+LB+';margin:20px 0 8px">'+t('Or just one exercise').toUpperCase()+'</div><div class="chips">';
     mine.forEach(function(id){
@@ -1402,6 +1656,7 @@ function buildHTML(d){
   return h;
 }
 function addPartHTML(d){
+  RT_DATE = d;
   var have=partsIn(d), order=restedOrder(d), ctx=SIM.ctxT;
   var count=dayCount(d), max=S.settings.maxPerSession||4, room=Math.max(0,max-count);
   var h='<div class="top"><div><h3 style="font-size:17px">Add to this day</h3>'
@@ -1423,7 +1678,7 @@ function addPartHTML(d){
   });
   h += '</div>';
 
-  var mine=S.routine.filter(function(id){ var r=S.logs[d]; return !(r&&r.items&&r.items[id]); });
+  var mine=routineListFor(d).filter(function(id){ var r=S.logs[d]; return !(r&&r.items&&r.items[id]); });
   if(mine.length){
     h += '<div class="lbl" style="color:var(--tx3);font-size:11px;font-weight:700;letter-spacing:.06em;margin:20px 0 8px">OR JUST ONE EXERCISE</div><div class="chips">';
     mine.forEach(function(id){
@@ -1472,6 +1727,7 @@ function repairShort(){
 function markSkip(date){ S.logs[date]={date:date,type:'skip',group:'rest',items:{},logged:true}; save(); refresh(); toast('Saved \u2713  '+fmt(date)+' marked as a rest day'); }
 function clearRec(date){ delete S.logs[date]; save(); refresh(); toast('Record cleared \u2014 back to the plan'); }
 function swapGroup(date,g){
+  RT_DATE = date;
   var entry, ctx = SIM.ctxT;
   if(g==='rest'){ S.logs[date]={date:date,type:'rest',group:'rest',items:{},logged:true}; }
   else if(g==='cardio'){ entry = cardioEntry(date,ctx,''); }
@@ -1522,7 +1778,7 @@ function exCard(date,it,editable){
   h += '<div class="exhd"><div><h4>'+H(ex.name)+(it.bonus?' <span class="tag t-cardio" style="vertical-align:2px">extra</span>':'')+'</h4>'
     +  '<div class="presc">'+H(ex.part)+(ex.gear!=='None'?' &middot; '+H(ex.gear):'')+'</div></div>';
   h += '<div style="margin-left:auto;display:flex;gap:6px;flex:none">';
-  h += '<button class="figbtn" style="margin:0" onclick="openFig(\''+ex.id+'\')">'+t('How to')+'</button>';
+  h += '<button class="figbtn" style="margin:0" onclick="openFig(\''+ex.id+'\',\''+modeOf(date)+'\')">'+t('How to')+'</button>';
   if(editable){
     h += it.skipped
       ? '<button class="figbtn" style="margin:0;color:var(--ok);border-color:rgba(45,212,167,.4)" onclick="unskipEx(\''+date+'\',\''+ex.id+'\')">'+t('Undo')+'</button>'
@@ -1667,6 +1923,11 @@ function renderToday(){
     +'<div class="date" style="flex:1;text-align:center">'+fmtLong(D).toUpperCase()
     +(D!==T?' &nbsp;<button class="btn sm ghost" style="padding:2px 9px" onclick="goToday()">'+t('Today')+'</button>':'')+'</div>'
     +'<button class="navarr" onclick="moveDay(1)">&#8250;</button></div>';
+  h+='<div class="row" style="margin-top:12px;justify-content:center">'
+    +'<div class="modeseg">'
+    +'<button class="'+(modeOf(D)==='home'?'on':'')+'" onclick="setMode(\''+D+'\',\'home\')">'+t('Home')+'</button>'
+    +'<button class="'+(modeOf(D)==='gym'?'on':'')+'" onclick="setMode(\''+D+'\',\'gym\')">'+t('Gym')+'</button>'
+    +'</div></div>';
   h+='<div class="row" style="margin-top:12px;align-items:flex-start;gap:8px">'
     +'<div style="flex:1;min-width:0"><div class="title">'+H(ttl)
     +((parallelCardio(src)&&!skipped)?' <span style="color:var(--cardio)">+ '+GS('cardio')+'</span>':'')+'</div>'
@@ -1755,7 +2016,8 @@ function statusOf(T){
   var s=streak();
   out.push(t('Active streak')+': <b>'+s+t('d')+'</b>');
   ['upper','core','lower'].forEach(function(g){
-    if(!routineOf(g).length || !ctx.last[g]) return;
+    var anyEx = S.routine.concat(S.routineG||[]).some(function(id){ return LIBMAP[id] && LIBMAP[id].cat===g; });
+    if(!anyEx || !ctx.last[g]) return;
     var since=diffD(T,ctx.last[g]), need=restDaysFor(ctx.lastInt[g])+1, left=need-since;
     out.push(GS(g)+': <b>'+(left<=0 ? t('ready') : '+'+left+t('d'))+'</b>');
   });
@@ -1813,6 +2075,7 @@ function renderCal(){
     h += '<div class="'+cls+'" onclick="openDay(\''+d+'\')">';
     h += '<div class="bar" style="background:'+(skipped?'var(--bad)':barStyle(src))+'"></div>';
     h += '<div class="mk" style="color:'+col+'">'+mark+'</div>';
+    h += '<button class="modebtn'+(modeOf(d)==='gym'?' gym':'')+'" title="'+t('Home')+' / '+t('Gym')+'" onclick="event.stopPropagation();cycleMode(\''+d+'\')">'+(modeOf(d)==='gym'?'G':'H')+'</button>';
     h += '<div class="n">'+day+'</div>';
     var seen={}, gcats=[];
     itemList(src).forEach(function(o){
@@ -1837,7 +2100,8 @@ function renderCal(){
 
   h += '<div class="legend">'+GORDER.map(function(g){return '<span><span class="gb" style="--gc:'+GROUPS[g].color+';display:inline-grid;vertical-align:-5px;margin-right:5px">'+GLET[g]+'</span>'+GN(g)+'</span>';}).join('')
      + '<span><span class="gb off" style="display:inline-grid;vertical-align:-5px;margin-right:5px">&#10005;</span>'+t('Rest Day')+'</span>'
-     + '<span style="color:var(--tx3)">&#9679; '+t('Recorded')+'</span></div>';
+     + '<span style="color:var(--tx3)">&#9679; '+t('Recorded')+'</span>'
+     + '<span style="color:var(--tx3)">H = '+t('Home')+' &middot; G = '+t('Gym')+'</span></div>';
 
   
 
@@ -1884,6 +2148,7 @@ function daySheetHTML(d){
 function openDay(d){ openSheet(daySheetHTML(d), {t:'day', d:d}); }
 function openSwap(d){ openSheet(swapSheetHTML(d), {t:'swap', d:d}); }
 function swapSheetHTML(d){
+  RT_DATE = d;
   var h='<div class="top"><div><h3 style="font-size:17px">Change session</h3><div class="tiny" style="margin-top:4px">'+fmtLong(d)+'</div></div>'
       + '<button class="iconbtn" style="margin-left:auto" onclick="closeSheet()">&#10005;</button></div>';
   h += '<div class="grid">';
@@ -1901,11 +2166,23 @@ function swapSheetHTML(d){
 /* ============================================================
    8. PAGE: MY ROUTINE
    ============================================================ */
-function inRoutine(id){ return S.routine.indexOf(id)>=0; }
-function addEx(id){ if(!inRoutine(id)){ S.routine.push(id); save(); refresh(); toast(LIBMAP[id].name+' added to your routine'); } }
-function removeEx(id){
-  var i=S.routine.indexOf(id);
-  if(i>=0){ S.routine.splice(i,1); save(); refresh(); toast(LIBMAP[id].name+' removed'); }
+function listFor(env){ if(env==='gym'){ S.routineG=S.routineG||[]; return S.routineG; } return S.routine; }
+function exEnv(ex){ return ex.env||'home'; }
+/* which routine an exercise belongs to by default; 'both' follows the library tab */
+function exTarget(id){ var e=exEnv(LIBMAP[id]); return e==='both' ? LENV : e; }
+function inRoutine(id,env){
+  if(env) return listFor(env).indexOf(id)>=0;
+  return S.routine.indexOf(id)>=0 || (S.routineG||[]).indexOf(id)>=0;
+}
+function addEx(id,env){
+  env=env||exTarget(id); var L=listFor(env);
+  if(L.indexOf(id)<0){ L.push(id); save(); refresh();
+    toast(LIBMAP[id].name+' added'+(env==='gym'?' ('+t('Gym')+')':'')); }
+}
+function removeEx(id,env){
+  env=env||exTarget(id); var L=listFor(env);
+  var i=L.indexOf(id);
+  if(i>=0){ L.splice(i,1); save(); refresh(); toast(LIBMAP[id].name+' removed'); }
 }
 function isPinned(id){ return (S.pinned||[]).indexOf(id)>=0; }
 function togglePin(id){
@@ -1915,26 +2192,32 @@ function togglePin(id){
   else { S.pinned.push(id); toast('Saved \u2713  '+LIBMAP[id].name+' will show on every cardio day'); }
   save(); refresh();
 }
+var RTAB='home';
+function setRtab(v){ RTAB=v; renderRoutine(); }
 function renderRoutine(){
-  var h='';
+  var list = RTAB==='gym' ? (S.routineG||[]) : S.routine;
+  var h='<div class="modeseg wide">'
+    +'<button class="'+(RTAB==='home'?'on':'')+'" onclick="setRtab(\'home\')">'+t('Home Training')+'</button>'
+    +'<button class="'+(RTAB==='gym'?'on':'')+'" onclick="setRtab(\'gym\')">'+t('Gym Training')+'</button>'
+    +'</div>';
   GORDER.forEach(function(g){
-    var ids=routineOf(g);
+    var ids=list.filter(function(id){ return LIBMAP[id] && LIBMAP[id].cat===g; });
     h+='<div class="sechd big"><span class="gb" style="--gc:'+GROUPS[g].color+'">'+GLET[g]+'</span><h2>'+H(GN(g))+'</h2><div class="line"></div><span class="tiny">'+ids.length+'</span></div>';
     if(!ids.length){
       h+='<div class="card"><div class="empty">'+t('Nothing here yet.')
-        +'<br><button class="btn sm" style="margin-top:10px" onclick="go(\'lib\',\''+g+'\')">'+t('Browse library')+'</button></div></div>';
+        +'<br><button class="btn sm" style="margin-top:10px" onclick="LENV=RTAB;go(\'lib\',\''+g+'\')">'+t('Browse library')+'</button></div></div>';
       return;
     }
     ids.forEach(function(id){
       var ex=LIBMAP[id], pin=isPinned(id);
       h+='<div class="rrow" style="--gc:'+GROUPS[g].color+'">'
         +'<b style="font-size:13.5px;flex:none">'+H(ex.name)+'</b>'
-        +((pin&&g!=='cardio')?'<span class="tag t-cardio" style="flex:none">&#10003; '+GLET.cardio+'</span>':'')
+        +((RTAB==='home'&&pin&&g!=='cardio')?'<span class="tag t-cardio" style="flex:none">&#10003; '+GLET.cardio+'</span>':'')
         +'<span class="tiny" style="flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">'+H(ex.part)+'</span>'
-        +'<button class="figbtn" style="margin:0;flex:none" onclick="openFig(\''+id+'\')">?</button>'
-        +'<button class="figbtn" style="margin:0;flex:none;color:var(--bad)" onclick="removeEx(\''+id+'\')">&#10005;</button></div>';
+        +'<button class="figbtn" style="margin:0;flex:none" onclick="openFig(\''+id+'\',\''+RTAB+'\')">?</button>'
+        +'<button class="figbtn" style="margin:0;flex:none;color:var(--bad)" onclick="removeEx(\''+id+'\',\''+RTAB+'\')">&#10005;</button></div>';
     });
-    h+='<div style="margin:9px 0 4px"><button class="btn sm ghost" onclick="go(\'lib\',\''+g+'\')">+ '+t('Add more')+'</button></div>';
+    h+='<div style="margin:9px 0 4px"><button class="btn sm ghost" onclick="LENV=RTAB;go(\'lib\',\''+g+'\')">+ '+t('Add more')+'</button></div>';
   });
   document.getElementById('p-routine').innerHTML=h;
 }
@@ -1943,22 +2226,28 @@ function renderRoutine(){
    9. PAGE: EXERCISE LIBRARY
    ============================================================ */
 var libFilter='all';
+var LENV='home';
 function setLibFilter(f){ libFilter=f; renderLib(); }
+function setLibEnv(v){ LENV=v; renderLib(); }
+function envList(){ return LIB.filter(function(e){ var v=exEnv(e); return v===LENV || v==='both'; }); }
 function renderLib(){
-  var h='';
-  
+  var h='<div class="modeseg wide">'
+    +'<button class="'+(LENV==='home'?'on':'')+'" onclick="setLibEnv(\'home\')">'+t('Home Training')+'</button>'
+    +'<button class="'+(LENV==='gym'?'on':'')+'" onclick="setLibEnv(\'gym\')">'+t('Gym Training')+'</button>'
+    +'</div>';
+  var pool = envList();
   h += '<div class="chips" style="margin-bottom:14px">';
-  h += '<button class="chip'+(libFilter==='all'?' on':'')+'" onclick="setLibFilter(\'all\')">All ('+LIB.length+')</button>';
+  h += '<button class="chip'+(libFilter==='all'?' on':'')+'" onclick="setLibFilter(\'all\')">All ('+pool.length+')</button>';
   GORDER.forEach(function(g){
-    var n=LIB.filter(function(e){return e.cat===g;}).length;
+    var n=pool.filter(function(e){return e.cat===g;}).length;
     h += '<button class="chip gc'+(libFilter===g?' on':'')+'" style="--lc:'+GROUPS[g].color+'" onclick="setLibFilter(\''+g+'\')">'+H(GN(g))+' ('+n+')</button>';
   });
   h += '</div>';
 
-  var list = LIB.filter(function(e){ return libFilter==='all'||e.cat===libFilter; });
+  var list = pool.filter(function(e){ return libFilter==='all'||e.cat===libFilter; });
   h += '<div class="grid g2">';
   list.forEach(function(ex){
-    var has=inRoutine(ex.id);
+    var has=inRoutine(ex.id, exEnv(ex)==='both' ? LENV : exEnv(ex));
     h += '<div class="libitem'+(has?' in':'')+'" style="--lc:'+GROUPS[ex.cat].color+'">';
     h += '<div class="row"><div><b style="font-size:15px">'+H(ex.name)+'</b>'+(has?' <span class="tag t-'+ex.cat+'" style="vertical-align:2px">&#10003; '+t('My Routine')+'</span>':'')
       +  '<div class="tiny" style="margin-top:3px">'+H(ex.part)+'</div></div>'
@@ -1970,23 +2259,24 @@ function renderLib(){
     if(ex.tip) h += '<div class="tiny" style="margin-top:8px;padding:8px 10px;background:var(--card2);border-radius:8px;border-left:3px solid var(--lc)"><b>Tip:</b> '+H(ex.tip)+'</div>';
     h += '<div style="margin-top:11px">'+(has
         ? '<button class="btn sm danger" onclick="removeEx(\''+ex.id+'\')">'+t('Remove')+'</button>'
-        : '<button class="btn sm pri" onclick="addEx(\''+ex.id+'\')">+ '+t('Add to routine')+'</button>')+'</div>';
+        : '<button class="btn sm pri" onclick="addEx(\''+ex.id+'\')">+ '+t('Add to routine')+(exEnv(ex)==='gym'?' ('+t('Gym')+')':'')+'</button>')+'</div>';
     h += '</div>';
   });
   h += '</div>';
   document.getElementById('p-lib').innerHTML=h;
 }
-function openFig(id){ openSheet(figSheetHTML(id), {t:'fig', id:id}); }
-function figSheetHTML(id){
+function openFig(id,env){ openSheet(figSheetHTML(id,env), {t:'fig', id:id, env:env}); }
+function figSheetHTML(id,env){
   var ex=LIBMAP[id];
   var h='<div class="top"><div><h3 style="font-size:18px">'+H(ex.name)+'</h3><div class="tiny" style="margin-top:4px">'+H(ex.part)+' &middot; '+H(ex.level)+' &middot; '+H(ex.gear)+'</div></div>'
       + '<button class="iconbtn" style="margin-left:auto" onclick="closeSheet()">&#10005;</button></div>';
   h += '<div class="fig">'+figureSVG(ex, GROUPS[ex.cat].color)+'</div>';
   h += '<ol class="steps" style="font-size:13.5px">'+ex.how.map(function(s){return '<li>'+H(s)+'</li>';}).join('')+'</ol>';
   if(ex.tip) h += '<div class="tiny" style="margin-top:12px;padding:10px 12px;background:var(--card2);border-radius:9px"><b>Tip:</b> '+H(ex.tip)+'</div>';
-  h += '<div style="margin-top:14px">'+(inRoutine(id)
-      ? '<button class="btn sm danger" onclick="removeEx(\''+id+'\');closeSheet()">Remove from my routine</button>'
-      : '<button class="btn sm pri" onclick="addEx(\''+id+'\');closeSheet()">+ Add to my routine</button>')+'</div>';
+  var ev = env || exTarget(id);
+  h += '<div style="margin-top:14px">'+(inRoutine(id,ev)
+      ? '<button class="btn sm danger" onclick="removeEx(\''+id+'\',\''+ev+'\');closeSheet()">'+t('Remove')+'</button>'
+      : '<button class="btn sm pri" onclick="addEx(\''+id+'\',\''+ev+'\');closeSheet()">+ '+t('Add to routine')+'</button>')+'</div>';
   return h;
 }
 
@@ -2056,7 +2346,7 @@ function settingsHTML(){
     +  '<button class="flag'+(L==='en'?' on':'')+'" onclick="setLang(\'en\')" title="English">'+FLAGS.en+'</button>'
     +  '<button class="flag'+(L==='vi'?' on':'')+'" onclick="setLang(\'vi\')" title="Ti\u1ebfng Vi\u1ec7t">'+FLAGS.vi+'</button>'
     +  '</div>';
-  h += '<div class="sechd" style="margin:6px 0 10px"><h2 style="font-size:13px;color:var(--tx3);letter-spacing:.06em">'+t('Exercises').toUpperCase()+'</h2><div class="line"></div></div>';
+  h += '<div class="sechd" style="margin:6px 0 10px"><h2 style="font-size:13px;color:var(--tx3);letter-spacing:.06em">'+t('Exercises').toUpperCase()+' \u00b7 '+t('Home Training').toUpperCase()+'</h2><div class="line"></div></div>';
   S.routine.forEach(function(id){
     var ex=LIBMAP[id]; if(!ex||ex.unit==='dist') return;
     var d=defOf(ex), pin=isPinned(id);
@@ -2074,6 +2364,24 @@ function settingsHTML(){
       +  '</div>';
   });
   h += '<div class="tiny" style="margin:2px 0 14px">'+GLET.cardio+' = '+t('Cardio')+'</div>';
+  h += '<div class="sechd" style="margin:6px 0 10px"><h2 style="font-size:13px;color:var(--tx3);letter-spacing:.06em">'+t('Gym Training').toUpperCase()+'</h2><div class="line"></div></div>';
+  if(!(S.routineG||[]).length){
+    h += '<div class="tiny" style="margin:2px 0 14px">'+t('Nothing here yet.')+'</div>';
+  } else {
+    (S.routineG||[]).forEach(function(id){
+      var ex=LIBMAP[id]; if(!ex||ex.unit==='dist') return;
+      var d=defOf(ex);
+      h += '<div class="rrow" style="--gc:'+GROUPS[ex.cat].color+'">'
+        +  '<b style="font-size:13px;flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">'+H(ex.name)+'</b>'
+        +  '<button class="figbtn" style="margin:0" onclick="bumpDef(\''+id+'\',\'sets\',-1)">&#8722;</button>'
+        +  '<b style="font-size:12.5px;min-width:34px;text-align:center">'+d.sets+'\u00d7'+d.reps+'</b>'
+        +  '<button class="figbtn" style="margin:0" onclick="bumpDef(\''+id+'\',\'sets\',1)">+</button>'
+        +  '<span style="width:4px"></span>'
+        +  '<button class="figbtn" style="margin:0" onclick="bumpDef(\''+id+'\',\'reps\',-1)">'+t('reps')+' &#8722;</button>'
+        +  '<button class="figbtn" style="margin:0" onclick="bumpDef(\''+id+'\',\'reps\',1)">'+t('reps')+' +</button>'
+        +  '</div>';
+    });
+  }
   h += row('Rest days after a Mild session','Days off before that body part comes back around.',[0,1,2,3],r.mild,'setRest.bind(null,\'mild\')');
   h += row('Rest days after a Moderate session','Your default effort level.',[1,2,3,4],r.moderate,'setRest.bind(null,\'moderate\')');
   h += row('Rest days after an Intensive session','Longer recovery after an all-out session.',[1,2,3,4,5],r.intensive,'setRest.bind(null,\'intensive\')');
@@ -2125,7 +2433,7 @@ function rerenderSheet(){
   var el=document.getElementById('sheet'), top=el.scrollTop, h='';
   if(SHEET.t==='day') h=daySheetHTML(SHEET.d);
   else if(SHEET.t==='swap') h=swapSheetHTML(SHEET.d);
-  else if(SHEET.t==='fig') h=figSheetHTML(SHEET.id);
+  else if(SHEET.t==='fig') h=figSheetHTML(SHEET.id, SHEET.env);
   else if(SHEET.t==='set') h=settingsHTML();
   else if(SHEET.t==='add') h=addPartHTML(SHEET.d);
   else if(SHEET.t==='build') h=buildHTML(SHEET.d);
@@ -2302,7 +2610,7 @@ function H2(x){ return H(x); }
 
 /* per exercise: where you started against where you are now */
 function prescRows(g,A){
-  var ids=S.routine.filter(function(id){ return LIBMAP[id] && LIBMAP[id].cat===g && (A.presc[id]||[]).length; });
+  var ids=S.routine.concat(S.routineG||[]).filter(function(id,i,arr){ return arr.indexOf(id)===i && LIBMAP[id] && LIBMAP[id].cat===g && (A.presc[id]||[]).length; });
   if(!ids.length) return '';
   var h='<div style="margin-top:12px">';
   ids.forEach(function(id){
