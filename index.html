@@ -182,6 +182,16 @@ nav button.on{background:var(--tx);color:var(--bg);}
 .day .bar{position:absolute;left:0;top:0;bottom:0;width:6px}
 .day .mk{position:absolute;right:5px;top:5px;font-size:10px}
 .day{cursor:pointer}
+/* weekly view: one row, tall cells that narrate the day */
+.cal.weekcal .day{min-height:174px;padding:8px 5px 27px 10px}
+.cal.weekcal .day .n{font-size:12px}
+.cal.weekcal .gl .gb{width:18px;height:18px;font-size:10px}
+.xi{font-size:9.5px;color:var(--tx2);line-height:1.4;display:flex;gap:4px;align-items:flex-start;word-break:break-word}
+.xi .dot{width:5px;height:5px;border-radius:50%;flex:none;margin-top:3.5px}
+.xi b{color:var(--tx);font-weight:650;white-space:nowrap}
+.xi.rst{color:var(--tx3)}
+.wklabel{font-weight:700;font-size:15px;flex:1;text-align:center}
+.wktag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.05em;padding:2px 8px;border-radius:999px;border:1px solid var(--line2);color:var(--tx3);margin-left:7px;vertical-align:2px}
 .skipbtn{
   position:absolute;right:4px;bottom:4px;width:21px;height:21px;border-radius:6px;
   border:1px solid var(--line2);background:var(--card);color:var(--tx3);font-size:11px;
@@ -193,8 +203,14 @@ nav button.on{background:var(--tx);color:var(--bg);}
 .ex.off h4{text-decoration:line-through}
 .exhd{display:flex;align-items:flex-start;gap:8px}
 @media(max-width:640px){
-  .day{min-height:60px;padding:4px}
-  .day .xs{display:none}
+  .cal{gap:4px}
+  .cal.weekcal .day{min-height:190px;padding:7px 3px 26px 8px}
+  .cal.weekcal .day .bar{width:4px}
+  .cal.weekcal .gl .gb{width:15px;height:15px;font-size:9px}
+  .xi{font-size:8.5px;gap:3px}
+  .xi .dot{width:4px;height:4px;margin-top:3px}
+  .modebtn{width:17px;height:17px;font-size:9px;right:3px;top:3px}
+  .skipbtn{width:18px;height:18px;right:3px;bottom:3px}
 }
 
 /* ---------- library ---------- */
@@ -547,8 +563,8 @@ var GORDER = ['upper','core','lower','cardio'];
 var GLET = {upper:'U', core:'C', lower:'L', cardio:'R', rest:'\u2013'};
 var LOCALES = {en:'en-GB', ko:'ko-KR', vi:'vi-VN'};
 var TR = {
-ko:{'Today':'\uc624\ub298','Calendar':'\ub2ec\ub825','My Routine':'\ub0b4 \ub8e8\ud2f4','Library':'\uc6b4\ub3d9 \ubaa9\ub85d','Analysis':'\ubd84\uc11d','Rest Day':'\ud734\uc2dd\uc77c','Rest':'\ud734\uc2dd','Reset':'\ucd08\uae30\ud654','Coming up':'\ub2e4\uac00\uc624\ub294 \uc77c\uc815','Yesterday':'\uc5b4\uc81c','last':'\ucd5c\uadfc','first time':'\ucc98\uc74c','Today\'s Line Up':'\uc624\ub298\uc758 \uad6c\uc131','Nothing planned yet.':'\uacc4\ud68d \uc5c6\uc74c','How to':'\ubc29\ubc95','Skip':'\uac74\ub108\ub6f0\uae30','Undo':'\ub418\ub3cc\ub9ac\uae30','Sets':'\uc138\ud2b8','Target':'\ubaa9\ud45c','Mild':'\uac00\ubcbc\uc6c0','Moderate':'\ubcf4\ud1b5','Intensive':'\uac15\ud568','Effort':'\uac15\ub3c4','Train anyway':'\uadf8\ub798\ub3c4 \uc6b4\ub3d9\ud558\uae30','Everything skipped':'\ubaa8\ub450 \uac74\ub108\ub700','Not done today.':'\uc624\ub298\uc740 \uc548 \ud568','Edit':'\ud3b8\uc9d1','Theme':'\ud14c\ub9c8','Dark':'\ub2e4\ud06c','Light':'\ub77c\uc774\ud2b8','Add more':'\ub354 \ucd94\uac00','Browse library':'\uc6b4\ub3d9 \ubaa9\ub85d \ubcf4\uae30','Nothing here yet.':'\uc544\uc9c1 \uc5c6\uc74c','Remove':'\uc0ad\uc81c','Recovery':'\ud68c\ubcf5','recover':'\ud68c\ubcf5','Planned':'\uc608\uc815','Recorded':'\uae30\ub85d\ub428','Assumed':'\uacc4\ud68d\ub300\ub85c \ucc98\ub9ac','Exercises':'\uc6b4\ub3d9','Language':'\uc5b8\uc5b4','Rest day recorded':'\ud734\uc2dd\uc77c\ub85c \uae30\ub85d\ub428','ready':'\uc900\ube44\ub428','d':'\uc77c','Upper Body':'\uc0c1\uccb4','Middle (Core)':'\ucf54\uc5b4(\ubcf5\ubd80)','Lower Body':'\ud558\uccb4','Cardio':'\uc720\uc0b0\uc18c','Upper':'\uc0c1\uccb4','Core':'\ucf54\uc5b4','Lower':'\ud558\uccb4','Cardio this week':'\uc774\ubc88 \uc8fc \uc720\uc0b0\uc18c','Running target':'\ub7ec\ub2dd \ubaa9\ud45c','Active streak':'\uc5f0\uc18d \uc6b4\ub3d9','Build this day':'\uc774 \ub0a0 \uad6c\uc131\ud558\uae30','Add a body part':'\ubd80\uc704 \ucd94\uac00','Or just one exercise':'\uc6b4\ub3d9 \ud558\ub098\ub9cc \ucd94\uac00','In this day - tap to remove':'\ud604\uc7ac \uad6c\uc131 - \ub20c\ub7ec\uc11c \uc81c\uac70','Or replace the whole session':'\uc138\uc158 \uc804\uccb4 \uad50\uccb4','Deliberate day off.':'\uc758\ub3c4\uc801\uc778 \ud734\uc2dd.','Add to routine':'\ub8e8\ud2f4\uc5d0 \ucd94\uac00','Rest day':'\ud734\uc2dd\uc77c','Before you started':'\uc2dc\uc791 \uc774\uc804','reps':'\ud68c','Streak':'\uc5f0\uc18d','ago':'\uc804','Keep it up!':'\uacc4\uc18d \uc774\uc5b4\uac00\uc694!','Great start!':'\uc88b\uc740 \uc2dc\uc791!','Start':'\uc2dc\uc791\uc77c','This month':'\uc774\ubc88 \ub2ec','Home':'\ud648','Gym':'\uc9d0','Home Training':'\ud648 \ud2b8\ub808\uc774\ub2dd','Gym Training':'\uc9d0 \ud2b8\ub808\uc774\ub2dd'},
-vi:{'Today':'H\u00f4m nay','Calendar':'L\u1ecbch','My Routine':'L\u1ecbch tr\u00ecnh','Library':'Th\u01b0 vi\u1ec7n','Analysis':'Ph\u00e2n t\u00edch','Rest Day':'Ng\u00e0y ngh\u1ec9','Rest':'Ngh\u1ec9','Reset':'\u0110\u1eb7t l\u1ea1i','Coming up':'S\u1eafp t\u1edbi','Yesterday':'H\u00f4m qua','last':'l\u1ea7n tr\u01b0\u1edbc','first time':'l\u1ea7n \u0111\u1ea7u','Today\'s Line Up':'B\u00e0i h\u00f4m nay','Nothing planned yet.':'Ch\u01b0a c\u00f3 k\u1ebf ho\u1ea1ch','How to':'C\u00e1ch t\u1eadp','Skip':'B\u1ecf qua','Undo':'Ho\u00e0n t\u00e1c','Sets':'Hi\u1ec7p','Target':'M\u1ee5c ti\u00eau','Mild':'Nh\u1eb9','Moderate':'V\u1eeba','Intensive':'N\u1eb7ng','Effort':'C\u01b0\u1eddng \u0111\u1ed9','Train anyway':'V\u1eabn t\u1eadp','Everything skipped':'\u0110\u00e3 b\u1ecf qua t\u1ea5t c\u1ea3','Not done today.':'H\u00f4m nay kh\u00f4ng t\u1eadp','Edit':'Ch\u1ec9nh s\u1eeda','Theme':'Giao di\u1ec7n','Dark':'T\u1ed1i','Light':'S\u00e1ng','Add more':'Th\u00eam','Browse library':'Xem th\u01b0 vi\u1ec7n','Nothing here yet.':'Ch\u01b0a c\u00f3 g\u00ec','Remove':'X\u00f3a','Recovery':'Ph\u1ee5c h\u1ed3i','recover':'ph\u1ee5c h\u1ed3i','Planned':'D\u1ef1 ki\u1ebfn','Recorded':'\u0110\u00e3 ghi','Assumed':'Theo k\u1ebf ho\u1ea1ch','Exercises':'B\u00e0i t\u1eadp','Language':'Ng\u00f4n ng\u1eef','Rest day recorded':'\u0110\u00e3 ghi ng\u00e0y ngh\u1ec9','ready':'s\u1eb5n s\u00e0ng','d':' ng\u00e0y','Upper Body':'Th\u00e2n tr\u00ean','Middle (Core)':'C\u01a1 b\u1ee5ng','Lower Body':'Th\u00e2n d\u01b0\u1edbi','Cardio':'Cardio','Upper':'Tr\u00ean','Core':'B\u1ee5ng','Lower':'D\u01b0\u1edbi','Cardio this week':'Cardio tu\u1ea7n n\u00e0y','Running target':'M\u1ee5c ti\u00eau ch\u1ea1y','Active streak':'Chu\u1ed7i ng\u00e0y t\u1eadp','Build this day':'S\u1eafp x\u1ebfp ng\u00e0y n\u00e0y','Add a body part':'Th\u00eam nh\u00f3m c\u01a1','Or just one exercise':'Ho\u1eb7c m\u1ed9t b\u00e0i','In this day - tap to remove':'Trong ng\u00e0y - ch\u1ea1m \u0111\u1ec3 x\u00f3a','Or replace the whole session':'Ho\u1eb7c thay c\u1ea3 bu\u1ed5i','Deliberate day off.':'Ngh\u1ec9 c\u00f3 ch\u1ee7 \u0111\u00edch.','Add to routine':'Th\u00eam v\u00e0o l\u1ecbch','Rest day':'Ng\u00e0y ngh\u1ec9','Before you started':'Tr\u01b0\u1edbc khi b\u1eaft \u0111\u1ea7u','reps':'l\u1ea7n','Streak':'Chu\u1ed7i','ago':'tr\u01b0\u1edbc','Keep it up!':'Ti\u1ebfp t\u1ee5c nh\u00e9!','Great start!':'Kh\u1edfi \u0111\u1ea7u t\u1ed1t!','Start':'B\u1eaft \u0111\u1ea7u','This month':'Th\u00e1ng n\u00e0y','Home':'Nh\u00e0','Gym':'Gym','Home Training':'T\u1eadp t\u1ea1i nh\u00e0','Gym Training':'T\u1eadp gym'}
+ko:{'Today':'\uc624\ub298','Calendar':'\ub2ec\ub825','My Routine':'\ub0b4 \ub8e8\ud2f4','Library':'\uc6b4\ub3d9 \ubaa9\ub85d','Analysis':'\ubd84\uc11d','Rest Day':'\ud734\uc2dd\uc77c','Rest':'\ud734\uc2dd','Reset':'\ucd08\uae30\ud654','Coming up':'\ub2e4\uac00\uc624\ub294 \uc77c\uc815','Yesterday':'\uc5b4\uc81c','last':'\ucd5c\uadfc','first time':'\ucc98\uc74c','Today\'s Line Up':'\uc624\ub298\uc758 \uad6c\uc131','Nothing planned yet.':'\uacc4\ud68d \uc5c6\uc74c','How to':'\ubc29\ubc95','Skip':'\uac74\ub108\ub6f0\uae30','Undo':'\ub418\ub3cc\ub9ac\uae30','Sets':'\uc138\ud2b8','Target':'\ubaa9\ud45c','Mild':'\uac00\ubcbc\uc6c0','Moderate':'\ubcf4\ud1b5','Intensive':'\uac15\ud568','Effort':'\uac15\ub3c4','Train anyway':'\uadf8\ub798\ub3c4 \uc6b4\ub3d9\ud558\uae30','Everything skipped':'\ubaa8\ub450 \uac74\ub108\ub700','Not done today.':'\uc624\ub298\uc740 \uc548 \ud568','Edit':'\ud3b8\uc9d1','Theme':'\ud14c\ub9c8','Dark':'\ub2e4\ud06c','Light':'\ub77c\uc774\ud2b8','Add more':'\ub354 \ucd94\uac00','Browse library':'\uc6b4\ub3d9 \ubaa9\ub85d \ubcf4\uae30','Nothing here yet.':'\uc544\uc9c1 \uc5c6\uc74c','Remove':'\uc0ad\uc81c','Recovery':'\ud68c\ubcf5','recover':'\ud68c\ubcf5','Planned':'\uc608\uc815','Recorded':'\uae30\ub85d\ub428','Assumed':'\uacc4\ud68d\ub300\ub85c \ucc98\ub9ac','Exercises':'\uc6b4\ub3d9','Language':'\uc5b8\uc5b4','Rest day recorded':'\ud734\uc2dd\uc77c\ub85c \uae30\ub85d\ub428','ready':'\uc900\ube44\ub428','d':'\uc77c','Upper Body':'\uc0c1\uccb4','Middle (Core)':'\ucf54\uc5b4(\ubcf5\ubd80)','Lower Body':'\ud558\uccb4','Cardio':'\uc720\uc0b0\uc18c','Upper':'\uc0c1\uccb4','Core':'\ucf54\uc5b4','Lower':'\ud558\uccb4','Cardio this week':'\uc774\ubc88 \uc8fc \uc720\uc0b0\uc18c','Running target':'\ub7ec\ub2dd \ubaa9\ud45c','Active streak':'\uc5f0\uc18d \uc6b4\ub3d9','Build this day':'\uc774 \ub0a0 \uad6c\uc131\ud558\uae30','Add a body part':'\ubd80\uc704 \ucd94\uac00','Or just one exercise':'\uc6b4\ub3d9 \ud558\ub098\ub9cc \ucd94\uac00','In this day - tap to remove':'\ud604\uc7ac \uad6c\uc131 - \ub20c\ub7ec\uc11c \uc81c\uac70','Or replace the whole session':'\uc138\uc158 \uc804\uccb4 \uad50\uccb4','Deliberate day off.':'\uc758\ub3c4\uc801\uc778 \ud734\uc2dd.','Add to routine':'\ub8e8\ud2f4\uc5d0 \ucd94\uac00','Rest day':'\ud734\uc2dd\uc77c','Before you started':'\uc2dc\uc791 \uc774\uc804','reps':'\ud68c','Streak':'\uc5f0\uc18d','ago':'\uc804','Keep it up!':'\uacc4\uc18d \uc774\uc5b4\uac00\uc694!','Great start!':'\uc88b\uc740 \uc2dc\uc791!','Start':'\uc2dc\uc791\uc77c','This week':'\uc774\ubc88 \uc8fc','Next week':'\ub2e4\uc74c \uc8fc','Home':'\ud648','Gym':'\uc9d0','Home Training':'\ud648 \ud2b8\ub808\uc774\ub2dd','Gym Training':'\uc9d0 \ud2b8\ub808\uc774\ub2dd'},
+vi:{'Today':'H\u00f4m nay','Calendar':'L\u1ecbch','My Routine':'L\u1ecbch tr\u00ecnh','Library':'Th\u01b0 vi\u1ec7n','Analysis':'Ph\u00e2n t\u00edch','Rest Day':'Ng\u00e0y ngh\u1ec9','Rest':'Ngh\u1ec9','Reset':'\u0110\u1eb7t l\u1ea1i','Coming up':'S\u1eafp t\u1edbi','Yesterday':'H\u00f4m qua','last':'l\u1ea7n tr\u01b0\u1edbc','first time':'l\u1ea7n \u0111\u1ea7u','Today\'s Line Up':'B\u00e0i h\u00f4m nay','Nothing planned yet.':'Ch\u01b0a c\u00f3 k\u1ebf ho\u1ea1ch','How to':'C\u00e1ch t\u1eadp','Skip':'B\u1ecf qua','Undo':'Ho\u00e0n t\u00e1c','Sets':'Hi\u1ec7p','Target':'M\u1ee5c ti\u00eau','Mild':'Nh\u1eb9','Moderate':'V\u1eeba','Intensive':'N\u1eb7ng','Effort':'C\u01b0\u1eddng \u0111\u1ed9','Train anyway':'V\u1eabn t\u1eadp','Everything skipped':'\u0110\u00e3 b\u1ecf qua t\u1ea5t c\u1ea3','Not done today.':'H\u00f4m nay kh\u00f4ng t\u1eadp','Edit':'Ch\u1ec9nh s\u1eeda','Theme':'Giao di\u1ec7n','Dark':'T\u1ed1i','Light':'S\u00e1ng','Add more':'Th\u00eam','Browse library':'Xem th\u01b0 vi\u1ec7n','Nothing here yet.':'Ch\u01b0a c\u00f3 g\u00ec','Remove':'X\u00f3a','Recovery':'Ph\u1ee5c h\u1ed3i','recover':'ph\u1ee5c h\u1ed3i','Planned':'D\u1ef1 ki\u1ebfn','Recorded':'\u0110\u00e3 ghi','Assumed':'Theo k\u1ebf ho\u1ea1ch','Exercises':'B\u00e0i t\u1eadp','Language':'Ng\u00f4n ng\u1eef','Rest day recorded':'\u0110\u00e3 ghi ng\u00e0y ngh\u1ec9','ready':'s\u1eb5n s\u00e0ng','d':' ng\u00e0y','Upper Body':'Th\u00e2n tr\u00ean','Middle (Core)':'C\u01a1 b\u1ee5ng','Lower Body':'Th\u00e2n d\u01b0\u1edbi','Cardio':'Cardio','Upper':'Tr\u00ean','Core':'B\u1ee5ng','Lower':'D\u01b0\u1edbi','Cardio this week':'Cardio tu\u1ea7n n\u00e0y','Running target':'M\u1ee5c ti\u00eau ch\u1ea1y','Active streak':'Chu\u1ed7i ng\u00e0y t\u1eadp','Build this day':'S\u1eafp x\u1ebfp ng\u00e0y n\u00e0y','Add a body part':'Th\u00eam nh\u00f3m c\u01a1','Or just one exercise':'Ho\u1eb7c m\u1ed9t b\u00e0i','In this day - tap to remove':'Trong ng\u00e0y - ch\u1ea1m \u0111\u1ec3 x\u00f3a','Or replace the whole session':'Ho\u1eb7c thay c\u1ea3 bu\u1ed5i','Deliberate day off.':'Ngh\u1ec9 c\u00f3 ch\u1ee7 \u0111\u00edch.','Add to routine':'Th\u00eam v\u00e0o l\u1ecbch','Rest day':'Ng\u00e0y ngh\u1ec9','Before you started':'Tr\u01b0\u1edbc khi b\u1eaft \u0111\u1ea7u','reps':'l\u1ea7n','Streak':'Chu\u1ed7i','ago':'tr\u01b0\u1edbc','Keep it up!':'Ti\u1ebfp t\u1ee5c nh\u00e9!','Great start!':'Kh\u1edfi \u0111\u1ea7u t\u1ed1t!','Start':'B\u1eaft \u0111\u1ea7u','This week':'Tu\u1ea7n n\u00e0y','Next week':'Tu\u1ea7n sau','Home':'Nh\u00e0','Gym':'Gym','Home Training':'T\u1eadp t\u1ea1i nh\u00e0','Gym Training':'T\u1eadp gym'}
 };
 var FLAGS={
 ko:'<svg width="30" height="20" viewBox="0 0 30 20" style="border-radius:4px;display:block"><rect width="30" height="20" fill="#fff"/><g transform="translate(15,10) rotate(-14)"><path d="M-5 0A5 5 0 0 1 5 0A2.5 2.5 0 0 1 0 0A2.5 2.5 0 0 0 -5 0Z" fill="#c8102e"/><path d="M5 0A5 5 0 0 1 -5 0A2.5 2.5 0 0 1 0 0A2.5 2.5 0 0 0 5 0Z" fill="#003478"/></g><g fill="#000"><g transform="translate(5.2,5) rotate(-62)"><rect x="-2.4" y="-2" width="4.8" height="1"/><rect x="-2.4" y="-0.5" width="4.8" height="1"/><rect x="-2.4" y="1" width="4.8" height="1"/></g><g transform="translate(24.8,5) rotate(62)"><rect x="-2.4" y="-2" width="4.8" height="1"/><rect x="-2.4" y="-0.5" width="4.8" height="1"/><rect x="-2.4" y="1" width="4.8" height="1"/></g><g transform="translate(5.2,15) rotate(62)"><rect x="-2.4" y="-2" width="4.8" height="1"/><rect x="-2.4" y="-0.5" width="4.8" height="1"/><rect x="-2.4" y="1" width="4.8" height="1"/></g><g transform="translate(24.8,15) rotate(-62)"><rect x="-2.4" y="-2" width="4.8" height="1"/><rect x="-2.4" y="-0.5" width="4.8" height="1"/><rect x="-2.4" y="1" width="4.8" height="1"/></g></g></svg>',
@@ -1498,7 +1514,7 @@ function apply(rec,ctx,explicit){
 /* ============================================================
    5. SHARED UI HELPERS
    ============================================================ */
-var SIM, PAGE='today', calMonth;
+var SIM, PAGE='today', calWeek;
 
 function toast(m){ var t=document.getElementById('toast'); t.textContent=m; t.classList.add('on'); clearTimeout(t._t); t._t=setTimeout(function(){t.classList.remove('on');},1900); }
 function gname(g){ return g==='rest' ? 'Rest Day' : GROUPS[g].name; }
@@ -2092,30 +2108,34 @@ function streak(){
 /* ============================================================
    7. PAGE: CALENDAR
    ============================================================ */
+function weekStartOf(d){ var x=pd(d); x.setDate(x.getDate()-x.getDay()); return ymd(x); }
 function renderCal(){
   var T=today();
-  if(!calMonth) calMonth = T.slice(0,7);
-  var y=+calMonth.slice(0,4), m=+calMonth.slice(5,7);
-  var first=new Date(y,m-1,1), start=first.getDay(), days=new Date(y,m,0).getDate();
+  var thisWk=weekStartOf(T), cap=addD(thisWk,7), floor=weekStartOf(SIM.start);
+  if(!calWeek) calWeek=thisWk;
+  if(calWeek>cap) calWeek=cap;
+  if(calWeek<floor) calWeek=floor;
+  var d0=calWeek, d6=addD(d0,6);
+  var tag = d0===thisWk ? t('This week') : (d0===cap ? t('Next week') : '');
   var h='';
 
   h += '<div class="row" style="margin-bottom:12px">';
-  h += '<button class="iconbtn" onclick="moveMonth(-1)">&#8249;</button>';
-  h += '<div style="font-weight:700;font-size:16px;min-width:150px;text-align:center">'+monthTitle(y,m)+'</div>';
-  h += '<button class="iconbtn" onclick="moveMonth(1)">&#8250;</button>';
-  h += '<button class="btn sm ghost" style="margin-left:auto" onclick="calMonth=null;render()">'+t('This month')+'</button></div>';
+  h += '<button class="iconbtn" '+(calWeek<=floor?'disabled style="opacity:.35"':'onclick="moveWeek(-1)"')+'>&#8249;</button>';
+  h += '<div class="wklabel">'+fmt(d0)+' – '+fmt(d6)+(tag?'<span class="wktag">'+H(tag)+'</span>':'')+'</div>';
+  h += '<button class="iconbtn" '+(calWeek>=cap?'disabled style="opacity:.35"':'onclick="moveWeek(1)"')+'>&#8250;</button>';
+  h += '<button class="btn sm ghost" style="margin-left:8px" onclick="calWeek=null;render()">'+t('This week')+'</button></div>';
   h += '<div class="row" style="margin-bottom:11px;gap:8px"><span class="tiny" style="font-weight:700">'+t('Start')+'</span>'
     +  '<input type="date" value="'+S.settings.start+'" max="'+today()+'" onchange="setStart(this.value)" '
     +  'style="background:var(--bg2);border:1px solid var(--line2);color:var(--tx);border-radius:9px;padding:6px 10px;font:inherit;font-size:12.5px"></div>';
 
-  h += '<div class="cal">'+[0,1,2,3,4,5,6].map(function(i){return '<div class="dow">'+dowShort(i)+'</div>';}).join('');
-  for(var i=0;i<start;i++) h += '<div class="day blank"></div>';
-  for(var day=1;day<=days;day++){
-    var d = y+'-'+pad(m)+'-'+pad(day);
+  h += '<div class="cal weekcal">'+[0,1,2,3,4,5,6].map(function(i){return '<div class="dow">'+dowShort(i)+'</div>';}).join('');
+  for(var i=0;i<7;i++){
+    var d = addD(d0,i);
     var e = SIM.plan[d];
     var rec = recOf(d);
+    var dayN = +d.slice(8);
     if(d < SIM.start){
-      h += '<div class="day blank" style="opacity:.32"><div class="n">'+day+'</div></div>';
+      h += '<div class="day blank" style="opacity:.32;min-height:174px"><div class="n">'+dayN+'</div></div>';
       continue;
     }
     var src = (rec && rec.type!=='skip') ? rec : e;
@@ -2130,8 +2150,8 @@ function renderCal(){
     h += '<div class="mk" style="color:'+col+'">'+mark+'</div>';
     var md=modeOf(d), em=effModeOf(d);
     var mcls = md==='gym' ? ' gym' : md==='home' ? ' home' : (em==='gym' ? ' auto' : ' off');
-    h += '<button class="modebtn'+mcls+'" title="'+t('Rest')+' / '+t('Home')+' / '+t('Gym')+'" onclick="event.stopPropagation();cycleMode(\''+d+'\')">'+(em==='gym'?'G':(em==='home'?'H':'\u2013'))+'</button>';
-    h += '<div class="n">'+day+'</div>';
+    h += '<button class="modebtn'+mcls+'" title="'+t('Rest')+' / '+t('Home')+' / '+t('Gym')+'" onclick="event.stopPropagation();cycleMode(\''+d+'\')">'+(em==='gym'?'G':(em==='home'?'H':'–'))+'</button>';
+    h += '<div class="n">'+dayN+'</div>';
     var seen={}, gcats=[];
     itemList(src).forEach(function(o){
       if(o.skipped) return;
@@ -2143,7 +2163,15 @@ function renderCal(){
       : (gcats.map(function(c){return '<span class="gb" style="--gc:'+GROUPS[c].color+'">'+GLET[c]+'</span>';}).join('')
          || '<span class="gb">'+GLET.rest+'</span>');
     h += '<div class="gl">'+gl+'</div>';
-    h += '<div class="xs">'+H(shortItems(rec,e))+'</div>';
+    /* the tall cell narrates the day: one line per exercise */
+    var its = skipped ? [] : itemList(src);
+    if(!skipped && !its.length) h += '<div class="xi rst">'+t('Rest')+'</div>';
+    its.forEach(function(it){
+      var ex=LIBMAP[it.id]; if(!ex) return;
+      var nm=ex.name.replace(/^Dumbbell /,'DB ').replace(/^Barbell /,'BB ').replace(/^Machine /,'');
+      var v = it.lv!=null ? distOf(it.lv).short : repsLabel(it,ex);
+      h += '<div class="xi"><span class="dot bg-'+ex.cat+'"></span><span>'+H(nm)+' <b>'+H(v)+'</b></span></div>';
+    });
     if(d<=T){
       h += g==='skip'
         ? '<button class="skipbtn undo" title="Undo — put the planned session back" onclick="event.stopPropagation();toggleSkip(\''+d+'\')">&#8635;</button>'
@@ -2156,9 +2184,7 @@ function renderCal(){
   h += '<div class="legend">'+GORDER.map(function(g){return '<span><span class="gb" style="--gc:'+GROUPS[g].color+';display:inline-grid;vertical-align:-5px;margin-right:5px">'+GLET[g]+'</span>'+GN(g)+'</span>';}).join('')
      + '<span><span class="gb off" style="display:inline-grid;vertical-align:-5px;margin-right:5px">&#10005;</span>'+t('Rest Day')+'</span>'
      + '<span style="color:var(--tx3)">&#9679; '+t('Recorded')+'</span>'
-     + '<span style="color:var(--tx3)">\u2013 / H / G = '+t('Rest')+' / '+t('Home')+' / '+t('Gym')+'</span></div>';
-
-  
+     + '<span style="color:var(--tx3)">– / H / G = '+t('Rest')+' / '+t('Home')+' / '+t('Gym')+'</span></div>';
 
   document.getElementById('p-cal').innerHTML=h;
 }
@@ -2181,10 +2207,12 @@ function setStart(v){
   S.settings.start=v; save(); refresh();
   toast('✓ '+fmt(v));
 }
-function moveMonth(n){
-  var y=+calMonth.slice(0,4), m=+calMonth.slice(5,7)+n;
-  if(m<1){m=12;y--;} if(m>12){m=1;y++;}
-  calMonth=y+'-'+pad(m); render();
+function moveWeek(n){
+  var thisWk=weekStartOf(today()), cap=addD(thisWk,7), floor=weekStartOf(SIM.start);
+  var nx=addD(calWeek||thisWk, n*7);
+  if(nx>cap) nx=cap;
+  if(nx<floor) nx=floor;
+  calWeek=nx; render();
 }
 function stateTag(d){
   var T=today(), rec=recOf(d);
